@@ -1,5 +1,24 @@
 const keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?']
 
+const keyboardDiv = document.getElementById('keyboard');
+
+const createKey = () => {
+    for (let key of keys) {
+        const keyDiv = document.createElement("div"); //create the div and attach it to keyboardDiv
+        keyDiv.className = "keyDiv";
+        keyboardDiv.appendChild(keyDiv);
+
+        const keyPara = document.createElement('p'); //create a paragraph tag for the key label to live inside and attach it to the keyDiv
+        keyPara.className = 'keyLabel';
+        keyDiv.appendChild(keyPara);
+
+        let keyLabel = document.createTextNode(key); //create a letter for the key label
+        keyLabel.className = 'keyLabel';
+        keyPara.appendChild(keyLabel);
+    }
+}
+createKey(keys);
+
 const phrases = [
     {
         text: 'hi there!',
@@ -18,7 +37,7 @@ const phrases = [
         hint: 'US State',
     },
     {
-        text: "mitochondrion",
+        text: 'mitochondrion',
         hint: 'powerhouse',
     },
     {
@@ -44,29 +63,17 @@ const phrases = [
 ]
 
 
+
+
 const pickPhrase = () => {
-    let num = Math.floor(Math.random() * (phrases.length + 1));
+    let num = Math.floor(Math.random() * (phrases.length));
     return num
 }
 
+const getNewPhrase = () => {
+    return phrases[pickPhrase()].text;
 
-
-const keyboardDiv = document.getElementById('keyboard');
-
-const createKey = () => {
-    for (let key of keys) {
-        const keyDiv = document.createElement("div"); //create the div and attach it to keyboardDiv
-        keyDiv.className = "keyDiv";
-        keyboardDiv.appendChild(keyDiv);
-
-        const keyPara = document.createElement('p'); //create a paragraph tag for the key label to live inside and attach it to the keyDiv
-        keyPara.className = 'keyLabel';
-        keyDiv.appendChild(keyPara);
-
-        let keyLabel = document.createTextNode(key); //create a letter for the key label
-        keyLabel.className = 'keyLabel';
-        keyPara.appendChild(keyLabel);
-    }
 }
-createKey(keys);
+
+
 
