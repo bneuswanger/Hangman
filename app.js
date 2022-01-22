@@ -43,8 +43,8 @@ const phrases = [
         hint: 'powerhouse',
     },
     {
-        text: 'ok boomer',
-        hint: 'you know you are old when a kid says this to you',
+        text: 'Yellowstone',
+        hint: 'A park and a TV show',
     },
     {
         text: 'kayak',
@@ -65,20 +65,25 @@ const phrases = [
 ]
 
 getNewPhraseBtn.addEventListener('click', function () {
-    extractLetters(getNewPhrase());
+    getNewPhrase();
 })
 
-const getNewPhrase = () => { //returns string of phrase
-    let num = Math.floor(Math.random() * (phrases.length)); //generates random index position in the array of possible phrases
-    console.log(`index of phrase: ${num}`);
+const getNewPhrase = () => {                                    //returns string of phrase
+    let num = Math.floor(Math.random() * (phrases.length));     //generates random index position in the array of possible phrases
+    console.log(`index of phrase in array: ${num}`);
     console.log(`phrase text: ${phrases[num].text}`)
-    return phrases[num].text 
+    let newPhrase = phrases[num].text                           //newPhrase = the text string
+    countWords(newPhrase)                                       //feeding this function the string
+    extractLetters(newPhrase)                                   //feeding this function the string
 }
-// console.log(getNewPhrase()[2])
 
-function extractLetters(phrase) {
+function extractLetters(phrase) {                               //loops over each index of the phrase
     for (index of phrase) {
         console.log(index);
     }
+}
+
+function countWords(phrase) {
+    console.log(`This phrase is ${phrase.split(" ").length} word(s) long`)
 }
 
