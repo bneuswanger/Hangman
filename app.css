@@ -1,0 +1,70 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #06060E;
+    color: #E2E2F3;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+}
+
+h1 {
+    font-family: 'Gloria Hallelujah', cursive;
+    text-align: center;
+}
+#keyboard {
+    display: grid;
+    /* grid-template-columns: 80px, 80px, 80px, 80px, 80px, 80px, 80px;
+    grid-template-rows: 80px, 80px, 80px, 80px; */
+    gap: 20px 20px;
+    grid-template-areas:
+        ". . . . . . ."
+        ". . . . . . ."
+        ". . . . . . ."
+        ". . . . . . .";
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    width: 620px;
+    height: 370px;
+    background: rgb(30, 33, 70);
+    box-shadow: inset 0px 0px 7px 4px #9A9AD5;
+    border-radius: 1.5rem;
+    
+}
+
+.keyDiv {
+    display: grid;
+    grid-template-columns: 60px;
+    grid-template-rows: 60px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 2.5rem;
+    border: 2px solid #B8B8E0;
+    border-radius: 2rem;
+    background: #020024;
+    box-shadow: 2px 2px 8px #CECECE;
+    background: radial-gradient(ellipse at center, #D4D4ED 0%, #242456 100%);
+    font-family: 'Mochiy Pop P One', sans-serif;
+    color: #242456;
+    font-size: 2rem;
+    user-select: none;
+}
+
+.keyDiv:hover {
+    cursor: pointer;
+    background: radial-gradient(ellipse at center, #ffffff 0%, #35356e 100%);
+    color: #35356e;
+    
+    
+}
+
+.keyDiv:active {
+    transform: translatex(2px) translatey(2px) scale(.95);
+    box-shadow: 0px 0px 10px #CECECE;
+    font-size: 1.9rem;
+}
