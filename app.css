@@ -8,13 +8,52 @@ body {
     display: grid;
     justify-content: center;
     justify-items: center;
+    font-family: 'Mochiy Pop P One', sans-serif; 
+}
+
+p {
+    letter-spacing: 0.1rem;
 }
 
 h1 {
     font-family: 'Gloria Hallelujah', cursive;
     text-align: center;
 }
-#keyboard {
+
+#button-container {
+    display: flex;
+    justify-content: space-around;
+    width: 620px;
+}
+button {
+    display: block;
+    border: 2px solid #B8B8E0;
+    margin: 1rem;
+    padding: .5rem;
+    border-radius: 1.3rem;
+    background: #020024;
+    box-shadow: 2px 2px 8px #CECECE;
+    background: radial-gradient(ellipse at center, #D4D4ED 30%, #242456 100%);
+    font-family: 'Mochiy Pop P One', sans-serif;
+    color: #242456;
+    font-size: 1.3rem;
+    user-select: none;
+}
+
+button:hover {
+    cursor: pointer;
+    background: radial-gradient(ellipse at center, #ffffff 30%, #35356e 100%);
+    
+}
+
+button:active {
+    transform: translatex(2px) translatey(2px) scale(.95);
+    box-shadow: 0px 0px 10px #CECECE;
+    font-size: 1.4rem;
+}
+
+
+#keyboard-container {
     display: grid;
     gap: 20px 20px;
     grid-template-areas:
@@ -31,8 +70,44 @@ h1 {
     background: rgb(30, 33, 70);
     box-shadow: inset 0px 0px 7px 4px #9A9AD5;
     border-radius: 1.5rem;
-    
+
 }
+
+#blanks-container {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 620px;
+    height: 160px;
+    background: #1e2146;
+    box-shadow: inset 0px 0px 7px 4px #9A9AD5;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    gap: 4px;
+
+}
+
+.words-box {
+    display: inline-flex;
+    align-self: flex-start;
+    font-size: 2rem;
+    margin: 6px;
+    user-select: none;
+    background: #2B2F64;
+    border-radius: 5px;
+}
+.blanks-box {
+    font-family: 'Azeret Mono', monospace;
+    border-bottom: 3px solid white;
+    margin: 3px;
+    color: white;
+    user-select: none;
+}
+
+
 
 .keyDiv {
     display: grid;
@@ -57,8 +132,8 @@ h1 {
     cursor: pointer;
     background: radial-gradient(ellipse at center, #ffffff 0%, #35356e 100%);
     color: #35356e;
-    
-    
+
+
 }
 
 .keyDiv:active {

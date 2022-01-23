@@ -1,6 +1,6 @@
 const keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?']
 
-const keyboardDiv = document.getElementById('keyboard');
+const keyboardDiv = document.getElementById('keyboard-container');
 const getNewPhraseBtn = document.getElementById('newPhrase');
 
 
@@ -70,11 +70,13 @@ getNewPhraseBtn.addEventListener('click', function () {
 
 const getNewPhrase = () => {                                    //returns string of phrase
     let num = Math.floor(Math.random() * (phrases.length));     //generates random index position in the array of possible phrases
-    console.log(`index of phrase in array: ${num}`);
-    console.log(`phrase text: ${phrases[num].text}`)
-    let newPhrase = phrases[num].text                           //newPhrase = the text string
-    countWords(newPhrase)                                       //feeding this function the string
-    extractLetters(newPhrase)                                   //feeding this function the string
+    console.log(`INDEX OF PHRASE: ${num}`);
+    let text = phrases[num].text;
+    console.log(`PHRASE TEXT: ${text}`);
+    let hint = phrases[num].hint;                           
+    console.log(`PHRASE HINT: ${hint}`);
+    countWords(text);                                       
+    extractLetters(text);                                   
 }
 
 function extractLetters(phrase) {                               //loops over each index of the phrase
@@ -84,6 +86,7 @@ function extractLetters(phrase) {                               //loops over eac
 }
 
 function countWords(phrase) {
-    console.log(`This phrase is ${phrase.split(" ").length} word(s) long`)
+    let numOfWords = phrase.split(" ").length;
+    console.log(`This phrase is ${numOfWords} word(s) long`);
 }
 
