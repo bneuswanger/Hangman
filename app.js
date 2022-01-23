@@ -2,7 +2,7 @@ const keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', '
 
 const keyboardDiv = document.getElementById('keyboard-container');
 const getNewPhraseBtn = document.getElementById('newPhrase');
-
+const blanksContainer = document.getElementById('blanks-container');
 
 const createKey = () => {
     for (let key of keys) {
@@ -69,24 +69,40 @@ getNewPhraseBtn.addEventListener('click', function () {
 })
 
 const getNewPhrase = () => {                                    //returns string of phrase
+    clearPhrase();
     let num = Math.floor(Math.random() * (phrases.length));     //generates random index position in the array of possible phrases
     console.log(`INDEX OF PHRASE: ${num}`);
     let text = phrases[num].text;
     console.log(`PHRASE TEXT: ${text}`);
     let hint = phrases[num].hint;                           
     console.log(`PHRASE HINT: ${hint}`);
-    countWords(text);                                       
-    extractLetters(text);                                   
+    buildBlanks(text);                                       
+                                     
 }
 
-function extractLetters(phrase) {                               //loops over each index of the phrase
-    for (index of phrase) {
-        console.log(index);
+
+const clearPhrase = () => {
+    while (blanksContainer.firstChild) {
+        blanksContainer.removeChild(blanksContainer.firstChild);
     }
 }
 
-function countWords(phrase) {
-    let numOfWords = phrase.split(" ").length;
-    console.log(`This phrase is ${numOfWords} word(s) long`);
+function buildBlanks(phrase) {
+    let wordsArray = phrase.split(" ");
+    console.log (wordsArray);
+    for(let word of wordsArray) {
+        const wordBox = document.createElement("div");
+        wordBox.className = "words-box";
+        blanksContainer.appendChild(wordBox);
+        for(let letter of word) {
+            const letterDiv = document.createElement("div");
+            letterDiv.className = "blanks-box-hidden";
+            wordBox.appendChild(letterDiv);
+            const letterNode = document.createTextNode(letter.toUpperCase());
+            letterDiv.appendChild(letterNode);
+        }
+        console.log (word.length);
+    }
 }
+    
 

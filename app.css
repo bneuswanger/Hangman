@@ -18,6 +18,17 @@ p {
 h1 {
     font-family: 'Gloria Hallelujah', cursive;
     text-align: center;
+    font-size: 60px;
+    background: #F1F1F9;
+    background: -webkit-repeating-linear-gradient(to right, #F1F1F9 30%, #B8B8E0 59%, #F1F1F9 70%);
+    background: -moz-repeating-linear-gradient(to right, #F1F1F9 30%, #B8B8E0 59%, #F1F1F9 70%);
+    background: repeating-linear-gradient(to right, #F1F1F9 30%, #B8B8E0 59%, #F1F1F9 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 5px;
+    
+    
 }
 
 #button-container {
@@ -47,9 +58,9 @@ button:hover {
 }
 
 button:active {
-    transform: translatex(2px) translatey(2px) scale(.95);
+    transform: translatex(2px) translatey(2px);
     box-shadow: 0px 0px 10px #CECECE;
-    font-size: 1.4rem;
+   
 }
 
 
@@ -67,8 +78,8 @@ button:active {
     align-items: center;
     width: 620px;
     height: 370px;
-    background: rgb(30, 33, 70);
-    box-shadow: inset 0px 0px 7px 4px #9A9AD5;
+    background: #1e2146;
+    box-shadow: -1px 12px 15px 2px #b8b8e03d,inset 0px 0px 7px 4px #9A9AD5;
     border-radius: 1.5rem;
 
 }
@@ -83,7 +94,7 @@ button:active {
     width: 620px;
     height: 160px;
     background: #1e2146;
-    box-shadow: inset 0px 0px 7px 4px #9A9AD5;
+    box-shadow: -1px 12px 15px 2px #b8b8e03d,inset 0px 0px 7px 4px #9A9AD5;
     border-radius: 1.5rem;
     padding: 2rem;
     gap: 4px;
@@ -99,11 +110,18 @@ button:active {
     background: #2B2F64;
     border-radius: 5px;
 }
-.blanks-box {
+.blanks-box-revealed {
     font-family: 'Azeret Mono', monospace;
     border-bottom: 3px solid white;
     margin: 3px;
     color: white;
+    user-select: none;
+}
+.blanks-box-hidden {
+    font-family: 'Azeret Mono', monospace;
+    border-bottom: 3px solid white;
+    margin: 3px;
+    color: #2B2F64;
     user-select: none;
 }
 
