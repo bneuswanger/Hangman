@@ -5,10 +5,6 @@ const phrases = [
         hint: 'A salutation, of sorts',
     },
     {
-        text: 'i am groot',
-        hint: 'Marvel Comics character',
-    },
-    {
         text: 'who are you?',
         hint: 'Who who, who who?',
     },
@@ -40,6 +36,18 @@ const phrases = [
         text: 'this is a long one with many small words',
         hint: 'It is what it is!',
     },
+    {
+        text: 'loon',
+        hint: 'An eccentric bird',
+    },
+    {
+        text: 'green bay packers',
+        hint: 'A sports team',
+    },
+    {
+        text: 'have you ever seen the rain?',
+        hint: 'Fogerty wants to know',
+    },
 ]
 const keyboardDiv = document.getElementById('keyboard-container');
 const getNewPhraseBtn = document.getElementById('newPhrase');
@@ -48,10 +56,11 @@ const hintBtn = document.getElementById('hint-btn');
 const hintTxtDiv = document.getElementById('hint-txt-div')
 const hintTxt = document.getElementById('hint-txt')
 
-const createKey = () => {
+
+const createKeys = () => {
     for (let key of keys) {
         const keyDiv = document.createElement("div"); //create the div and attach it to keyboardDiv
-        keyDiv.className = "keyDiv";
+        keyDiv.className = "key-div key-div-neutral";
         keyboardDiv.appendChild(keyDiv);
 
         const keyPara = document.createElement('p'); //create a paragraph tag for the key label to live inside and attach it to the keyDiv
@@ -62,25 +71,52 @@ const createKey = () => {
         keyLabel.className = 'keyLabel';
         keyPara.appendChild(keyLabel);
 
-        keyDiv.addEventListener('click', function() {
+        keyDiv.addEventListener('click', function () {
             let chosenKey = this.innerText;
-            revealLetter(chosenKey); //works; key value is passed into checkPhrase function
+            testLetter(chosenKey, this); //works; key value is passed into checkPhrase function
         })
     }
 }
-createKey(keys);
+createKeys(keys);
 
-const revealLetter = (chosenKey) => { 
-    const activeLetters = document.querySelectorAll('.blanks-box-hidden');
-    for (let letter of activeLetters) {
-        if (letter.innerText === chosenKey) {
-            letter.classList.remove('blanks-box-hidden');
-            letter.classList.add('blanks-box-revealed');
-            //add success to classList, style keyDivs for success
-            //add an else which adds failure to classList, style keyDivs for failure
+
+const testLetter = (chosenKey, chosenKeyDiv) => {
+    console.log(`chosenKey is ${chosenKey}`)
+    console.log(chosenKeyDiv)
+    const activeLettersDivs = document.querySelectorAll('.blanks-box');
+    for (let blank of activeLettersDivs) {
+        if (blank.innerText === chosenKey) {
+            blank.classList.remove('blanks-box-hidden');
+            blank.classList.add('blanks-box-revealed');
         }
-    }  
+    }
+    const activeLettersArray = [...activeLettersDivs].map(n => n.innerText)
+    console.log(activeLettersArray)
+    if (activeLettersArray.includes(chosenKey)) {
+        chosenKeyDiv.classList.remove('key-div-neutral');
+        chosenKeyDiv.classList.add('key-div-success');
+    } else {
+        chosenKeyDiv.classList.remove('key-div-neutral');
+        chosenKeyDiv.classList.add('key-div-failure');
+    }
 }
+
+const keySuccess = function () {
+    const key = document.querySelectorAll('key-div-neutral');
+    key.classList.remove('key-div-neutral');
+    key.classList.add('key-div-success');
+}
+
+
+
+const keyFailure = function () {
+    const key = document.querySelectorAll('key-div-neutral');
+    key.classList.remove('key-div-neutral');
+    key.classList.add('key-div-success');
+}
+
+
+
 
 getNewPhraseBtn.addEventListener('click', function () {
     getNewPhrase();
@@ -96,9 +132,19 @@ hintBtn.addEventListener('click', function () {
 })
 
 
+const resetKeyboard = function () {
+    const keyDivs = document.querySelectorAll('.key-div')
+    for (let key of keyDivs) {
+        key.classList.remove('key-div-success')
+        key.classList.remove('key-div-failure')
+        key.classList.add('key-div-neutral')
+    }
+}
+
 
 const getNewPhrase = () => {                                    //returns string of phrase
     clearPhrase();
+    resetKeyboard();
     if (phrases.length === 0) {
         alert("You've exhausted the options, please refresh and play again!")
     } else {
@@ -131,7 +177,7 @@ function buildBlanks(phrase) {
         blanksContainer.appendChild(wordBox);
         for (let letter of word) {
             const letterDiv = document.createElement("div");
-            letterDiv.className = "blanks-box-hidden";
+            letterDiv.className = "blanks-box blanks-box-hidden";
             wordBox.appendChild(letterDiv);
             const letterNode = document.createTextNode(letter.toUpperCase());
             letterDiv.appendChild(letterNode);
