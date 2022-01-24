@@ -13,6 +13,9 @@ body {
 
 p {
     letter-spacing: 0.1rem;
+    user-select: none;
+    color: #06060E;
+    margin: 0;
 }
 
 h1 {
@@ -30,6 +33,7 @@ h1 {
     
     
 }
+
 
 #button-container {
     display: flex;
@@ -81,6 +85,7 @@ button:active {
     background: #1e2146;
     box-shadow: -1px 12px 15px 2px #b8b8e03d,inset 0px 0px 7px 4px #9A9AD5;
     border-radius: 1.5rem;
+    margin-top: 1rem;
 
 }
 
@@ -98,6 +103,7 @@ button:active {
     border-radius: 1.5rem;
     padding: 2rem;
     gap: 4px;
+    margin-bottom: 1rem;
 
 }
 
