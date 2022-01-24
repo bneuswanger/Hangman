@@ -1,29 +1,4 @@
 const keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?']
-
-const keyboardDiv = document.getElementById('keyboard-container');
-const getNewPhraseBtn = document.getElementById('newPhrase');
-const blanksContainer = document.getElementById('blanks-container');
-const hintBtn = document.getElementById('hint-btn');
-const hintTxtDiv = document.getElementById('hint-txt-div')
-const hintTxt = document.getElementById('hint-txt')
-
-const createKey = () => {
-    for (let key of keys) {
-        const keyDiv = document.createElement("div"); //create the div and attach it to keyboardDiv
-        keyDiv.className = "keyDiv";
-        keyboardDiv.appendChild(keyDiv);
-
-        const keyPara = document.createElement('p'); //create a paragraph tag for the key label to live inside and attach it to the keyDiv
-        keyPara.className = 'keyLabel';
-        keyDiv.appendChild(keyPara);
-
-        let keyLabel = document.createTextNode(key); //create a letter for the key label
-        keyLabel.className = 'keyLabel';
-        keyPara.appendChild(keyLabel);
-    }
-}
-createKey(keys);
-
 const phrases = [
     {
         text: 'hi there!',
@@ -66,14 +41,51 @@ const phrases = [
         hint: 'It is what it is!',
     },
 ]
+const keyboardDiv = document.getElementById('keyboard-container');
+const getNewPhraseBtn = document.getElementById('newPhrase');
+const blanksContainer = document.getElementById('blanks-container');
+const hintBtn = document.getElementById('hint-btn');
+const hintTxtDiv = document.getElementById('hint-txt-div')
+const hintTxt = document.getElementById('hint-txt')
+
+const createKey = () => {
+    for (let key of keys) {
+        const keyDiv = document.createElement("div"); //create the div and attach it to keyboardDiv
+        keyDiv.className = "keyDiv";
+        keyboardDiv.appendChild(keyDiv);
+
+        const keyPara = document.createElement('p'); //create a paragraph tag for the key label to live inside and attach it to the keyDiv
+        keyPara.className = 'keyLabel';
+        keyDiv.appendChild(keyPara);
+
+        let keyLabel = document.createTextNode(key); //create a letter for the key label
+        keyLabel.className = 'keyLabel';
+        keyPara.appendChild(keyLabel);
+
+        keyDiv.addEventListener('click', function() {
+            let chosenKey = this.innerText;
+            revealLetter(chosenKey); //works; key value is passed into checkPhrase function
+        })
+    }
+}
+createKey(keys);
+
+const revealLetter = (chosenKey) => { 
+    const activeLetters = document.querySelectorAll('.blanks-box-hidden');
+    for (let letter of activeLetters) {
+        if (letter.innerText === chosenKey) {
+            letter.classList.remove('blanks-box-hidden');
+            letter.classList.add('blanks-box-revealed');
+            //add success to classList, style keyDivs for success
+            //add an else which adds failure to classList, style keyDivs for failure
+        }
+    }  
+}
 
 getNewPhraseBtn.addEventListener('click', function () {
     getNewPhrase();
 })
 
-
-
-////Hint button - work on this next
 
 hintBtn.addEventListener('click', function () {
     if (hintTxt.style.color === "white") {
@@ -85,13 +97,11 @@ hintBtn.addEventListener('click', function () {
 
 
 
-
 const getNewPhrase = () => {                                    //returns string of phrase
     clearPhrase();
     if (phrases.length === 0) {
         alert("You've exhausted the options, please refresh and play again!")
     } else {
-
         let num = Math.floor(Math.random() * (phrases.length));     //generates random index position in the array of possible phrases
         console.log(`INDEX OF PHRASE: ${num}`);
         let text = phrases[num].text;
@@ -101,7 +111,7 @@ const getNewPhrase = () => {                                    //returns string
         buildBlanks(text);
         hintBtn.style.display = "block";
         hintTxt.innerText = `Hint: ${hint}`;
-        phrases.splice(num, 1);
+        phrases.splice(num, 1); //removes current phrase from array
     }
 }
 
