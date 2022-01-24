@@ -5,6 +5,14 @@ const phrases = [
         hint: 'A salutation, of sorts',
     },
     {
+        text: 'It is snowing!',
+        hint: 'Floridians rarely say it',
+    },
+    {
+        text: 'Hello world',
+        hint: 'A coders salutation',
+    },
+    {
         text: 'who are you?',
         hint: 'Who who, who who?',
     },
@@ -79,7 +87,6 @@ const createKeys = () => {
 }
 createKeys(keys);
 
-
 const testLetter = (chosenKey, chosenKeyDiv) => {
     console.log(`chosenKey is ${chosenKey}`)
     console.log(chosenKeyDiv)
@@ -107,16 +114,11 @@ const keySuccess = function () {
     key.classList.add('key-div-success');
 }
 
-
-
 const keyFailure = function () {
     const key = document.querySelectorAll('key-div-neutral');
     key.classList.remove('key-div-neutral');
     key.classList.add('key-div-success');
 }
-
-
-
 
 getNewPhraseBtn.addEventListener('click', function () {
     getNewPhrase();
@@ -140,7 +142,6 @@ const resetKeyboard = function () {
         key.classList.add('key-div-neutral')
     }
 }
-
 
 const getNewPhrase = () => {                                    //returns string of phrase
     clearPhrase();
