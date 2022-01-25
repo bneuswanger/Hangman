@@ -29,9 +29,7 @@ h1 {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 5px;
-    
-    
+    margin: 5px;   
 }
 
 
@@ -132,8 +130,7 @@ button:active {
 }
 
 
-
-.key-div-neutral {
+.key-div {
     display: grid;
     grid-template-columns: 60px;
     grid-template-rows: 60px;
@@ -141,61 +138,44 @@ button:active {
     align-items: center;
     text-align: center;
     font-size: 2.5rem;
-    border: 2px solid #B8B8E0;
     border-radius: 1.3rem;
-    background: #020024;
-    box-shadow: 2px 2px 8px #CECECE;
-    background: radial-gradient(ellipse at center, #D4D4ED 0%, #242456 100%);
     font-family: 'Mochiy Pop P One', sans-serif;
-    color: #242456;
     font-size: 2rem;
     user-select: none;
 }
 
+.key-div-neutral {
+    border: 2px solid #B8B8E0;
+    background: #020024;
+    box-shadow: 2px 2px 8px #CECECE;
+    background: radial-gradient(ellipse at center, #D4D4ED 0%, #242456 100%);
+}
+
 .key-div-success {
-    display: grid;
-    grid-template-columns: 60px;
-    grid-template-rows: 60px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 2.5rem;
     border: 2px solid #02ee16;
-    border-radius: 1.3rem;
     background: #020024;
     box-shadow: 2px 2px 8px #16dd37;
     background: radial-gradient(ellipse at center, #D4D4ED 0%, #21d63f 100%);
-    font-family: 'Mochiy Pop P One', sans-serif;
-    font-size: 2rem;
-    user-select: none;  
 }
+
 .key-div-failure {
-    display: grid;
-    grid-template-columns: 60px;
-    grid-template-rows: 60px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 2.5rem;
     border: 2px solid #d62121;
-    border-radius: 1.3rem;
     background: #020024;
     box-shadow: 2px 2px 8px #d62121;
     background: radial-gradient(ellipse at center, #D4D4ED 0%, #d62121 100%);
-    font-family: 'Mochiy Pop P One', sans-serif;
-    font-size: 2rem;
-    user-select: none;  
 }
 
+.key-div-game-over {
+    opacity: 0.5;
+}
 
 
 .key-div-neutral:hover {
     cursor: pointer;
     background: radial-gradient(ellipse at center, #ffffff 0%, #35356e 100%);
     color: #35356e;
-
-
 }
+
 
 .key-div-neutral:active {
     transform: translatex(2px) translatey(2px) scale(.95);

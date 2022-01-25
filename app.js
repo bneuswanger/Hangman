@@ -64,6 +64,7 @@ const hintBtn = document.getElementById('hint-btn');
 const hintTxtDiv = document.getElementById('hint-txt-div')
 const hintTxt = document.getElementById('hint-txt')
 
+let isGameOver = false;
 
 const createKeys = () => {
     for (let key of keys) {
@@ -82,10 +83,39 @@ const createKeys = () => {
         keyDiv.addEventListener('click', function () {
             let chosenKey = this.innerText;
             testLetter(chosenKey, this); //works; key value is passed into checkPhrase function
+            checkGameStatus();
         })
     }
 }
 createKeys(keys);
+
+
+const checkGameStatus = () => {
+    const blanksRemaining = document.getElementsByClassName('blanks-box-hidden').length;
+    console.log(blanksRemaining)
+    if (blanksRemaining === 0) {
+        gameOver();
+    }
+}
+
+const gameOver = () => {
+    console.log("game over")
+    isGameOver = true;
+    const keyDivs = document.getElementsByClassName('key-div');
+    for (let key of keyDivs) {
+        key.classList.add('key-div-game-over')
+    }
+}
+
+const resetKeyboard = function () {
+    const keyDivs = document.querySelectorAll('.key-div')
+    for (let key of keyDivs) {
+        key.classList.remove('key-div-success')
+        key.classList.remove('key-div-failure')
+        key.classList.remove('key-div-game-over')
+        key.classList.add('key-div-neutral')
+    }
+}
 
 const testLetter = (chosenKey, chosenKeyDiv) => {
     console.log(`chosenKey is ${chosenKey}`)
@@ -108,22 +138,10 @@ const testLetter = (chosenKey, chosenKeyDiv) => {
     }
 }
 
-const keySuccess = function () {
-    const key = document.querySelectorAll('key-div-neutral');
-    key.classList.remove('key-div-neutral');
-    key.classList.add('key-div-success');
-}
-
-const keyFailure = function () {
-    const key = document.querySelectorAll('key-div-neutral');
-    key.classList.remove('key-div-neutral');
-    key.classList.add('key-div-success');
-}
-
 getNewPhraseBtn.addEventListener('click', function () {
     getNewPhrase();
+    isGameOver = false;
 })
-
 
 hintBtn.addEventListener('click', function () {
     if (hintTxt.style.color === "white") {
@@ -133,15 +151,6 @@ hintBtn.addEventListener('click', function () {
     }
 })
 
-
-const resetKeyboard = function () {
-    const keyDivs = document.querySelectorAll('.key-div')
-    for (let key of keyDivs) {
-        key.classList.remove('key-div-success')
-        key.classList.remove('key-div-failure')
-        key.classList.add('key-div-neutral')
-    }
-}
 
 const getNewPhrase = () => {                                    //returns string of phrase
     clearPhrase();
