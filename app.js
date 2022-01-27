@@ -1,5 +1,5 @@
 const keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?']
-const phrases = [
+const puzzles = [
     {
         text: 'hi there!',
         hint: 'A salutation, of sorts',
@@ -58,13 +58,25 @@ const phrases = [
     },
 ]
 const keyboardDiv = document.getElementById('keyboard-container');
-const getNewPhraseBtn = document.getElementById('newPhrase');
+const getNewPuzzleBtn = document.getElementById('newPuzzle');
 const blanksContainer = document.getElementById('blanks-container');
 const hintBtn = document.getElementById('hint-btn');
-const hintTxtDiv = document.getElementById('hint-txt-div')
-const hintTxt = document.getElementById('hint-txt')
+const hintTxtDiv = document.getElementById('hint-txt-div');
+const hintTxt = document.getElementById('hint-txt');
+const congratsTxt = document.getElementById('congrats');
+
+
+
 
 let isGameOver = false;
+let hit = 0;
+let miss = 0;
+//Player has 
+
+const resetScore = () => {
+    hit = 0;
+    miss = 0;
+}
 
 const createKeys = () => {
     for (let key of keys) {
@@ -82,7 +94,7 @@ const createKeys = () => {
 
         keyDiv.addEventListener('click', function () {
             let chosenKey = this.innerText;
-            testLetter(chosenKey, this); //works; key value is passed into checkPhrase function
+            testLetter(chosenKey, this); //works; key value is passed into checkPuzzle function
             checkGameStatus();
         })
     }
@@ -90,20 +102,23 @@ const createKeys = () => {
 createKeys(keys);
 
 
-const checkGameStatus = () => {
-    const blanksRemaining = document.getElementsByClassName('blanks-box-hidden').length;
-    console.log(blanksRemaining)
-    if (blanksRemaining === 0) {
-        gameOver();
-    }
-}
-
-const gameOver = () => {
-    console.log("game over")
-    isGameOver = true;
-    const keyDivs = document.getElementsByClassName('key-div');
-    for (let key of keyDivs) {
-        key.classList.add('key-div-game-over')
+const getNewPuzzle = () => {                                    
+    clearPuzzle();
+    resetKeyboard();
+    resetScore();
+    if (puzzles.length === 0) {
+        alert("You've exhausted the options, please refresh and play again!")
+    } else {
+        let num = Math.floor(Math.random() * (puzzles.length));     //generates random index position in the array of possible puzzles
+        // console.log(`INDEX OF PUZZLE: ${num}`);
+        let text = puzzles[num].text;
+        console.log(`PUZZLE TEXT: ${text}`);
+        let hint = puzzles[num].hint;
+        // console.log(`PUZZLE HINT: ${hint}`);
+        buildBlanks(text);
+        hintBtn.style.display = "block";
+        hintTxt.innerText = `Hint: ${hint}`;
+        puzzles.splice(num, 1); //removes current puzzle from array
     }
 }
 
@@ -117,9 +132,46 @@ const resetKeyboard = function () {
     }
 }
 
+const clearPuzzle = () => {
+    while (blanksContainer.firstChild) {
+        blanksContainer.removeChild(blanksContainer.firstChild);
+    }
+}
+
+
+
+getNewPuzzle();
+
+
+const checkGameStatus = () => {
+    const blanksRemaining = document.getElementsByClassName('blanks-box-hidden').length;
+    console.log(`Blanks remaining: ${blanksRemaining}`)
+    if (blanksRemaining === 0) {
+        gameOverWin();
+    }
+}
+
+const gameOverWin = () => {
+    console.log("game over")
+    isGameOver = true;
+    keyboardDiv.style.display = 'none';
+    congratsTxt.style.display = 'block';
+}
+
+// ////experimental
+// const determineActive = () => { //exp
+//     const activeLettersDivs = document.querySelectorAll('.blanks-box'); //delete & uncomment below
+//     const activeLettersArray = [...activeLettersDivs].map(n => n.innerText) //delete & uncomment below
+//     console.log(`TOTAL LETTERS TO SOLVE: ${activeLettersArray.length}`) //delete & uncomment below
+//     return activeLettersDivs; //exp
+// }
+// ////experimental
+
+
 const testLetter = (chosenKey, chosenKeyDiv) => {
-    console.log(`chosenKey is ${chosenKey}`)
-    console.log(chosenKeyDiv)
+    // determineActive();
+    // console.log(`chosenKey is ${chosenKey}`)
+    // console.log(chosenKeyDiv)
     const activeLettersDivs = document.querySelectorAll('.blanks-box');
     for (let blank of activeLettersDivs) {
         if (blank.innerText === chosenKey) {
@@ -128,19 +180,29 @@ const testLetter = (chosenKey, chosenKeyDiv) => {
         }
     }
     const activeLettersArray = [...activeLettersDivs].map(n => n.innerText)
-    console.log(activeLettersArray)
+    console.log(`TOTAL LETTERS TO SOLVE: ${activeLettersArray.length}`)
     if (activeLettersArray.includes(chosenKey)) {
         chosenKeyDiv.classList.remove('key-div-neutral');
         chosenKeyDiv.classList.add('key-div-success');
+        hit++;
+
     } else {
         chosenKeyDiv.classList.remove('key-div-neutral');
         chosenKeyDiv.classList.add('key-div-failure');
+        miss++;
+
     }
+    console.log(`hit count: ${hit}`);
+    console.log(`miss count: ${miss}`);
 }
 
-getNewPhraseBtn.addEventListener('click', function () {
-    getNewPhrase();
+
+
+getNewPuzzleBtn.addEventListener('click', function () {
+    getNewPuzzle();
     isGameOver = false;
+    keyboardDiv.style.display = 'grid';
+    congratsTxt.style.display = 'none';
 })
 
 hintBtn.addEventListener('click', function () {
@@ -152,35 +214,9 @@ hintBtn.addEventListener('click', function () {
 })
 
 
-const getNewPhrase = () => {                                    //returns string of phrase
-    clearPhrase();
-    resetKeyboard();
-    if (phrases.length === 0) {
-        alert("You've exhausted the options, please refresh and play again!")
-    } else {
-        let num = Math.floor(Math.random() * (phrases.length));     //generates random index position in the array of possible phrases
-        console.log(`INDEX OF PHRASE: ${num}`);
-        let text = phrases[num].text;
-        console.log(`PHRASE TEXT: ${text}`);
-        let hint = phrases[num].hint;
-        console.log(`PHRASE HINT: ${hint}`);
-        buildBlanks(text);
-        hintBtn.style.display = "block";
-        hintTxt.innerText = `Hint: ${hint}`;
-        phrases.splice(num, 1); //removes current phrase from array
-    }
-}
-
-
-const clearPhrase = () => {
-    while (blanksContainer.firstChild) {
-        blanksContainer.removeChild(blanksContainer.firstChild);
-    }
-}
-
-function buildBlanks(phrase) {
-    let wordsArray = phrase.split(" ");
-    console.log(wordsArray);
+function buildBlanks(puzzle) {
+    let wordsArray = puzzle.split(" ");
+    // console.log(wordsArray);
     for (let word of wordsArray) {
         const wordBox = document.createElement("div");
         wordBox.className = "words-box";

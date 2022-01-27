@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman!</title>
     <script src='app.js' defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
     <link rel="stylesheet" href="app.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,38 +18,47 @@
 
 <body>
 
-    <h1 id='header'>Let's PlaY HanGman!</h1>
+    <h1 id='header'>Solve a Puzzle!</h1>
     <div id="blanks-container">
     </div>
     <div>
         <div id="hint-txt-div">
-            <p id="hint-txt">worthless placeholder text</p>
+            <p id="hint-txt">you found me!</p>
         </div>
     </div>
     <div id="button-container">
-        <button id="newPhrase">Get New Phrase</button>
+        <button id="newPuzzle">Get New Puzzle</button>
         <button id="hint-btn" style="display:none">Toggle Hint</button>
     </div>
+    <h1 id='congrats'>Congratulations!</h1>
     <div id="keyboard-container"></div>
     <br>
-    <p>
-    <ul>
-        <li>------------Stuff(s) to do---------</li>
-        <li>Add more phrases to array (ask for community contributions?)</li>
-        <li>Hangman picture... or some adaptation that is not a person hanging from a hook... (how about building a
-            snowman before running out of attempts, which is related to the difficulty of the phrase? Winning as a
-            constructive prize (building complete snowman) vs. losing as a penalty(death)</li>
+    <!-- <p><ul>------------Stuff(s) to do---------
         
         <li>Build snowman</li>
-        <li>Game design/structure for points/attempts/difficulty etc.</li>
-        <li>Is game over status - disable unused keys<li>
+        <li>Game design/structure for points/attempts</li>
+        <li>Define win/loss with counter</li>
+        <li>replace keyboard at gameover/win with congrats message</li>
+        <li>replace keyboard at gameover/lose with congrats message</li>
+
         <li>create win/loss notifications</li>
         <li>Keyboard functionality vis-a-vis snowman</li>
         <li>Responsive sizing</li>
         <li>Animate section entrances on pageload with GSAP (web dev has tutorial) </li>
+        <li>Add more phrases to array or link to random word API somehow</li>
     </ul>
     </p>
-    
+    <p>
+    <ol>
+        <li>--Stuff done 1/25/22---</li>
+        <li>Keyboard removed on win</li>
+        <li>Congrats Text added on win</li>
+        <li>Removed keyboard styling on win (wasn't working out)</li>
+        <li>Gets phrase on page refresh to prevent keyboard click from congratulating user</li>
+        <li>Hit/Miss tracker added in JS</li>
+    </ol>
+    </p> -->
+
 
 </body>
 
