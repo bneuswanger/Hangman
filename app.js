@@ -71,7 +71,7 @@ const congratsTxt = document.getElementById('congrats');
 let isGameOver = false;
 let hit = 0;
 let miss = 0;
-//Player has 
+
 
 const resetScore = () => {
     hit = 0;
