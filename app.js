@@ -102,10 +102,19 @@ const createKeys = () => {
 createKeys(keys);
 
 
-const getNewPuzzle = () => {                                    
+const updateScore = () => {
+    const hitBox = document.querySelector('.hit-box')
+    const missBox = document.querySelector('.miss-box')
+    hitBox.textContent = hit;
+    missBox.textContent = miss;
+}
+
+
+const getNewPuzzle = () => {
     clearPuzzle();
     resetKeyboard();
     resetScore();
+    updateScore();
     if (puzzles.length === 0) {
         alert("You've exhausted the options, please refresh and play again!")
     } else {
@@ -166,10 +175,10 @@ const gameOverWin = () => {
 //     return activeLettersDivs; //exp
 // }
 // ////experimental
-
+// determineActive();
 
 const testLetter = (chosenKey, chosenKeyDiv) => {
-    // determineActive();
+    
     // console.log(`chosenKey is ${chosenKey}`)
     // console.log(chosenKeyDiv)
     const activeLettersDivs = document.querySelectorAll('.blanks-box');
@@ -194,7 +203,9 @@ const testLetter = (chosenKey, chosenKeyDiv) => {
     }
     console.log(`hit count: ${hit}`);
     console.log(`miss count: ${miss}`);
+    updateScore()
 }
+
 
 
 
