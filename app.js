@@ -63,12 +63,11 @@ const blanksContainer = document.getElementById('blanks-container');
 const hintBtn = document.getElementById('hint-btn');
 const hintTxtDiv = document.getElementById('hint-txt-div');
 const hintTxt = document.getElementById('hint-txt');
-const congratsTxt = document.getElementById('congrats');
+const outcomeTxt = document.getElementById('outcome');
+const hitIncContainer = document.getElementById('hit-inc-container'
+)
 
-
-
-
-let isGameOver = false;
+let isGameOver = false; //this isn't used anywhere yet, but the boolean works
 let hit = 0;
 let miss = 0;
 
@@ -101,27 +100,18 @@ const createKeys = () => {
 }
 createKeys(keys);
 
-
-const updateScore = () => {
-    const hitBox = document.querySelector('.hit-box')
-    const missBox = document.querySelector('.miss-box')
-    hitBox.textContent = hit;
-    missBox.textContent = miss;
-}
-
-
 const getNewPuzzle = () => {
     clearPuzzle();
     resetKeyboard();
     resetScore();
-    updateScore();
+    resetIncBars();
     if (puzzles.length === 0) {
         alert("You've exhausted the options, please refresh and play again!")
     } else {
         let num = Math.floor(Math.random() * (puzzles.length));     //generates random index position in the array of possible puzzles
         // console.log(`INDEX OF PUZZLE: ${num}`);
         let text = puzzles[num].text;
-        console.log(`PUZZLE TEXT: ${text}`);
+        // console.log(`PUZZLE TEXT: ${text}`);
         let hint = puzzles[num].hint;
         // console.log(`PUZZLE HINT: ${hint}`);
         buildBlanks(text);
@@ -141,44 +131,54 @@ const resetKeyboard = function () {
     }
 }
 
-const clearPuzzle = () => {
+const clearPuzzle = () => { //also clears hit stauts bar
     while (blanksContainer.firstChild) {
         blanksContainer.removeChild(blanksContainer.firstChild);
     }
-}
-
-
-
-getNewPuzzle();
-
-
-const checkGameStatus = () => {
-    const blanksRemaining = document.getElementsByClassName('blanks-box-hidden').length;
-    console.log(`Blanks remaining: ${blanksRemaining}`)
-    if (blanksRemaining === 0) {
-        gameOverWin();
+    while (hitIncContainer.firstChild) {
+        hitIncContainer.removeChild(hitIncContainer.firstChild);
     }
 }
 
-const gameOverWin = () => {
-    console.log("game over")
-    isGameOver = true;
-    keyboardDiv.style.display = 'none';
-    congratsTxt.style.display = 'block';
+
+const resetIncBars = () => {
+    const missInc = document.querySelectorAll('.miss-inc')
+    for (let x of missInc) {
+        x.classList.remove('miss-inc-active')
+    }
+}
+getNewPuzzle();
+
+const checkGameStatus = () => {
+    const blanksRemaining = document.getElementsByClassName('blanks-box-hidden').length;
+    // console.log(`Blanks remaining: ${blanksRemaining}`)
+    // console.log(`misses: ${miss}`)
+    if (blanksRemaining === 0) {
+        gameOverWin();
+    }
+    if (miss === 6) {
+        gameOverLose();
+    }
 }
 
-// ////experimental
-// const determineActive = () => { //exp
-//     const activeLettersDivs = document.querySelectorAll('.blanks-box'); //delete & uncomment below
-//     const activeLettersArray = [...activeLettersDivs].map(n => n.innerText) //delete & uncomment below
-//     console.log(`TOTAL LETTERS TO SOLVE: ${activeLettersArray.length}`) //delete & uncomment below
-//     return activeLettersDivs; //exp
-// }
-// ////experimental
-// determineActive();
+const gameOverLose = () => {
+    isGameOver = true;
+    keyboardDiv.style.display = 'none';
+    outcomeTxt.innerText = 'Better luck next time!'
+    outcomeTxt.style.display = 'block';
+
+}
+
+const gameOverWin = () => {
+    // console.log("game over")
+    isGameOver = true;
+    keyboardDiv.style.display = 'none';
+    outcomeTxt.innerText = 'Congratulations!'
+    outcomeTxt.style.display = 'block';
+}
 
 const testLetter = (chosenKey, chosenKeyDiv) => {
-    
+
     // console.log(`chosenKey is ${chosenKey}`)
     // console.log(chosenKeyDiv)
     const activeLettersDivs = document.querySelectorAll('.blanks-box');
@@ -189,7 +189,9 @@ const testLetter = (chosenKey, chosenKeyDiv) => {
         }
     }
     const activeLettersArray = [...activeLettersDivs].map(n => n.innerText)
-    console.log(`TOTAL LETTERS TO SOLVE: ${activeLettersArray.length}`)
+    // console.log(activeLettersDivs)
+    // console.log(activeLettersArray)
+    // console.log(`TOTAL LETTERS TO SOLVE: ${activeLettersArray.length}`)
     if (activeLettersArray.includes(chosenKey)) {
         chosenKeyDiv.classList.remove('key-div-neutral');
         chosenKeyDiv.classList.add('key-div-success');
@@ -199,21 +201,36 @@ const testLetter = (chosenKey, chosenKeyDiv) => {
         chosenKeyDiv.classList.remove('key-div-neutral');
         chosenKeyDiv.classList.add('key-div-failure');
         miss++;
+        const allMissIncs = document.querySelectorAll('.miss-inc'); //these two lines increment the miss status bar
+        allMissIncs[miss - 1].classList.add('miss-inc-active')
 
     }
-    console.log(`hit count: ${hit}`);
-    console.log(`miss count: ${miss}`);
-    updateScore()
+    logHits();
 }
 
+const logHits = () => { //accumulates green status bars as correct letters are guessed
+    const blanksRevealed = document.getElementsByClassName('blanks-box-revealed') //this is an HTMLcollection of the revealed blanks
+    const n = [...blanksRevealed] //this is an array containing the revealed blanks
+    const solved = n.length;
+    // console.log(`Solved: ${solved}`);
+    const unsolved = document.getElementsByClassName('blanks-box-hidden').length;
+    // console.log(`Unsolved: ${unsolved}`)
+    const total = document.getElementsByClassName('blanks-box').length;
+    // console.log(`Total: ${total}`)
+    for (let i = 0; i + 1 <= solved; i++) {
+        const hitStatusDivs = document.querySelectorAll('.hit-inc')
+        const hitStatusArr = [...hitStatusDivs]
+        hitStatusArr[i].classList.add ('hit-inc-active')
+    }
 
+}
 
 
 getNewPuzzleBtn.addEventListener('click', function () {
     getNewPuzzle();
     isGameOver = false;
     keyboardDiv.style.display = 'grid';
-    congratsTxt.style.display = 'none';
+    outcomeTxt.style.display = 'none';
 })
 
 hintBtn.addEventListener('click', function () {
@@ -225,7 +242,8 @@ hintBtn.addEventListener('click', function () {
 })
 
 
-function buildBlanks(puzzle) {
+function buildBlanks(puzzle) { //also builds hit status bar
+    // console.log(puzzle)
     let wordsArray = puzzle.split(" ");
     // console.log(wordsArray);
     for (let word of wordsArray) {
@@ -240,6 +258,11 @@ function buildBlanks(puzzle) {
             letterDiv.appendChild(letterNode);
         }
     }
+    let noSpaces = puzzle.replaceAll(" ", "")
+    for (let char of noSpaces) {
+        // console.log(char)
+        const hitInc = document.createElement("div");
+        hitInc.className = "hit-inc";
+        hitIncContainer.appendChild(hitInc);
+    }
 }
-
-

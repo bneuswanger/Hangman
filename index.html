@@ -18,15 +18,9 @@
 
 <body>
 
-    <h1 id='header'>Solve a Puzzle!</h1>
-    <div id="blanks-container">
     </div>
-    <div class="score-container">
-        <div class="hit-box">should update to # of success keys</div>
-        <div class="miss-box">should update to # of missed keys</div>
-    </div>
-    <div class="hit-progress-bar"></div>
-
+    <h1 id='header'>Can you solve the puzzle?</h1>
+    <div id="blanks-container"></div>
 
     <div>
         <div id="hint-txt-div">
@@ -37,37 +31,57 @@
         <button id="newPuzzle">Get New Puzzle</button>
         <button id="hint-btn" style="display:none">Toggle Hint</button>
     </div>
-    <h1 id='congrats'>Congratulations!</h1>
-    <div id="keyboard-container"></div>
+
+    <section id="keyboard-section">
+        <div id="hit-inc-container"></div>
+        <h1 id='outcome'></h1>
+        <div id="keyboard-container"></div>
+        <div class="miss-box-container">
+            <div class="miss-inc"></div>
+            <div class="miss-inc"></div>
+            <div class="miss-inc"></div>
+            <div class="miss-inc"></div>
+            <div class="miss-inc"></div>
+            <div class="miss-inc"></div>
+        </div>
+    </section>
+
     <br>
-    <p><ul>------------Stuff(s) to do---------
-        
-        <li>Build snowman</li>
-        <li>Game design/structure for points/attempts</li>
-        <li>Define win/loss with counter</li>
-        <li>create win/loss notifications</li>
-        <li>Keyboard functionality vis-a-vis snowman</li>
-        <li>Responsive sizing</li>
-        <li>Animate section entrances on pageload with GSAP (web dev has tutorial) </li>
-        <li>Add more phrases to array or link to random word API somehow</li>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <ul class="outside"><b>To Do List:</b>
+        <li>Mediaqueries for mobile screen size</li>
+        <li>Animate section entrances on pageload with GSAP (web dev has tutorial)</li>
+        <li>Add more phrases to array or link to random word API somehow, if can find a freebie</li>
+        <li>Find animated GIFS w/transparency for win/loss (happy snowman/snow falling for win, melted sad snowman for
+            loss, etc)</li>
     </ul>
-    </p>
-    <p>
-         <ol>
-        <li>--Stuff done 1/28/22---</li>
-        <li>Added visual hit/miss counter</li>
-        
-    </ol>
-    <ol>
-        <li>--Stuff done 1/25/22---</li>
+    <ul class="outside"><b>Update 1/29/22</b>
+        <li>added hit-increment status bar functionality</li>
+        <li>hit status bar populates with correct # of letters</li>
+        </ul>
+    <ul class="outside"><b>Update 1/28/22</b>
+        <li>Defined loss (6 fails) & added point accumulator math</li>
+        <li>added win/loss notifications</li>
+        <li>created elements & styles for the hit/miss status bars</li>
+        <li>added miss-increment status bar functionality</li>
+    </ul>
+    <ul class="outside"><b>Update 1/25/22</b>
         <li>Keyboard removed on win</li>
         <li>Congrats Text added on win</li>
         <li>Removed keyboard styling on win (wasn't working out)</li>
         <li>Gets phrase on page refresh to prevent keyboard click from congratulating user</li>
         <li>Hit/Miss tracker added in JS</li>
-    </ol>
-   
-    </p>
+    </ul>
 
 
 </body>

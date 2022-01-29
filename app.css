@@ -8,10 +8,15 @@ body {
     display: grid;
     justify-content: center;
     justify-items: center;
-    font-family: 'Mochiy Pop P One', sans-serif; 
+    font-family: 'Mochiy Pop P One', sans-serif;
+ 
 }
 
-p {
+
+
+
+
+.keyLabel, #hint-txt {
     letter-spacing: 0.1rem;
     user-select: none;
     color: #06060E;
@@ -21,7 +26,7 @@ p {
 h1 {
     font-family: 'Gloria Hallelujah', cursive;
     text-align: center;
-    font-size: 60px;
+    font-size: 40px;
     background: #F1F1F9;
     background: -webkit-repeating-linear-gradient(to right, #F1F1F9 30%, #B8B8E0 59%, #F1F1F9 70%);
     background: -moz-repeating-linear-gradient(to right, #F1F1F9 30%, #B8B8E0 59%, #F1F1F9 70%);
@@ -29,8 +34,97 @@ h1 {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 5px;   
+    margin: 5px;
 }
+
+
+#hit-inc-container {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40px;
+    height: 370px;
+    border-radius: 2em;
+}
+
+.hit-inc {
+    background-color: #323b33;
+    flex-grow: 1;
+    flex-basis: 0;
+    border-top: 2px solid #06060E;
+    width: 40px;
+}
+
+.hit-inc-active {
+    background: radial-gradient(ellipse at center, #acf0b2 0%, #56fd64 100%);
+
+}
+
+.hit-inc:first-of-type {
+    border-bottom: none;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+}
+
+.hit-inc:last-of-type {
+    border-top: none;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+}
+
+.miss-box-container {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    width: 40px;
+    height: 370px;
+    border-radius: 2em;
+}
+
+.miss-inc {
+    background-color: #3a2a2a;
+    flex-grow: 1;
+    flex-basis: 0;
+    border-top: 2px solid #06060E;
+    width: 40px;
+}
+
+.miss-inc-active {
+    background: radial-gradient(ellipse at center, #cf8787 0%, #d62121 100%);
+
+}
+
+.miss-inc:first-of-type {
+    border-bottom: none;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+}
+
+.miss-inc:last-of-type {
+    border-top: none;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+}
+
+
+#keyboard-section {
+    display: flex;
+    justify-content: space-between;
+    width: 750px;
+    align-items: flex-end;
+}
+
+
+
+
+
+
+
+
+
+
 
 .score-container {
     color: black;
@@ -43,6 +137,7 @@ h1 {
     border-radius: 2rem;
     font-size: 1.5rem;
 }
+
 .hit-box, .miss-box {
     flex-grow: 1;
     margin: .3rem;
@@ -54,6 +149,7 @@ h1 {
 .hit-box {
     background-color: #56fd64;
 }
+
 .miss-box {
     background-color: #d62121;
 }
@@ -70,7 +166,7 @@ h1 {
     width: 620px;
     height: 160px;
     background: #1e2146;
-    box-shadow: -1px 12px 15px 2px #b8b8e03d,inset 0px 0px 7px 4px #9A9AD5;
+    box-shadow: -1px 12px 15px 2px #b8b8e03d, inset 0px 0px 7px 4px #9A9AD5;
     border-radius: 1.5rem;
     padding: 2rem;
     gap: 4px;
@@ -87,6 +183,7 @@ h1 {
     background: #2B2F64;
     border-radius: 5px;
 }
+
 .blanks-box-revealed {
     font-family: 'Azeret Mono', monospace;
     border-bottom: 3px solid white;
@@ -94,6 +191,7 @@ h1 {
     color: white;
     user-select: none;
 }
+
 .blanks-box-hidden {
     font-family: 'Azeret Mono', monospace;
     border-bottom: 3px solid white;
@@ -131,13 +229,13 @@ button {
 button:hover {
     cursor: pointer;
     background: radial-gradient(ellipse at center, #ffffff 30%, #35356e 100%);
-    
+
 }
 
 button:active {
     transform: translatex(2px) translatey(2px);
     box-shadow: 0px 0px 10px #CECECE;
-   
+
 }
 
 
@@ -156,7 +254,7 @@ button:active {
     width: 620px;
     height: 370px;
     background: #1e2146;
-    box-shadow: -1px 12px 15px 2px #b8b8e03d,inset 0px 0px 7px 4px #9A9AD5;
+    box-shadow: -1px 12px 15px 2px #b8b8e03d, inset 0px 0px 7px 4px #9A9AD5;
     border-radius: 1.5rem;
     margin-top: 1rem;
 
@@ -216,3 +314,7 @@ button:active {
     box-shadow: 0px 0px 10px #CECECE;
     font-size: 1.9rem;
 }
+
+.outside {
+    font-family: 'Courier New', Courier, monospace
+  }
