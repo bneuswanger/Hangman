@@ -1,315 +1,357 @@
-const keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '?']
-const puzzles = [
+const KEYS = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+    "!",
+    "?"
+];
+const PUZZLES = [
     {
-        text: 'hi there!',
-        hint: 'A salutation, of sorts',
+        text: "hi there!",
+        hint: "A salutation, of sorts"
     },
     {
-        text: 'It is snowing!',
-        hint: 'Floridians rarely say it',
+        text: "It is snowing!",
+        hint: "Floridians rarely say it"
     },
     {
-        text: 'Hello world',
-        hint: 'A coders salutation',
+        text: "Hello world",
+        hint: "A coders salutation"
     },
     {
-        text: 'who are you?',
-        hint: 'Who who, who who?',
+        text: "who are you?",
+        hint: "Who who, who who?"
     },
     {
-        text: 'california',
-        hint: 'US State',
+        text: "california",
+        hint: "US State"
     },
     {
-        text: 'mitochondrion',
-        hint: 'A powerhouse',
+        text: "mitochondrion",
+        hint: "A powerhouse"
     },
     {
-        text: 'Yellowstone',
-        hint: 'Both a park and a TV show',
+        text: "Yellowstone",
+        hint: "Both a park and a TV show"
     },
     {
-        text: 'kayak',
-        hint: 'A watercraft',
+        text: "kayak",
+        hint: "A watercraft"
     },
     {
-        text: 'walleye',
-        hint: 'A type of fish',
+        text: "walleye",
+        hint: "A type of fish"
     },
     {
-        text: 'elbow',
-        hint: 'A bendy body part',
+        text: "elbow",
+        hint: "A bendy body part"
     },
     {
-        text: 'this is a long one with many small words',
-        hint: 'It is what it is!',
+        text: "this is a long one with many small words",
+        hint: "It is what it is!"
     },
     {
-        text: 'loon',
-        hint: 'An eccentric bird',
+        text: "loon",
+        hint: "An eccentric bird"
     },
     {
-        text: 'green bay packers',
-        hint: 'A sports team',
+        text: "green bay packers",
+        hint: "A sports team"
     },
     {
-        text: 'have you ever seen the rain?',
-        hint: 'Fogerty wants to know',
-    },
-]
-const keyboardDiv = document.getElementById('keyboard-container');
-const getNewPuzzleBtn = document.getElementById('newPuzzle');
-const blanksContainer = document.getElementById('blanks-container');
-const hintBtn = document.getElementById('hint-btn');
-const hintTxtDiv = document.getElementById('hint-txt-div');
-const hintTxt = document.getElementById('hint-txt');
-const outcomeTxt = document.getElementById('outcome');
-const hitIncContainer = document.getElementById('hit-inc-container'
-)
+        text: "have you ever seen the rain?",
+        hint: "Fogerty wants to know"
+    }
+];
+const KEYBOARD_DIV = document.getElementById("keyboard-container");
+const NEW_PUZ_BTN = document.getElementById("newPuzzle");
+const BLANKS_CONTAINER = document.getElementById("blanks-container");
+const HINT_BTN = document.getElementById("hint-btn");
+const HINT_TXT = document.getElementById("hint-txt");
+const OUTCOME_TXT = document.getElementById("outcome");
+const HIT_INC_CONTAINER = document.getElementById("hit-inc-container");
 
 let isGameOver = false; //this isn't used anywhere yet, but the boolean works
 let hit = 0;
 let miss = 0;
 let snowStop;
 
-
 const resetScore = () => {
     hit = 0;
     miss = 0;
-}
+};
 
 const createKeys = () => {
-    for (let key of keys) {
-        const keyDiv = document.createElement("div"); //create the div and attach it to keyboardDiv
-        keyDiv.className = "key-div key-div-neutral";
-        keyboardDiv.appendChild(keyDiv);
+    for (let key of KEYS) {
+        const KEY_DIV = document.createElement("div"); //create the div and attach it to KEYBOARD_DIV
+        KEY_DIV.className = "key-div key-div-neutral";
+        KEYBOARD_DIV.appendChild(KEY_DIV);
 
-        const keyPara = document.createElement('p'); //create a paragraph tag for the key label to live inside and attach it to the keyDiv
-        keyPara.className = 'keyLabel';
-        keyDiv.appendChild(keyPara);
+        const KEY_PARA = document.createElement("p"); //create a paragraph tag for the key label to live inside and attach it to the KEY_DIV
+        KEY_PARA.className = "keyLabel";
+        KEY_DIV.appendChild(KEY_PARA);
 
         let keyLabel = document.createTextNode(key); //create a letter for the key label
-        keyLabel.className = 'keyLabel';
-        keyPara.appendChild(keyLabel);
+        keyLabel.className = "keyLabel";
+        KEY_PARA.appendChild(keyLabel);
 
-        keyDiv.addEventListener('click', function () {
-            let chosenKey = this.innerText;
-            testLetter(chosenKey, this); //works; key value is passed into checkPuzzle function
-            checkGameStatus();
-        })
+        KEY_DIV.addEventListener(
+            "click",
+            function () {
+                let chosenKey = this.innerText;
+                testLetter(chosenKey, this); //works; key value is passed into checkPuzzle function
+                checkGameStatus();
+            },
+            { once: true }
+        );
     }
-}
-createKeys(keys);
+};
 
-const getNewPuzzle = (snowStop) => { //USE THIS WHEN DRAWING FROM MY ARRAY
-    clearPuzzle()
-    resetKeyboard()
-    resetScore()
-    resetIncBars()
-    console.log(snowStop)
-    clearInterval(snowStop)
-    if (puzzles.length === 0) {
-        alert("You've exhausted the options, please refresh and play again!")
-    } else {
-        let num = Math.floor(Math.random() * (puzzles.length));     //generates random index position in the array of possible puzzles
-        // console.log(`INDEX OF PUZZLE: ${num}`);
-        let text = puzzles[num].text;
-        // console.log(`PUZZLE TEXT: ${text}`);
-        let hint = puzzles[num].hint;
-        // console.log(`PUZZLE HINT: ${hint}`);
-        buildPuzzle(text);
-        hintBtn.style.display = "block";
-        hintTxt.innerText = `Hint: ${hint}`;
-        puzzles.splice(num, 1); //removes current puzzle from array
+const removeKeys = (KEYBOARD_DIV) => {
+    while (KEYBOARD_DIV.firstChild) {
+        KEYBOARD_DIV.removeChild(KEYBOARD_DIV.firstChild);
     }
-}
+};
 
-// async function getNewPuzzle() { //USE THIS WHEN DRAWING FROM WORDS API
+//USE THIS VERSION of getNewPuzzle WHEN DRAWING FROM MY SIMPLE ARRAY
+// const getNewPuzzle = (snowStop, KEYBOARD_DIV, KEYS) => { 
+//     removeKeys(KEYBOARD_DIV);
+//     createKeys(KEYS);
 //     clearPuzzle();
 //     resetKeyboard();
 //     resetScore();
 //     resetIncBars();
-//     // await this fetch for api to respond
-//     let text = await fetch("https://random-words-api.vercel.app/word")
-//         .then((response) => response.json())
-//         .then((json) => json[0]);
-//     console.log(`PUZZLE TEXT: ${text.word}`);
-//     // console.log(`PUZZLE HINT: ${text.definition}`)
-//     buildPuzzle(text.word);
-//     hintBtn.style.display = "block";
-//     hintTxt.innerText = `Hint: ${text.definition}`;
-// }
+//     clearInterval(snowStop);
+//     if (PUZZLES.length === 0) {
+//         alert("You've exhausted the options, please refresh and play again!")
+//     } else {
+//         let num = Math.floor(Math.random() * (PUZZLES.length));     //generates random index position in the array of possible PUZZLES
+//         // console.log(`INDEX OF PUZZLE: ${num}`);
+//         let text = PUZZLES[num].text;
+//         // console.log(`PUZZLE TEXT: ${text}`);
+//         let hint = PUZZLES[num].hint;
+//         // console.log(`PUZZLE HINT: ${hint}`);
+//         buildPuzzle(text);
+//         HINT_BTN.style.display = "block";
+//         HINT_TXT.innerText = `Hint: ${hint}`;
+//         PUZZLES.splice(num, 1); //removes current puzzle from array
+//     }
+// };
 
+//USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
+const getNewPuzzle = async (snowStop, KEYBOARD_DIV, KEYS) => { 
+    removeKeys(KEYBOARD_DIV);
+    createKeys(KEYS);
+    clearPuzzle();
+    resetKeyboard();
+    resetScore();
+    resetIncBars();
+    clearInterval(snowStop);
+    // await this fetch for api to respond
+    let text = await fetch("https://random-words-api.vercel.app/word")
+        .then((response) => response.json())
+        .then((json) => json[0]);
+    console.log(`PUZZLE TEXT: ${text.word}`);
+    // console.log(`PUZZLE HINT: ${text.definition}`)
+    buildPuzzle(text.word);
+    HINT_BTN.style.display = "block";
+    HINT_TXT.innerText = `Hint: ${text.definition}`;
+};
 
 const resetKeyboard = function () {
-    const keyDivs = document.querySelectorAll('.key-div')
-    for (let key of keyDivs) {
-        key.classList.remove('key-div-success')
-        key.classList.remove('key-div-failure')
-        key.classList.remove('key-div-game-over')
-        key.classList.add('key-div-neutral')
+    const KEY_DIVS = document.querySelectorAll(".key-div");
+    for (let key of KEY_DIVS) {
+        key.classList.remove("key-div-success");
+        key.classList.remove("key-div-failure");
+        key.classList.remove("key-div-game-over");
+        key.classList.add("key-div-neutral");
     }
-}
+};
 
 const clearPuzzle = () => { //also clears hit stauts bar
-    while (blanksContainer.firstChild) {
-        blanksContainer.removeChild(blanksContainer.firstChild);
+    while (BLANKS_CONTAINER.firstChild) {
+        BLANKS_CONTAINER.removeChild(BLANKS_CONTAINER.firstChild);
     }
-    while (hitIncContainer.firstChild) {
-        hitIncContainer.removeChild(hitIncContainer.firstChild);
+    while (HIT_INC_CONTAINER.firstChild) {
+        HIT_INC_CONTAINER.removeChild(HIT_INC_CONTAINER.firstChild);
     }
-}
+};
 
 const resetIncBars = () => {
-    const missInc = document.querySelectorAll('.miss-inc')
-    for (let x of missInc) {
-        x.classList.remove('miss-inc-active')
+    const MISS_INC = document.querySelectorAll(".miss-inc");
+    for (let x of MISS_INC) {
+        x.classList.remove("miss-inc-active");
     }
-}
+};
 
-getNewPuzzle();
+getNewPuzzle(snowStop, KEYBOARD_DIV, KEYS);
 
 const checkGameStatus = () => {
-    const blanksRemaining = document.getElementsByClassName('blanks-box-hidden').length;
-    // console.log(`Blanks remaining: ${blanksRemaining}`)
+    const BLANKS_REMAINING = document.getElementsByClassName("blanks-box-hidden")
+        .length;
+    // console.log(`Blanks remaining: ${BLANKS_REMAINING}`)
     // console.log(`misses: ${miss}`)
-    if (blanksRemaining === 0) {
+    if (BLANKS_REMAINING === 0) {
         gameOverWin();
     }
     if (miss === 6) {
         gameOverLose();
     }
-}
+};
 
 const gameOverLose = () => {
     isGameOver = true;
-    keyboardDiv.style.display = 'none';
-    outcomeTxt.innerText = 'Better luck next time!'
-    outcomeTxt.style.display = 'block';
-
-}
-
-
+    KEYBOARD_DIV.style.display = "none";
+    OUTCOME_TXT.innerText = "Better luck next time!";
+    OUTCOME_TXT.style.display = "block";
+};
 
 const gameOverWin = () => {
     // console.log("game over")
     isGameOver = true;
-    keyboardDiv.style.display = 'none';
-    outcomeTxt.innerText = 'Congratulations!'
-    outcomeTxt.style.display = 'block';
+    KEYBOARD_DIV.style.display = "none";
+    OUTCOME_TXT.innerText = "Congratulations!";
+    OUTCOME_TXT.style.display = "block";
     snowStop = setInterval(createSnowFlake, 20);
-}
-
-
-
+};
 
 const testLetter = (chosenKey, chosenKeyDiv) => {
-
     // console.log(`chosenKey is ${chosenKey}`)
     // console.log(chosenKeyDiv)
-    const activeLettersDivs = document.querySelectorAll('.blanks-box');
-    for (let blank of activeLettersDivs) {
+    const ACTIVE_LETTERS_DIVS = document.querySelectorAll(".blanks-box");
+    for (let blank of ACTIVE_LETTERS_DIVS) {
         if (blank.innerText === chosenKey) {
-            blank.classList.remove('blanks-box-hidden');
-            blank.classList.add('blanks-box-revealed');
+            blank.classList.remove("blanks-box-hidden");
+            blank.classList.add("blanks-box-revealed");
         }
     }
-    const activeLettersArray = [...activeLettersDivs].map(n => n.innerText)
-    // console.log(activeLettersDivs)
-    // console.log(activeLettersArray)
-    // console.log(`TOTAL LETTERS TO SOLVE: ${activeLettersArray.length}`)
-    if (activeLettersArray.includes(chosenKey)) {
-        chosenKeyDiv.classList.remove('key-div-neutral');
-        chosenKeyDiv.classList.add('key-div-success');
+    const ACTIVE_LETTERS_ARR = [...ACTIVE_LETTERS_DIVS].map((n) => n.innerText);
+    // console.log(ACTIVE_LETTERS_DIVS)
+    // console.log(ACTIVE_LETTERS_ARR)
+    // console.log(`TOTAL LETTERS TO SOLVE: ${ACTIVE_LETTERS_ARR.length}`)
+    if (ACTIVE_LETTERS_ARR.includes(chosenKey)) {
+        chosenKeyDiv.classList.remove("key-div-neutral");
+        chosenKeyDiv.classList.add("key-div-success");
         hit++;
-
     } else {
-        chosenKeyDiv.classList.remove('key-div-neutral');
-        chosenKeyDiv.classList.add('key-div-failure');
+        chosenKeyDiv.classList.remove("key-div-neutral");
+        chosenKeyDiv.classList.add("key-div-failure");
         miss++;
-        const allMissIncs = document.querySelectorAll('.miss-inc'); //these two lines increment the miss status bar
-        allMissIncs[miss - 1].classList.add('miss-inc-active')
-
+        const ALL_MISS_INCS = document.querySelectorAll(".miss-inc"); //these two lines increment the miss status bar
+        ALL_MISS_INCS[miss - 1].classList.add("miss-inc-active");
     }
     logHits();
-}
+};
 
-const logHits = () => { //accumulates green status bars as correct letters are guessed
-    const blanksRevealed = document.getElementsByClassName('blanks-box-revealed') //this is an HTMLcollection of the revealed blanks
-    const n = [...blanksRevealed] //this is an array containing the revealed blanks
-    const solved = n.length;
-    // console.log(`Solved: ${solved}`);
+const logHits = () => {
+    //accumulates green status bars as correct letters are guessed
+    const BLANKS_REVEALED = document.getElementsByClassName("blanks-box-revealed"); //this is an HTMLcollection of the revealed blanks
+    const BLANKS_SOLVED = [...BLANKS_REVEALED].length; //this is an array containing the revealed blanks
+    // console.log(`Solved: ${BLANKS_SOLVED}`);
     // const unsolved = document.getElementsByClassName('blanks-box-hidden').length;
     // console.log(`Unsolved: ${unsolved}`)
     // const total = document.getElementsByClassName('blanks-box').length;
     // console.log(`Total: ${total}`)
-    for (let i = 0; i + 1 <= solved; i++) {
-        const hitStatusDivs = document.querySelectorAll('.hit-inc')
-        const hitStatusArr = [...hitStatusDivs]
-        hitStatusArr[i].classList.add('hit-inc-active')
+    for (let i = 0; i + 1 <= BLANKS_SOLVED; i++) {
+        const HIT_STATUS_DIVS = document.querySelectorAll(".hit-inc");
+        const HIT_STATUS_ARR = [...HIT_STATUS_DIVS];
+        HIT_STATUS_ARR[i].classList.add("hit-inc-active");
     }
+};
 
-}
-
-
-getNewPuzzleBtn.addEventListener('click', function () {
-    getNewPuzzle(snowStop);
+NEW_PUZ_BTN.addEventListener("click", function () {
+    getNewPuzzle(snowStop, KEYBOARD_DIV, KEYS);
     isGameOver = false;
-    keyboardDiv.style.display = 'grid';
-    outcomeTxt.style.display = 'none';
-})
+    KEYBOARD_DIV.style.display = "grid";
+    OUTCOME_TXT.style.display = "none";
+});
 
-hintBtn.addEventListener('click', function () {
-    if (hintTxt.style.color === "white") {
-        hintTxt.style.color = "#06060E";
+HINT_BTN.addEventListener("click", function () {
+    if (HINT_TXT.style.color === "white") {
+        HINT_TXT.style.color = "#06060E";
     } else {
-        hintTxt.style.color = "white";
+        HINT_TXT.style.color = "white";
     }
-})
+});
 
-
-function buildPuzzle(puzzle) { //also builds hit status bar
+function buildPuzzle(puzzle) {
+    //also builds hit status bar
     // console.log(puzzle)
     let wordsArray = puzzle.split(" ");
     // console.log(wordsArray);
     for (let word of wordsArray) {
-        const wordBox = document.createElement("div");
-        wordBox.className = "words-box";
-        blanksContainer.appendChild(wordBox);
+        const WORD_BOX = document.createElement("div");
+        WORD_BOX.className = "words-box";
+        BLANKS_CONTAINER.appendChild(WORD_BOX);
         for (let letter of word) {
-            const letterDiv = document.createElement("div");
-            letterDiv.className = "blanks-box blanks-box-hidden";
-            wordBox.appendChild(letterDiv);
-            const letterNode = document.createTextNode(letter.toUpperCase());
-            letterDiv.appendChild(letterNode);
-            const hitInc = document.createElement("div");
-            hitInc.className = `hit-inc`;
-            hitIncContainer.appendChild(hitInc);
+            const LETTER_DIV = document.createElement("div");
+            LETTER_DIV.className = "blanks-box blanks-box-hidden";
+            WORD_BOX.appendChild(LETTER_DIV);
+            const LETTER_NODE = document.createTextNode(letter.toUpperCase());
+            LETTER_DIV.appendChild(LETTER_NODE);
+            const HIT_INC_DIV = document.createElement("div");
+            HIT_INC_DIV.className = `hit-inc`;
+            HIT_INC_CONTAINER.appendChild(HIT_INC_DIV);
         }
     }
 }
 
-
 function createSnowFlake() {
-    const body = document.querySelector("body");
-    const snowDot = document.createElement("div");
-    const flakeArray = ['❄', '❅', '❊', '❉']
-    const randomFlake = flakeArray[Math.floor(Math.random() * 4)]
-    snowDot.innerText = randomFlake;
-    snowDot.classList.add("snow");
-    snowDot.style.left = Math.random() * (window.innerWidth / 1.03) + "px";
-    let rand = Math.random() * 8 + 2
-    let timeout = rand * 990
-    snowDot.style.animationDuration = rand + 's';
-    snowDot.style.opacity = Math.random() + .3;
-    snowDot.style.fontSize = Math.random() * 30 + "px";
-    body.appendChild(snowDot);
-
+    const BODY = document.querySelector("body");
+    const SNOW_DIV = document.createElement("div");
+    const FLAKE_ARR = ["❄", "❅", "❊", "❉"];
+    const RAND_FLAKE = FLAKE_ARR[Math.floor(Math.random() * 4)];
+    SNOW_DIV.innerText = RAND_FLAKE;
+    SNOW_DIV.classList.add("snow");
+    SNOW_DIV.style.left = Math.random() * (window.innerWidth / 1.03) + "px";
+    let rand = Math.random() * 8 + 2;
+    let timeout = rand * 990;
+    SNOW_DIV.style.animationDuration = rand + "s";
+    SNOW_DIV.style.opacity = Math.random() + 0.3;
+    SNOW_DIV.style.fontSize = Math.random() * 30 + "px";
+    BODY.appendChild(SNOW_DIV);
     setTimeout(() => {
-        snowDot.remove();
+        SNOW_DIV.remove();
     }, timeout);
 }
 
-
-
-
+function createSnowFlake() {
+    const SNOW_DIV = document.createElement("div");
+    const FLAKE_ARR = ["❄", "❅", "❊", "❉"];
+    const RAND_FLAKE = FLAKE_ARR[Math.floor(Math.random() * 4)];
+    SNOW_DIV.innerText = RAND_FLAKE;
+    SNOW_DIV.classList.add("snow");
+    SNOW_DIV.style.left = Math.random() * (window.innerWidth / 1.03) + "px";
+    let rand = Math.random() * 8 + 2;
+    let timeout = rand * 990;
+    SNOW_DIV.style.animationDuration = rand + "s";
+    SNOW_DIV.style.opacity = Math.random() + 0.3;
+    SNOW_DIV.style.fontSize = Math.random() * 30 + "px";
+    document.body.appendChild(SNOW_DIV);
+    setTimeout(() => {
+        SNOW_DIV.remove();
+    }, timeout);
+}
