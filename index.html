@@ -19,7 +19,7 @@
 <body>
 
     </div>
-    <h1 id='header'>Can you solve the puzzle?</h1>
+    <h1 id='header'>Can you make it snow?</h1>
     <div id="blanks-container"></div>
 
     <div>
@@ -31,10 +31,9 @@
         <button id="newPuzzle">Get New Puzzle</button>
         <button id="hint-btn" style="display:none">Toggle Hint</button>
     </div>
-
+    <h1 id='outcome'></h1>
     <section id="keyboard-section">
         <div id="hit-inc-container"></div>
-        <h1 id='outcome'></h1>
         <div id="keyboard-container"></div>
         <div class="miss-box-container">
             <div class="miss-inc"></div>
@@ -60,15 +59,21 @@
     <br>
     <ul class="outside"><b>To Do List:</b>
         <li>Mediaqueries for mobile screen size</li>
+        <li>Change purple theme to darker blue hue</li>
+        <li>Change green scheme to cyan</li>
         <li>Animate section entrances on pageload with GSAP (web dev has tutorial)</li>
-        <li>Add more phrases to array or link to random word API somehow, if can find a freebie</li>
-        <li>Find animated GIFS w/transparency for win/loss (happy snowman/snow falling for win, melted sad snowman for
+        <li>Look for random word API with less obscure words</li>
+        <li>Find animated GIFS or pics w/transparency for win/loss (happy snowman/snow falling for win, melted sad snowman for
             loss, etc)</li>
+        <li>If loss, display correct answer</li>
     </ul>
     <ul class="outside"><b>Update 1/29/22</b>
+        <li>Snow animation starts on win, removed with new puzzle</li>
+        <li>Snow animation created (NoobNoob/Keenai)</li>
+        <li>Link to random word API (NoobNoob)</li>
         <li>added hit-increment status bar functionality</li>
         <li>hit status bar populates with correct # of letters</li>
-        </ul>
+    </ul>
     <ul class="outside"><b>Update 1/28/22</b>
         <li>Defined loss (6 fails) & added point accumulator math</li>
         <li>added win/loss notifications</li>

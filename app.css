@@ -13,9 +13,6 @@ body {
 }
 
 
-
-
-
 .keyLabel, #hint-txt {
     letter-spacing: 0.1rem;
     user-select: none;
@@ -318,3 +315,19 @@ button:active {
 .outside {
     font-family: 'Courier New', Courier, monospace
   }
+
+
+  .snow {
+    animation: fall linear forwards;
+    animation-iteration-count: infinite;
+    position: absolute;
+    top: -20px;
+    left: 0;
+  }
+  
+  @keyframes fall {
+    to {
+      transform: translateY(100vh);
+    }
+  }
+  
