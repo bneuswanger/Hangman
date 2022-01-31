@@ -1,59 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snowman</title>
-    <script src='app.js' defer></script>
+    <title>Hangman!</title>
+    <script src="script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@600&family=Gloria+Hallelujah&family=Mochiy+Pop+P+One&display=swap"
         rel="stylesheet">
 </head>
+
 <body>
 
-    </div>
-    <h1 id='header'>Can you make it snow?</h1>
-    <div id="blanks-container"></div>
+    <div id="snowman">
+        <div class="hat"></div>
+        <div class="head">
+            <div class="eye-container">
+                <div class="eye1"></div>
+                <div class="eye2"></div>
+            </div>
+            <div class="nose"></div>
+            <div class="mouth"></div>
+        </div>
 
-    <div>
-        <div id="hint-txt-div">
-            <p id="hint-txt">you found me!</p>
+        <div class="mid-container">
+            <div class="arm1"></div>
+            <div class="body-middle">
+                <div class="buttons"></div>
+                <div class="buttons"></div>
+                <div class="buttons"></div>
+                <div class="buttons"></div>
+            </div>
+            <div class="arm2"></div>
+        </div>
+        <div class="body-bottom">
+            <div class="floor"></div>
+
         </div>
     </div>
-    <div id="button-container">
-        <button id="newPuzzle">Get New Puzzle</button>
-        <button id="hint-btn" style="display:none">Toggle Hint</button>
-    </div>
-    <h1 id='outcome'></h1>
-    <section id="keyboard-section">
-        <div id="hit-inc-container"></div>
-        <div id="keyboard-container"></div>
-        <div class="miss-box-container">
-            <div class="miss-inc"></div>
-            <div class="miss-inc"></div>
-            <div class="miss-inc"></div>
-            <div class="miss-inc"></div>
-            <div class="miss-inc"></div>
-            <div class="miss-inc"></div>
+
+
+    <div id="game-container">
+
+        <h1 id="header">Can you make it snow?</h1>
+        <div id="blanks-container"></div>
+
+        <div>
+            <div id="hint-txt-div">
+                <p id="hint-txt">you found me!</p>
+            </div>
         </div>
-    </section>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+        <div id="button-container">
+            <button id="newPuzzle">Get New Puzzle</button>
+            <button id="hint-btn" style="display:none">Toggle Hint</button>
+        </div>
+        <h1 id="outcome"></h1>
+        <section id="keyboard-section">
+            <div id="hit-inc-container"></div>
+            <div id="keyboard-container"></div>
+            <div class="miss-box-container">
+                <div class="miss-inc"></div>
+                <div class="miss-inc"></div>
+                <div class="miss-inc"></div>
+                <div class="miss-inc"></div>
+                <div class="miss-inc"></div>
+                <div class="miss-inc"></div>
+            </div>
+        </section>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     <ul class="outside"><b>To Do List:</b>
         <li>Mediaqueries for mobile screen size</li>
         <li>Change purple theme to darker blue hue</li>

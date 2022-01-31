@@ -9,9 +9,18 @@ body {
     justify-content: center;
     justify-items: center;
     font-family: 'Mochiy Pop P One', sans-serif;
- 
+
 }
 
+/* GAME CONTAINER */
+
+#game-container {
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .keyLabel, #hint-txt {
     letter-spacing: 0.1rem;
@@ -314,20 +323,153 @@ button:active {
 
 .outside {
     font-family: 'Courier New', Courier, monospace
-  }
+}
 
 
-  .snow {
+.snow {
     animation: fall linear forwards;
     animation-iteration-count: infinite;
     position: absolute;
     top: -20px;
     left: 0;
-  }
-  
-  @keyframes fall {
+}
+
+@keyframes fall {
     to {
-      transform: translateY(100vh);
+        transform: translateY(100vh);
     }
-  }
-  
+}
+
+/* SNOWMAN */
+
+#snowman {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+.hat {
+    width: 2em;
+    height: 2em;
+    background-color: red;
+
+    border-top: solid white 0.4em;
+    border-bottom: solid white 0.5em;
+    border-radius: 50%;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.head {
+    width: 5em;
+    height: 5em;
+    background-color: #fff;
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/* Eyes */
+
+.eye-container {
+    padding-top: 0.5em;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.eye1 {
+    width: 0.75em;
+    height: 0.75em;
+    background-color: #000;
+
+    border-radius: 50%;
+}
+
+.eye2 {
+    width: 0.75em;
+    height: 0.75em;
+    background-color: #000;
+
+    border-radius: 50%;
+}
+
+.nose {
+    width: 2em;
+    height: 0.5em;
+    background-color: orangered;
+
+    transform: rotate3d(1, 1, 1, -50deg) translateX(-10px);
+}
+
+.mouth {
+    width: 3em;
+    height: 1em;
+
+    border-bottom: dotted black 3px;
+    border-radius: 50%;
+}
+
+/* Middle of body */
+
+.mid-container {
+    display: flex;
+    align-items: center;
+}
+
+.body-middle {
+    width: 8em;
+    height: 8em;
+    background-color: #fff;
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.buttons {
+    width: 0.5em;
+    height: 0.5em;
+    background-color: #000;
+    border-radius: 50%;
+}
+
+.arm1 {
+    width: 4em;
+    height: 0.5em;
+    background-color: darkred;
+    transform: rotate(34deg) translateY(-24px);
+}
+
+.arm2 {
+    width: 4em;
+    height: 0.5em;
+    background-color: darkred;
+    transform: rotate(-34deg) translateY(-24px);
+}
+
+.body-bottom {
+    width: 10em;
+    height: 10em;
+    background-color: #fff;
+    border-radius: 50%;
+    position: relative;
+}
+
+.floor {
+    width: 25em;
+    height: 5em;
+    background-color: #fff;
+    border-radius: 60%;
+    transform: rotate3d(3, 1, 1, -70deg) translate(-300px, 190px);
+
+    position: absolute;
+    z-index: -1000;
+}
