@@ -5,9 +5,10 @@
 body {
     background-color: #06060E;
     color: #E2E2F3;
-    display: grid;
+    display: flex;
     justify-content: center;
     justify-items: center;
+    align-items: center;
     font-family: 'Mochiy Pop P One', sans-serif;
 
 }
@@ -336,7 +337,7 @@ button:active {
 
 @keyframes fall {
     to {
-        transform: translateY(100vh);
+        transform: translateY(97vh);
     }
 }
 
@@ -347,7 +348,6 @@ button:active {
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 
@@ -355,11 +355,11 @@ button:active {
     width: 2em;
     height: 2em;
     background-color: red;
-
     border-top: solid white 0.4em;
     border-bottom: solid white 0.5em;
     border-radius: 50%;
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    visibility: hidden;
 }
 
 .head {
@@ -367,11 +367,11 @@ button:active {
     height: 5em;
     background-color: #fff;
     border-radius: 50%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    visibility: hidden;
 }
 
 /* Eyes */
@@ -381,38 +381,39 @@ button:active {
     width: 40%;
     display: flex;
     justify-content: space-between;
+    visibility: hidden;
 }
 
 .eye1 {
     width: 0.75em;
     height: 0.75em;
     background-color: #000;
-
     border-radius: 50%;
+    visibility: hidden;
 }
-
 .eye2 {
     width: 0.75em;
     height: 0.75em;
     background-color: #000;
-
     border-radius: 50%;
+    visibility: hidden;
 }
+
 
 .nose {
     width: 2em;
     height: 0.5em;
     background-color: orangered;
-
     transform: rotate3d(1, 1, 1, -50deg) translateX(-10px);
+    visibility: hidden;
 }
 
 .mouth {
     width: 3em;
     height: 1em;
-
     border-bottom: dotted black 3px;
     border-radius: 50%;
+    visibility: hidden;
 }
 
 /* Middle of body */
@@ -427,11 +428,11 @@ button:active {
     height: 8em;
     background-color: #fff;
     border-radius: 50%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    visibility: hidden;
 }
 
 .buttons {
@@ -439,6 +440,7 @@ button:active {
     height: 0.5em;
     background-color: #000;
     border-radius: 50%;
+    visibility: hidden;
 }
 
 .arm1 {
@@ -446,6 +448,7 @@ button:active {
     height: 0.5em;
     background-color: darkred;
     transform: rotate(34deg) translateY(-24px);
+    visibility: hidden;
 }
 
 .arm2 {
@@ -453,6 +456,7 @@ button:active {
     height: 0.5em;
     background-color: darkred;
     transform: rotate(-34deg) translateY(-24px);
+    visibility: hidden;
 }
 
 .body-bottom {
@@ -461,6 +465,7 @@ button:active {
     background-color: #fff;
     border-radius: 50%;
     position: relative;
+    visibility: hidden;
 }
 
 .floor {
@@ -469,7 +474,7 @@ button:active {
     background-color: #fff;
     border-radius: 60%;
     transform: rotate3d(3, 1, 1, -70deg) translate(-300px, 190px);
-
+    visibility: visible;
     position: absolute;
     z-index: -1000;
 }

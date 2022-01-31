@@ -136,33 +136,9 @@ const removeKeys = (KEYBOARD_DIV) => {
     }
 };
 
-//USE THIS VERSION of getNewPuzzle WHEN DRAWING FROM MY SIMPLE ARRAY
-// const getNewPuzzle = (snowStop, KEYBOARD_DIV, KEYS) => { 
-//     removeKeys(KEYBOARD_DIV);
-//     createKeys(KEYS);
-//     clearPuzzle();
-//     resetKeyboard();
-//     resetScore();
-//     resetIncBars();
-//     clearInterval(snowStop);
-//     if (PUZZLES.length === 0) {
-//         alert("You've exhausted the options, please refresh and play again!")
-//     } else {
-//         let num = Math.floor(Math.random() * (PUZZLES.length));     //generates random index position in the array of possible PUZZLES
-//         // console.log(`INDEX OF PUZZLE: ${num}`);
-//         let text = PUZZLES[num].text;
-//         // console.log(`PUZZLE TEXT: ${text}`);
-//         let hint = PUZZLES[num].hint;
-//         // console.log(`PUZZLE HINT: ${hint}`);
-//         buildPuzzle(text);
-//         HINT_BTN.style.display = "block";
-//         HINT_TXT.innerText = `Hint: ${hint}`;
-//         PUZZLES.splice(num, 1); //removes current puzzle from array
-//     }
-// };
-
-//USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
-const getNewPuzzle = async (snowStop, KEYBOARD_DIV, KEYS) => { 
+// USE THIS VERSION of getNewPuzzle WHEN DRAWING FROM MY SIMPLE ARRAY
+const getNewPuzzle = (snowStop, KEYBOARD_DIV, KEYS) => {
+    hideSnowman();
     removeKeys(KEYBOARD_DIV);
     createKeys(KEYS);
     clearPuzzle();
@@ -170,16 +146,42 @@ const getNewPuzzle = async (snowStop, KEYBOARD_DIV, KEYS) => {
     resetScore();
     resetIncBars();
     clearInterval(snowStop);
-    // await this fetch for api to respond
-    let text = await fetch("https://random-words-api.vercel.app/word")
-        .then((response) => response.json())
-        .then((json) => json[0]);
-    console.log(`PUZZLE TEXT: ${text.word}`);
-    // console.log(`PUZZLE HINT: ${text.definition}`)
-    buildPuzzle(text.word);
-    HINT_BTN.style.display = "block";
-    HINT_TXT.innerText = `Hint: ${text.definition}`;
+    if (PUZZLES.length === 0) {
+        alert("You've exhausted the options, please refresh and play again!")
+    } else {
+        let num = Math.floor(Math.random() * (PUZZLES.length));     //generates random index position in the array of possible PUZZLES
+        // console.log(`INDEX OF PUZZLE: ${num}`);
+        let text = PUZZLES[num].text;
+        // console.log(`PUZZLE TEXT: ${text}`);
+        let hint = PUZZLES[num].hint;
+        // console.log(`PUZZLE HINT: ${hint}`);
+        buildPuzzle(text);
+        HINT_BTN.style.display = "block";
+        HINT_TXT.innerText = `Hint: ${hint}`;
+        PUZZLES.splice(num, 1); //removes current puzzle from array
+    }
 };
+
+//USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
+// const getNewPuzzle = async (snowStop, KEYBOARD_DIV, KEYS) => {
+//     hideSnowman();
+//     removeKeys(KEYBOARD_DIV);
+//     createKeys(KEYS);
+//     clearPuzzle();
+//     resetKeyboard();
+//     resetScore();
+//     resetIncBars();
+//     clearInterval(snowStop);
+//     // await this fetch for api to respond
+//     let text = await fetch("https://random-words-api.vercel.app/word")
+//         .then((response) => response.json())
+//         .then((json) => json[0]);
+//     console.log(`PUZZLE TEXT: ${text.word}`);
+//     // console.log(`PUZZLE HINT: ${text.definition}`)
+//     buildPuzzle(text.word);
+//     HINT_BTN.style.display = "block";
+//     HINT_TXT.innerText = `Hint: ${text.definition}`;
+// };
 
 const resetKeyboard = function () {
     const KEY_DIVS = document.querySelectorAll(".key-div");
@@ -206,6 +208,37 @@ const resetIncBars = () => {
         x.classList.remove("miss-inc-active");
     }
 };
+
+const hideSnowman = () => {
+    document.querySelector('.floor').style.visibility = "hidden"
+    document.querySelector('.body-bottom').style.visibility = "hidden"
+    document.querySelector('.body-middle').style.visibility = "hidden"
+    document.querySelector('.head').style.visibility = "hidden"
+    document.querySelector('.arm1').style.visibility = "hidden"
+    document.querySelector('.arm2').style.visibility = "hidden"
+    document.querySelector('.eye-container').style.visibility = "hidden"
+    document.querySelector('.eye1').style.visibility = "hidden"
+    document.querySelector('.eye2').style.visibility = "hidden"
+    document.querySelector('.nose').style.visibility = "hidden"
+    document.querySelector('.mouth').style.visibility = "hidden"
+    document.querySelector('.hat').style.visibility = "hidden"
+    hideButtons();
+}
+
+const addButtons = () => {
+    const BUTTONS = document.querySelectorAll('.buttons')
+    const BUTTONS_ARR = [...BUTTONS];
+    for (let button of BUTTONS_ARR) {
+        button.style.visibility = "visible";
+    }
+}
+const hideButtons = () => {
+    const BUTTONS = document.querySelectorAll('.buttons')
+    const BUTTONS_ARR = [...BUTTONS];
+    for (let button of BUTTONS_ARR) {
+        button.style.visibility = "hidden";
+    }
+}
 
 getNewPuzzle(snowStop, KEYBOARD_DIV, KEYS);
 
@@ -269,7 +302,7 @@ const testLetter = (chosenKey, chosenKeyDiv) => {
 const logHits = () => {
     //accumulates green status bars as correct letters are guessed
     const BLANKS_REVEALED = document.getElementsByClassName("blanks-box-revealed"); //this is an HTMLcollection of the revealed blanks
-    const BLANKS_SOLVED = [...BLANKS_REVEALED].length; //this is an array containing the revealed blanks
+    const BLANKS_SOLVED = [...BLANKS_REVEALED].length; //this is the length of an array containing the revealed blanks
     // console.log(`Solved: ${BLANKS_SOLVED}`);
     // const unsolved = document.getElementsByClassName('blanks-box-hidden').length;
     // console.log(`Unsolved: ${unsolved}`)
@@ -280,7 +313,9 @@ const logHits = () => {
         const HIT_STATUS_ARR = [...HIT_STATUS_DIVS];
         HIT_STATUS_ARR[i].classList.add("hit-inc-active");
     }
+    snowManBuilder();
 };
+
 
 NEW_PUZ_BTN.addEventListener("click", function () {
     getNewPuzzle(snowStop, KEYBOARD_DIV, KEYS);
@@ -355,3 +390,97 @@ function createSnowFlake() {
         SNOW_DIV.remove();
     }, timeout);
 }
+
+//////Playing with conditional for snowman increment
+
+const snowManBuilder = () => {
+
+    const BLANKS_REVEALED = document.getElementsByClassName("blanks-box-revealed"); //this is an HTMLcollection of the revealed blanks
+    const BLANKS_SOLVED = [...BLANKS_REVEALED].length; //this is the length of an array containing the revealed blanks// 
+    const BLANKS_TOTAL = document.getElementsByClassName('blanks-box').length;
+    let x = Math.ceil((BLANKS_SOLVED / BLANKS_TOTAL) * 100); //x = percent solved
+    console.log("The percent solved is below:")
+    console.log(x)
+    if (x === 0) {
+        return;
+    } else if (x > 0 && x <= 10) { //add bottom
+        document.querySelector('.floor').style.visibility = "visible"
+        document.querySelector('.body-bottom').style.visibility = "visible"
+    } else if (x > 10 && x <= 20) { //add middle
+        document.querySelector('.floor').style.visibility = "visible"
+        document.querySelector('.body-bottom').style.visibility = "visible"
+        document.querySelector('.body-middle').style.visibility = "visible"
+    } else if (x > 20 && x <= 30) { //add head
+        document.querySelector('.floor').style.visibility = "visible"
+        document.querySelector('.body-bottom').style.visibility = "visible"
+        document.querySelector('.body-middle').style.visibility = "visible"
+        document.querySelector('.head').style.visibility = "visible"
+    } else if (x > 30 && x <= 40) { //add arm 1
+        document.querySelector('.floor').style.visibility = "visible"
+        document.querySelector('.body-bottom').style.visibility = "visible"
+        document.querySelector('.body-middle').style.visibility = "visible"
+        document.querySelector('.head').style.visibility = "visible"
+        document.querySelector('.arm1').style.visibility = "visible"
+    } else if (x > 40 && x <= 50) { //add arm 2
+        document.querySelector('.floor').style.visibility = "visible"
+        document.querySelector('.body-bottom').style.visibility = "visible"
+        document.querySelector('.body-middle').style.visibility = "visible"
+        document.querySelector('.head').style.visibility = "visible"
+        document.querySelector('.arm1').style.visibility = "visible"
+        document.querySelector('.arm2').style.visibility = "visible"
+    } else if (x > 50 && x <= 60) { //add buttons
+        document.querySelector('.body-bottom').style.visibility = "visible"
+        document.querySelector('.body-middle').style.visibility = "visible"
+        document.querySelector('.head').style.visibility = "visible"
+        document.querySelector('.arm1').style.visibility = "visible"
+        document.querySelector('.arm2').style.visibility = "visible"
+        addButtons();
+    } else if (x > 60 && x <= 70) { //add eyes
+        document.querySelector('.body-bottom').style.visibility = "visible"
+        document.querySelector('.body-middle').style.visibility = "visible"
+        document.querySelector('.head').style.visibility = "visible"
+        document.querySelector('.arm1').style.visibility = "visible"
+        document.querySelector('.arm2').style.visibility = "visible"
+        addButtons();
+        document.querySelector('.eye-container').style.visibility = "visible"
+        document.querySelector('.eye1').style.visibility = "visible"
+        document.querySelector('.eye2').style.visibility = "visible"
+    } else if (x > 70 && x <= 80) { //add nose
+        document.querySelector('.body-bottom').style.visibility = "visible"
+        document.querySelector('.body-middle').style.visibility = "visible"
+        document.querySelector('.head').style.visibility = "visible"
+        document.querySelector('.arm1').style.visibility = "visible"
+        document.querySelector('.arm2').style.visibility = "visible"
+        addButtons();
+        document.querySelector('.eye-container').style.visibility = "visible"
+        document.querySelector('.eye1').style.visibility = "visible"
+        document.querySelector('.eye2').style.visibility = "visible"
+        document.querySelector('.nose').style.visibility = "visible"
+    } else if (x > 80 && x <= 90) { //add mouth
+        document.querySelector('.body-bottom').style.visibility = "visible"
+        document.querySelector('.body-middle').style.visibility = "visible"
+        document.querySelector('.head').style.visibility = "visible"
+        document.querySelector('.arm1').style.visibility = "visible"
+        document.querySelector('.arm2').style.visibility = "visible"
+        addButtons();
+        document.querySelector('.eye-container').style.visibility = "visible"
+        document.querySelector('.eye1').style.visibility = "visible"
+        document.querySelector('.eye2').style.visibility = "visible"
+        document.querySelector('.nose').style.visibility = "visible"
+        document.querySelector('.mouth').style.visibility = "visible"
+    } else if (x > 90 && x <= 100) { //add hat
+        document.querySelector('.body-bottom').style.visibility = "visible"
+        document.querySelector('.body-middle').style.visibility = "visible"
+        document.querySelector('.head').style.visibility = "visible"
+        document.querySelector('.arm1').style.visibility = "visible"
+        document.querySelector('.arm2').style.visibility = "visible"
+        addButtons();
+        document.querySelector('.eye-container').style.visibility = "visible"
+        document.querySelector('.eye1').style.visibility = "visible"
+        document.querySelector('.eye2').style.visibility = "visible"
+        document.querySelector('.nose').style.visibility = "visible"
+        document.querySelector('.mouth').style.visibility = "visible"
+        document.querySelector('.hat').style.visibility = "visible"
+    }
+}
+
