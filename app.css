@@ -5,45 +5,72 @@
 body {
     background-color: #06060E;
     color: #E2E2F3;
-    display: flex;
+    display: block;
     justify-content: center;
     justify-items: center;
-    align-items: center;
-    font-family: 'Mochiy Pop P One', sans-serif;
+    align-items: flex-end;
+    font-family: 'Azeret Mono', monospace;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 
 }
 
-/* GAME CONTAINER */
+
+#snowman-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #181b2b;
+    box-shadow: 0px 0px 20px #1d305d;
+    margin-right: 15px;
+    padding-bottom: 23px;
+    border-radius: 1rem;
+}
 
 #game-container {
-    max-width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* border: 2px solid rgb(98, 98, 98); */
+    padding: 10px;
 }
 
-.keyLabel, #hint-txt {
-    letter-spacing: 0.1rem;
+#hint-txt {
     user-select: none;
     color: #06060E;
     margin: 0;
 }
 
+.keyLabel {
+    letter-spacing: 0.05rem;
+    user-select: none;
+    /* color: #030b4d; */
+    margin: 0;
+}
+
 h1 {
-    font-family: 'Gloria Hallelujah', cursive;
+    font-family: 'Mochiy Pop P One', sans-serif;
     text-align: center;
-    font-size: 40px;
-    background: #F1F1F9;
-    background: -webkit-repeating-linear-gradient(to right, #F1F1F9 30%, #B8B8E0 59%, #F1F1F9 70%);
-    background: -moz-repeating-linear-gradient(to right, #F1F1F9 30%, #B8B8E0 59%, #F1F1F9 70%);
+    font-size: 30px;
     background: repeating-linear-gradient(to right, #F1F1F9 30%, #B8B8E0 59%, #F1F1F9 70%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 5px;
+    margin: 10px;
 }
 
+h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+#outcome-win, #outcome-loss {
+    display: none;
+}
 
 #hit-inc-container {
     display: flex;
@@ -56,7 +83,7 @@ h1 {
 }
 
 .hit-inc {
-    background-color: #323b33;
+    background-color: #282f47;
     flex-grow: 1;
     flex-basis: 0;
     border-top: 2px solid #06060E;
@@ -64,7 +91,7 @@ h1 {
 }
 
 .hit-inc-active {
-    background: radial-gradient(ellipse at center, #acf0b2 0%, #56fd64 100%);
+    background: radial-gradient(ellipse at center, #9ff2f5 0%, #27ecf3 100%);
 
 }
 
@@ -80,7 +107,7 @@ h1 {
     border-top-right-radius: 2em;
 }
 
-.miss-box-container {
+.miss-inc-container {
     display: flex;
     flex-direction: column-reverse;
     justify-content: flex-start;
@@ -91,7 +118,7 @@ h1 {
 }
 
 .miss-inc {
-    background-color: #3a2a2a;
+    background-color: #342a2a;
     flex-grow: 1;
     flex-basis: 0;
     border-top: 2px solid #06060E;
@@ -123,71 +150,27 @@ h1 {
     align-items: flex-end;
 }
 
-
-
-
-
-
-
-
-
-
-
-.score-container {
-    color: black;
-    display: flex;
-    background-color: rgb(44, 44, 44);
-    width: 220px;
-    height: 75px;
-    margin-top: 1rem;
-    padding: 10px;
-    border-radius: 2rem;
-    font-size: 1.5rem;
-}
-
-.hit-box, .miss-box {
-    flex-grow: 1;
-    margin: .3rem;
-    border-radius: 2rem;
-    padding: .4rem;
-    text-align: center;
-}
-
-.hit-box {
-    background-color: #56fd64;
-}
-
-.miss-box {
-    background-color: #d62121;
-}
-
-
-
 #blanks-container {
     display: inline-flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
     align-content: center;
     width: 620px;
     height: 160px;
-    background: #1e2146;
+    background: #1d305d;
     box-shadow: -1px 12px 15px 2px #b8b8e03d, inset 0px 0px 7px 4px #9A9AD5;
     border-radius: 1.5rem;
     padding: 2rem;
     gap: 4px;
     margin-bottom: 1rem;
-
 }
 
 .words-box {
     display: inline-flex;
-    align-self: flex-start;
     font-size: 2rem;
     margin: 6px;
     user-select: none;
-    background: #2B2F64;
+    background: #1d305d;
     border-radius: 5px;
 }
 
@@ -203,7 +186,7 @@ h1 {
     font-family: 'Azeret Mono', monospace;
     border-bottom: 3px solid white;
     margin: 3px;
-    color: #2B2F64;
+    color: #1d305d;
     user-select: none;
 }
 
@@ -219,23 +202,21 @@ h1 {
 }
 
 button {
-    display: block;
     border: 2px solid #B8B8E0;
     margin: 1rem;
-    padding: .5rem;
+    padding: .5rem 1.6rem;
     border-radius: 1.3rem;
-    background: #020024;
     box-shadow: 2px 2px 8px #CECECE;
-    background: radial-gradient(ellipse at center, #D4D4ED 30%, #242456 100%);
+    background: radial-gradient(ellipse at center, #f4faff 5%, #3348a8 100%);
     font-family: 'Mochiy Pop P One', sans-serif;
-    color: #242456;
+    color: #030b4d;
     font-size: 1.3rem;
     user-select: none;
 }
 
 button:hover {
     cursor: pointer;
-    background: radial-gradient(ellipse at center, #ffffff 30%, #35356e 100%);
+    background: radial-gradient(ellipse at center, #ffffff 30%, #3348a8 100%);
 
 }
 
@@ -256,71 +237,65 @@ button:active {
         ". . . . . . .";
     justify-content: center;
     align-content: center;
-    justify-items: center;
-    align-items: center;
     width: 620px;
     height: 370px;
-    background: #1e2146;
+    background: #1d305d;
     box-shadow: -1px 12px 15px 2px #b8b8e03d, inset 0px 0px 7px 4px #9A9AD5;
     border-radius: 1.5rem;
     margin-top: 1rem;
-
 }
 
 
-
 .key-div {
+
     display: grid;
     grid-template-columns: 60px;
     grid-template-rows: 60px;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 2.5rem;
     border-radius: 1.3rem;
-    font-family: 'Mochiy Pop P One', sans-serif;
-    font-size: 2rem;
+    font-family: 'Azeret Mono', monospace;
+    font-size: 2.5rem;
     user-select: none;
 }
 
 .key-div-neutral {
+    color: #030b4d;
     border: 2px solid #B8B8E0;
-    background: #020024;
     box-shadow: 2px 2px 8px #CECECE;
-    background: radial-gradient(ellipse at center, #D4D4ED 0%, #242456 100%);
+    background: radial-gradient(ellipse at center, #D4D4ED 0%, #3348a8 100%);
 }
-
-.key-div-success {
-    border: 2px solid #02ee16;
-    background: #020024;
-    box-shadow: 2px 2px 8px #16dd37;
-    background: radial-gradient(ellipse at center, #D4D4ED 0%, #21d63f 100%);
-}
-
-.key-div-failure {
-    border: 2px solid #d62121;
-    background: #020024;
-    box-shadow: 2px 2px 8px #d62121;
-    background: radial-gradient(ellipse at center, #D4D4ED 0%, #d62121 100%);
-}
-
-.key-div-game-over {
-    opacity: 0.5;
-}
-
 
 .key-div-neutral:hover {
     cursor: pointer;
-    background: radial-gradient(ellipse at center, #ffffff 0%, #35356e 100%);
-    color: #35356e;
+    background: radial-gradient(ellipse at center, #ffffff 0%, #768cef 100%);
 }
 
 
 .key-div-neutral:active {
     transform: translatex(2px) translatey(2px) scale(.95);
     box-shadow: 0px 0px 10px #CECECE;
-    font-size: 1.9rem;
+    font-size: 2.3rem;
 }
+
+.key-div-success {
+    color: #355967;
+    border: 2px solid #d0faff;
+    background: radial-gradient(ellipse at center, #c5f3f5 20%, #27ecf3 100%);
+    transform: scale(.7)
+}
+
+.key-div-failure {
+    color: #6f4848;
+    border: 2px solid #ffa0a0;
+    background: radial-gradient(ellipse at center, #D4D4ED 0%, #e21818 100%);
+    transform: scale(.7)
+}
+
+.key-div-game-over {
+    opacity: 0.5;
+}
+
 
 .outside {
     font-family: 'Courier New', Courier, monospace
@@ -333,6 +308,7 @@ button:active {
     position: absolute;
     top: -20px;
     left: 0;
+    user-select: none;
 }
 
 @keyframes fall {
@@ -343,35 +319,33 @@ button:active {
 
 /* SNOWMAN */
 
-#snowman {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 
 .hat {
     width: 2em;
     height: 2em;
-    background-color: red;
+    background-color: #8cf2ff;
     border-top: solid white 0.4em;
     border-bottom: solid white 0.5em;
     border-radius: 50%;
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     visibility: hidden;
+    transform: translatey(22px)
 }
 
 .head {
     width: 5em;
     height: 5em;
-    background-color: #fff;
-    border-radius: 50%;
+    background: radial-gradient(ellipse at center, #ffffff 0%, #c8fafb 100%);
+    box-shadow: 0px 0px 7px #CECECE;
+    border-radius: 45%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     visibility: hidden;
+    transform: translatey(17px);
+    z-index: 3;
 }
 
 /* Eyes */
@@ -387,14 +361,15 @@ button:active {
 .eye1 {
     width: 0.75em;
     height: 0.75em;
-    background-color: #000;
+    background: radial-gradient(ellipse at center, #579cdd 0%, #0f2435 50%);
     border-radius: 50%;
     visibility: hidden;
 }
+
 .eye2 {
     width: 0.75em;
     height: 0.75em;
-    background-color: #000;
+    background: radial-gradient(ellipse at center, #579cdd 0%, #0f2435 50%);
     border-radius: 50%;
     visibility: hidden;
 }
@@ -403,17 +378,18 @@ button:active {
 .nose {
     width: 2em;
     height: 0.5em;
-    background-color: orangered;
-    transform: rotate3d(1, 1, 1, -50deg) translateX(-10px);
+    background-color: rgb(246, 112, 63);
+    transform: rotate3d(1, 1, 1, -50deg) translateX(-16px);
     visibility: hidden;
 }
 
 .mouth {
-    width: 3em;
+    width: 2.5em;
     height: 1em;
     border-bottom: dotted black 3px;
     border-radius: 50%;
     visibility: hidden;
+    transform: translatey(-6px)
 }
 
 /* Middle of body */
@@ -426,19 +402,22 @@ button:active {
 .body-middle {
     width: 8em;
     height: 8em;
-    background-color: #fff;
-    border-radius: 50%;
+    background: radial-gradient(ellipse at center, #ffffff 0%, #c8fafb 100%);
+    box-shadow: 0px 0px 10px #CECECE;
+    border-radius: 42%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     visibility: hidden;
+    transform: translatey(14px);
+    z-index: 2;
 }
 
 .buttons {
     width: 0.5em;
     height: 0.5em;
-    background-color: #000;
+    background: radial-gradient(ellipse at center, #7e7e7e 0%, #000000 80%);
     border-radius: 50%;
     visibility: hidden;
 }
@@ -446,7 +425,7 @@ button:active {
 .arm1 {
     width: 4em;
     height: 0.5em;
-    background-color: darkred;
+    background-color: #5c2f05;
     transform: rotate(34deg) translateY(-24px);
     visibility: hidden;
 }
@@ -454,7 +433,7 @@ button:active {
 .arm2 {
     width: 4em;
     height: 0.5em;
-    background-color: darkred;
+    background-color: #5c2f05;
     transform: rotate(-34deg) translateY(-24px);
     visibility: hidden;
 }
@@ -462,19 +441,26 @@ button:active {
 .body-bottom {
     width: 10em;
     height: 10em;
-    background-color: #fff;
-    border-radius: 50%;
+    background: radial-gradient(ellipse at center, #ffffff 0%, #c8fafb 100%);
+    box-shadow: 0px 0px 15px #CECECE;
+    border-radius: 43%;
     position: relative;
     visibility: hidden;
+
 }
 
 .floor {
-    width: 25em;
+    width: 13em;
     height: 5em;
-    background-color: #fff;
-    border-radius: 60%;
-    transform: rotate3d(3, 1, 1, -70deg) translate(-300px, 190px);
+    background-color: #3e3e3f;
+    box-shadow: 0px 10px 10px #3e3e3f;
+    border-radius: 57%;
+    transform: rotate3d(3, 1, 1, 288deg) translate(-196px, 263px);
     visibility: visible;
     position: absolute;
     z-index: -1000;
+}
+
+.change-log {
+    padding-top: 10rem;
 }

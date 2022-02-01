@@ -91,7 +91,8 @@ const NEW_PUZ_BTN = document.getElementById("newPuzzle");
 const BLANKS_CONTAINER = document.getElementById("blanks-container");
 const HINT_BTN = document.getElementById("hint-btn");
 const HINT_TXT = document.getElementById("hint-txt");
-const OUTCOME_TXT = document.getElementById("outcome");
+const OUTCOME_WIN = document.getElementById("outcome-win");
+const OUTCOME_LOSS = document.getElementById("outcome-loss");
 const HIT_INC_CONTAINER = document.getElementById("hit-inc-container");
 
 let isGameOver = false; //this isn't used anywhere yet, but the boolean works
@@ -155,6 +156,7 @@ const getNewPuzzle = (snowStop, KEYBOARD_DIV, KEYS) => {
         // console.log(`PUZZLE TEXT: ${text}`);
         let hint = PUZZLES[num].hint;
         // console.log(`PUZZLE HINT: ${hint}`);
+        OUTCOME_LOSS.innerText = `Oh no! It was: ${text.toUpperCase()}`;
         buildPuzzle(text);
         HINT_BTN.style.display = "block";
         HINT_TXT.innerText = `Hint: ${hint}`;
@@ -178,6 +180,7 @@ const getNewPuzzle = (snowStop, KEYBOARD_DIV, KEYS) => {
 //         .then((json) => json[0]);
 //     console.log(`PUZZLE TEXT: ${text.word}`);
 //     // console.log(`PUZZLE HINT: ${text.definition}`)
+//     OUTCOME_LOSS.innerText = `Whoops! Correct answer: '${text.word.toUpperCase()}'`;
 //     buildPuzzle(text.word);
 //     HINT_BTN.style.display = "block";
 //     HINT_TXT.innerText = `Hint: ${text.definition}`;
@@ -257,17 +260,16 @@ const checkGameStatus = () => {
 
 const gameOverLose = () => {
     isGameOver = true;
-    KEYBOARD_DIV.style.display = "none";
-    OUTCOME_TXT.innerText = "Better luck next time!";
-    OUTCOME_TXT.style.display = "block";
+    // KEYBOARD_DIV.style.visibility = "hidden";
+    OUTCOME_LOSS.style.display = "block";
 };
 
 const gameOverWin = () => {
     // console.log("game over")
     isGameOver = true;
-    KEYBOARD_DIV.style.display = "none";
-    OUTCOME_TXT.innerText = "Congratulations!";
-    OUTCOME_TXT.style.display = "block";
+    // KEYBOARD_DIV.style.visibility = "hidden";
+    OUTCOME_WIN.innerText = "Congratulations!";
+    OUTCOME_WIN.style.display = "block";
     snowStop = setInterval(createSnowFlake, 20);
 };
 
@@ -320,15 +322,16 @@ const logHits = () => {
 NEW_PUZ_BTN.addEventListener("click", function () {
     getNewPuzzle(snowStop, KEYBOARD_DIV, KEYS);
     isGameOver = false;
-    KEYBOARD_DIV.style.display = "grid";
-    OUTCOME_TXT.style.display = "none";
+    KEYBOARD_DIV.style.visibility = "visible";
+    OUTCOME_WIN.style.display = "none";
+    OUTCOME_LOSS.style.display = "none";
 });
 
 HINT_BTN.addEventListener("click", function () {
-    if (HINT_TXT.style.color === "white") {
+    if (HINT_TXT.style.color === "#E2E2F3") {
         HINT_TXT.style.color = "#06060E";
     } else {
-        HINT_TXT.style.color = "white";
+        HINT_TXT.style.color = "#E2E2F3";
     }
 });
 
@@ -355,25 +358,6 @@ function buildPuzzle(puzzle) {
 }
 
 function createSnowFlake() {
-    const BODY = document.querySelector("body");
-    const SNOW_DIV = document.createElement("div");
-    const FLAKE_ARR = ["❄", "❅", "❊", "❉"];
-    const RAND_FLAKE = FLAKE_ARR[Math.floor(Math.random() * 4)];
-    SNOW_DIV.innerText = RAND_FLAKE;
-    SNOW_DIV.classList.add("snow");
-    SNOW_DIV.style.left = Math.random() * (window.innerWidth / 1.03) + "px";
-    let rand = Math.random() * 8 + 2;
-    let timeout = rand * 990;
-    SNOW_DIV.style.animationDuration = rand + "s";
-    SNOW_DIV.style.opacity = Math.random() + 0.3;
-    SNOW_DIV.style.fontSize = Math.random() * 30 + "px";
-    BODY.appendChild(SNOW_DIV);
-    setTimeout(() => {
-        SNOW_DIV.remove();
-    }, timeout);
-}
-
-function createSnowFlake() {
     const SNOW_DIV = document.createElement("div");
     const FLAKE_ARR = ["❄", "❅", "❊", "❉"];
     const RAND_FLAKE = FLAKE_ARR[Math.floor(Math.random() * 4)];
@@ -390,8 +374,6 @@ function createSnowFlake() {
         SNOW_DIV.remove();
     }, timeout);
 }
-
-//////Playing with conditional for snowman increment
 
 const snowManBuilder = () => {
 
