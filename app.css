@@ -309,6 +309,7 @@ button:active {
     top: -20px;
     left: 0;
     user-select: none;
+    z-index: -2000;
 }
 
 @keyframes fall {
@@ -356,6 +357,7 @@ button:active {
     display: flex;
     justify-content: space-between;
     visibility: hidden;
+    transform: translatey(3px);
 }
 
 .eye1 {
@@ -374,13 +376,16 @@ button:active {
     visibility: hidden;
 }
 
-
 .nose {
     width: 2em;
-    height: 0.5em;
-    background-color: rgb(246, 112, 63);
-    transform: rotate3d(1, 1, 1, -50deg) translateX(-16px);
+    height: 1em;
+    background-color: #ff8416;
+    border-top: solid #f96a00 0.4em;
+    border-bottom: solid #f0881e 0.5em;
+    clip-path: polygon(-13% -16%, 38% 103%, 113% 148%);
     visibility: hidden;
+    
+    
 }
 
 .mouth {
@@ -389,7 +394,7 @@ button:active {
     border-bottom: dotted black 3px;
     border-radius: 50%;
     visibility: hidden;
-    transform: translatey(-6px)
+    transform: translatey(-8px)
 }
 
 /* Middle of body */
