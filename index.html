@@ -16,62 +16,62 @@
         rel="stylesheet">
 </head>
 
-<body> 
-    <div class = "main-container">
-    <div id="snowman-container">
-        <div class="hat"></div>
-        <div class="head">
-            <div class="eye-container">
-                <div class="eye1"></div>
-                <div class="eye2"></div>
+<body>
+    <div class="main-container">
+        <div id="snowman-container">
+            <div class="hat"></div>
+            <div class="head">
+                <div class="eye-container">
+                    <div class="eye1"></div>
+                    <div class="eye2"></div>
+                </div>
+                <div class="nose"></div>
+                <div class="mouth"></div>
             </div>
-            <div class="nose"></div>
-            <div class="mouth"></div>
-        </div>
-        <div class="mid-container">
-            <div class="arm1"></div>
-            <div class="body-middle">
-                <div class="buttons"></div>
-                <div class="buttons"></div>
-                <div class="buttons"></div>
-                <div class="buttons"></div>
+            <div class="mid-container">
+                <div class="arm1"></div>
+                <div class="body-middle">
+                    <div class="buttons"></div>
+                    <div class="buttons"></div>
+                    <div class="buttons"></div>
+                    <div class="buttons"></div>
+                </div>
+                <div class="arm2"></div>
             </div>
-            <div class="arm2"></div>
+            <div class="body-bottom">
+                <div class="floor"></div>
+            </div>
         </div>
-        <div class="body-bottom">
-            <div class="floor"></div>
-        </div>
-    </div>
 
-    <div id="game-container">
-        <h1 id="header"></h1>
-        <!--Empty for now... can't decide on what to say-->
-        <div id="blanks-container"></div>
-        <div>
-            <div id="hint-txt-div">
-                <p id="hint-txt">you found me!</p>
+        <div id="game-container">
+            <h1 id="header"></h1>
+            <!--Empty for now... can't decide on what to say-->
+            <div id="blanks-container"></div>
+            <div>
+                <div id="hint-txt-div">
+                    <p id="hint-txt">you found me!</p>
+                </div>
             </div>
-        </div>
-        <div id="button-container">
-            <button id="newPuzzle">Get New Puzzle</button>
-            <button id="hint-btn" style="display:none">Toggle Hint</button>
-        </div>
-        <h2 id="outcome-win"></h2>
-        <h2 id="outcome-loss"></h2>
-        <section id="keyboard-section">
-            <div id="hit-inc-container"></div>
-            <div id="keyboard-container"></div>
-            <div class="miss-inc-container">
-                <div class="miss-inc"></div>
-                <div class="miss-inc"></div>
-                <div class="miss-inc"></div>
-                <div class="miss-inc"></div>
-                <div class="miss-inc"></div>
-                <div class="miss-inc"></div>
+            <div id="button-container">
+                <button id="newPuzzle">Get New Puzzle</button>
+                <button id="hint-btn" style="display:none">Toggle Hint</button>
             </div>
-        </section>
+            <h2 id="outcome-win"></h2>
+            <h2 id="outcome-loss"></h2>
+            <section id="keyboard-section">
+                <div id="hit-inc-container"></div>
+                <div id="keyboard-container"></div>
+                <div class="miss-inc-container">
+                    <div class="miss-inc"></div>
+                    <div class="miss-inc"></div>
+                    <div class="miss-inc"></div>
+                    <div class="miss-inc"></div>
+                    <div class="miss-inc"></div>
+                    <div class="miss-inc"></div>
+                </div>
+            </section>
+        </div>
     </div>
-</div>
     <div class="change-log">
         <ul class="outside"><b>To Do List:</b>
             <li>Media queries for mobile screen size</li>
@@ -79,13 +79,18 @@
             <li>Look for random word API with less obscure words</li>
             <li>Discuss 90-99% case range with snowman parts</li>
             <li>Add light snowfall during game which increases in proportion to puzzle completion?</li>
+            <li>Add dropdown so user can choose hard words API vs. local array; this can be expanded in the future with
+                different APIs, difficulty levels, etc.</li>
         </ul>
-        <ul class="outside"><b>Update 1/31/22</b>
+        <ul class="outside"><b>Update 2/3/22</b>
+            <li>Added some phrases to array</li>
+        </ul>
+        <ul class="outside"><b>Update 2/1/22</b>
             <li>A few snowman tweaks</li>
             <li>Snow falls behind game now</li>
             <li>Fixed win-after-lose bug reported by @Lisgevan (thanks!)</li>
             <li>Fixed hint-toggle display bug</li>
-            </ul>
+        </ul>
         <ul class="outside"><b>Update 1/31/22</b>
             <li>Started snowman styling</li>
             <li>Cleaned up CSS, changed color scheme</li>

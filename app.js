@@ -30,8 +30,28 @@ const KEYS = [
   ];
   const PUZZLES = [
     {
-      text: "hi there!",
-      hint: "A salutation, of sorts"
+      text: "where the wild things are",
+      hint: "1963 children's book starring Max and his island-dwelling monsters"
+    },
+    {
+      text: "hobbes",
+      hint: "Calvin's best buddy; a tiger"
+    },
+    {
+      text: "hovawart",
+      hint: "medium to large-size German dog breed; 'yard-watcher'"
+    },
+    {
+      text: "robin",
+      hint: "a sign of spring; you better get up early!"
+    },
+    {
+      text: "Timmy!",
+      hint: "A South Park 1-liner"
+    },
+    {
+      text: "westeros",
+      hint: "It lies west of Essos"
     },
     {
       text: "It is snowing!",
@@ -396,7 +416,7 @@ const KEYS = [
     if (x === 0) {
       return;
     } else if (x > 0 && x <= 10) {
-      //add bottom
+      //add bottom & floor
       document.querySelector(".floor").style.visibility = "visible";
       document.querySelector(".body-bottom").style.visibility = "visible";
     } else if (x > 10 && x <= 20) {
