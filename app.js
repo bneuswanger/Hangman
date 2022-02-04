@@ -1,3 +1,5 @@
+// This is a practice test for GITHUB
+
 const KEYS = [
     "A",
     "B",
