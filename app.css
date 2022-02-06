@@ -479,11 +479,10 @@ button:active {
         height: 85px;
         box-shadow: -1px 3px 3px 2px #b8b8e03d, inset 0px 0px 7px 4px #9A9AD5;
         border-radius: 1.2rem;
-        padding: 0px;
+        padding: 6px;
         gap: 4px;
         margin-bottom: 10px;
     }
-
 
     .words-box {
         font-size: 1rem;
