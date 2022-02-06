@@ -504,7 +504,7 @@ button:active {
     }
 
     #hint-txt {
-        font-size: 10px;
+        font-size: 8px;
         width: 350px;
         text-align: center;
     }
@@ -517,8 +517,9 @@ button:active {
 
     button {
         border: 1px solid #B8B8E0;
-        margin: 10px;
-        padding: .2rem 1rem;
+        margin: 8px 0px;
+        width: 125px;
+        padding: 2px 0px 4px 0px;
         border-radius: 1.3rem;
         box-shadow: 1px 1px 4px #CECECE;
         background: radial-gradient(ellipse at center, #f4faff 5%, #3348a8 100%);
@@ -539,7 +540,7 @@ button:active {
     h2 {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-size: 15px;
-        margin: 0px;
+        margin: 4px;
         width: 350px;
         text-align: center;
     }
@@ -547,59 +548,89 @@ button:active {
     #keyboard-section {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         width: 350px;
-        align-items: flex-end;
+        align-items: center;
     }
 
     #keyboard-container {
-        order: 2;
+        order: 1;
         display: grid;
         gap: 9px 9px;
         width: 350px;
         height: 170px;
         background: #1d305d;
         box-shadow: -1px 3px 3px 2px #b8b8e03d, inset 0px 0px 3px 1px #9A9AD5;
+        margin: 5px;
     }
 
     #hit-inc-container {
-        order: 1;
+        order: 2;
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: row;
         justify-content: flex-start;
-        align-items: center;
-        width: 40px;
-        height: 170px;
-        border-radius: 2em;
+        width: 275px;
+        height: 12px;
     }
     
     .hit-inc {
+        border: 0px;
         background-color: #282f47;
         flex-grow: 1;
         flex-basis: 0;
-        border-top: 2px solid #06060E;
-        width: 40px;
+        border-right: 1px solid #06060E;
+        height: 12px;
     }
-    
+    .hit-inc:first-of-type {
+        border-radius: 0px;
+        border-right: 1px solid #06060E;
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+    }
+    .hit-inc-active {
+        background: radial-gradient(ellipse at center, #9ff2f5 0%, #27ecf3 100%);
+    }
+    .hit-inc:last-of-type {
+        border: 0px;
+        border-radius: 0px;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        
+    }
     .miss-inc-container {
         order: 3;
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: row;
         justify-content: flex-start;
-        align-items: center;
-        width: 10px;
-        height: 170px;
-        border-radius: 2em;
+        width: 275px;
+        height: 12px;
     }
     
     .miss-inc {
+        border: 0px;
         background-color: #342a2a;
         flex-grow: 1;
         flex-basis: 0;
-        border-top: 2px solid #06060E;
-        width: 40px;
+        border-right: 1px solid #06060E;
+        height: 12px;
+        margin-top: 9px;
+    }
+    
+    .miss-inc-active {
+        background: radial-gradient(ellipse at center, #cf8787 0%, #d62121 100%);
     }
 
+    .miss-inc:first-of-type {
+        border-radius: 0px;
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+    }
+
+    .miss-inc:last-of-type {
+        border: 0px;
+        border-radius: 0px;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+    }
     .key-div {
         grid-template-columns: 30px;
         grid-template-rows: 30px;
@@ -630,40 +661,11 @@ button:active {
 
 
 
-    .hit-inc-active {
-        background: radial-gradient(ellipse at center, #9ff2f5 0%, #27ecf3 100%);
+    
 
-    }
-
-    .hit-inc:first-of-type {
-        border-bottom: none;
-        border-bottom-left-radius: 2em;
-        border-bottom-right-radius: 2em;
-    }
-
-    .hit-inc:last-of-type {
-        border-top: none;
-        border-top-left-radius: 2em;
-        border-top-right-radius: 2em;
-    }
+   
 
 
 
-    .miss-inc-active {
-        background: radial-gradient(ellipse at center, #cf8787 0%, #d62121 100%);
-
-    }
-
-    .miss-inc:first-of-type {
-        border-bottom: none;
-        border-bottom-left-radius: 2em;
-        border-bottom-right-radius: 2em;
-    }
-
-    .miss-inc:last-of-type {
-        border-top: none;
-        border-top-left-radius: 2em;
-        border-top-right-radius: 2em;
-    }
 
 }
