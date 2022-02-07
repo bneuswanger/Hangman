@@ -474,6 +474,29 @@ button:active {
 
 @media (max-width: 1080px) {
 
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    #game-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        /* border: 2px solid rgb(98, 98, 98); remove */
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 0px;
+    }
+
+    #header {
+        display: none;
+    }
+
     #blanks-container {
         width: 350px;
         height: 85px;
@@ -539,17 +562,20 @@ button:active {
 
     h2 {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 15px;
+        font-size: 11px;
         margin: 4px;
         width: 350px;
         text-align: center;
     }
-/*----------Keyboard Area------------------------*/
+
+    /*----------Keyboard Area------------------------*/
     #keyboard-section {
         display: flex;
         flex-direction: column;
         width: 350px;
+        height: 210px;
         align-items: center;
+        justify-content: flex-start;
     }
 
     #keyboard-container {
@@ -571,7 +597,7 @@ button:active {
         width: 275px;
         height: 12px;
     }
-    
+
     .hit-inc {
         border: 0px;
         background-color: #282f47;
@@ -580,22 +606,22 @@ button:active {
         border-right: 1px solid #06060E;
         height: 12px;
     }
+
     .hit-inc:first-of-type {
         border-radius: 0px;
         border-right: 1px solid #06060E;
         border-top-left-radius: 1rem;
         border-bottom-left-radius: 1rem;
     }
-    .hit-inc-active {
-        background: radial-gradient(ellipse at center, #9ff2f5 0%, #27ecf3 100%);
-    }
+
     .hit-inc:last-of-type {
         border: 0px;
         border-radius: 0px;
         border-top-right-radius: 1rem;
         border-bottom-right-radius: 1rem;
-        
+
     }
+
     .miss-inc-container {
         order: 3;
         display: flex;
@@ -604,7 +630,7 @@ button:active {
         width: 275px;
         height: 12px;
     }
-    
+
     .miss-inc {
         border: 0px;
         background-color: #342a2a;
@@ -613,10 +639,6 @@ button:active {
         border-right: 1px solid #06060E;
         height: 12px;
         margin-top: 9px;
-    }
-    
-    .miss-inc-active {
-        background: radial-gradient(ellipse at center, #cf8787 0%, #d62121 100%);
     }
 
     .miss-inc:first-of-type {
@@ -631,6 +653,7 @@ button:active {
         border-top-right-radius: 1rem;
         border-bottom-right-radius: 1rem;
     }
+
     .key-div {
         grid-template-columns: 30px;
         grid-template-rows: 30px;
@@ -658,14 +681,166 @@ button:active {
         border: 1px solid #ffa0a0;
         transform: scale(.8)
     }
+/*Snowman Mobile Size*/
+
+#snowman-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #181b2b;
+    box-shadow: 0px 0px 10px #1d305d;
+    border-radius: 1rem;
+    margin: 0px;
+    /* border: 2px solid rgb(98, 98, 98); remove */
+    height: 230px;
+    padding-bottom: 5px;
+    z-index: 500;
+}
+    .hat {
+        width: 2em;
+        height: 2em;
+        background-color: #8cf2ff;
+        border-top: solid white 0.4em;
+        border-bottom: solid white 0.5em;
+        border-radius: 50%;
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        visibility: hidden;
+        transform: translatey(22px)
+    }
+
+    .head {
+        width: 2em;
+        height: 2em;
+        background: radial-gradient(ellipse at center, #ffffff 0%, #c8fafb 100%);
+        box-shadow: 0px 0px 7px #CECECE;
+        border-radius: 45%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        visibility: hidden;
+        transform: translatey(17px);
+        z-index: 3;
+    }
+
+    /* Eyes */
+
+    .eye-container {
+        padding-top: 0.5em;
+        width: 40%;
+        display: flex;
+        justify-content: space-between;
+        visibility: hidden;
+        transform: translatey(3px);
+    }
+
+    .eye1 {
+        width: 0.75em;
+        height: 0.75em;
+        background: radial-gradient(ellipse at center, #579cdd 0%, #0f2435 50%);
+        border-radius: 50%;
+        visibility: hidden;
+    }
+
+    .eye2 {
+        width: 0.75em;
+        height: 0.75em;
+        background: radial-gradient(ellipse at center, #579cdd 0%, #0f2435 50%);
+        border-radius: 50%;
+        visibility: hidden;
+    }
+
+    .nose {
+        width: 2em;
+        height: 1em;
+        background-color: #ff8416;
+        border-top: solid #f96a00 0.4em;
+        border-bottom: solid #f0881e 0.5em;
+        clip-path: polygon(-13% -16%, 38% 103%, 113% 148%);
+        visibility: hidden;
 
 
+    }
 
-    
+    .mouth {
+        width: 2.5em;
+        height: 1em;
+        border-bottom: dotted black 3px;
+        border-radius: 50%;
+        visibility: hidden;
+        transform: translatey(-8px)
+    }
 
-   
+    /* Middle of body */
 
+    .mid-container {
+        display: flex;
+        align-items: center;
+    }
 
+    .body-middle {
+        width: 4em;
+        height: 3em;
+        background: radial-gradient(ellipse at center, #ffffff 0%, #c8fafb 100%);
+        box-shadow: 0px 0px 10px #CECECE;
+        border-radius: 44%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        visibility: hidden;
+        transform: translatey(43px);
+        position: relative;
+        z-index: 2;
+    }
 
+    .buttons {
+        width: 0.3em;
+        height: 0.3em;
+        background: radial-gradient(ellipse at center, #7e7e7e 0%, #000000 80%);
+        border-radius: 50%;
+        visibility: hidden;
+    }
+
+    .arm1 {
+        width: 4em;
+        height: 0.5em;
+        background-color: #5c2f05;
+        transform: rotate(34deg) translateY(-24px);
+        visibility: hidden;
+    }
+
+    .arm2 {
+        width: 4em;
+        height: 0.5em;
+        background-color: #5c2f05;
+        transform: rotate(-34deg) translateY(-24px);
+        visibility: hidden;
+    }
+
+    .body-bottom {
+        width: 5em;
+        height: 5em;
+        background: radial-gradient(ellipse at center, #ffffff 0%, #c8fafb 100%);
+        box-shadow: 0px 0px 7px #cecece;
+        border-radius: 45%;
+        position: relative;
+        transform: translatey(40px);
+        visibility: hidden;
+        z-index: 1;
+    }
+
+    .floor {
+        width: 8em;
+        height: 4em;
+        background-color: #3e3e3f8c;
+        box-shadow: 3px 5px 8px #3E3D6E;
+        border-radius: 57%;
+        transform: rotate3d(3, 1, 1, 288deg) translate(-109px, 177px);
+        visibility: visible;
+        position: relative;
+        bottom: 64px;
+        z-index: 0;
+    }
 
 }
