@@ -681,21 +681,23 @@ button:active {
         border: 1px solid #ffa0a0;
         transform: scale(.8)
     }
-/*Snowman Mobile Size*/
 
-#snowman-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #181b2b;
-    box-shadow: 0px 0px 10px #1d305d;
-    border-radius: 1rem;
-    margin: 0px;
-    /* border: 2px solid rgb(98, 98, 98); remove */
-    height: 230px;
-    padding-bottom: 5px;
-    z-index: 500;
-}
+    /*Snowman Mobile Size*/
+
+    #snowman-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #181b2b;
+        box-shadow: 0px 0px 10px #1d305d;
+        border-radius: 1rem;
+        margin: 0px;
+        /* border: 2px solid rgb(98, 98, 98); remove */
+        height: 230px;
+        padding-bottom: 5px;
+        z-index: 500;
+    }
+
     .hat {
         width: 2em;
         height: 2em;
@@ -787,7 +789,7 @@ button:active {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: center;
         visibility: hidden;
         transform: translatey(43px);
         position: relative;
@@ -800,22 +802,28 @@ button:active {
         background: radial-gradient(ellipse at center, #7e7e7e 0%, #000000 80%);
         border-radius: 50%;
         visibility: hidden;
+        margin: 2px;
+        transform: translatey(5px)
     }
 
     .arm1 {
-        width: 4em;
-        height: 0.5em;
+        width: 2em;
+        height: 0.3em;
         background-color: #5c2f05;
-        transform: rotate(34deg) translateY(-24px);
+        transform: rotate(31deg) translateY(27px) translateX(25px);
         visibility: hidden;
+        position: relative;
+        border-radius: 2rem;
     }
 
     .arm2 {
-        width: 4em;
-        height: 0.5em;
+        width: 2em;
+        height: .3em;
         background-color: #5c2f05;
-        transform: rotate(-34deg) translateY(-24px);
+        transform: rotate(-31deg) translateY(27px) translateX(-25px);
         visibility: hidden;
+        position: relative;
+        border-radius: 2rem;
     }
 
     .body-bottom {
