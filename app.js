@@ -148,7 +148,7 @@ const KEYS = [
   
   const keyJobs = function () {
     //don't convert this to an arrow function!
-    let chosenKey = this.innerText;
+    let chosenKey = this.textContent;
     testLetter(chosenKey, this); //works; key value is passed into checkPuzzle function. breaks if use arrow function
     checkGameStatus();
   };
@@ -178,10 +178,10 @@ const KEYS = [
       // console.log(`PUZZLE TEXT: ${text}`);
       let hint = PUZZLES[num].hint;
       // console.log(`PUZZLE HINT: ${hint}`);
-      OUTCOME_LOSS.innerText = `Oh no! It was: ${text.toUpperCase()}`;
+      OUTCOME_LOSS.textContent = `Oh no! It was: ${text.toUpperCase()}`;
       buildPuzzle(text);
       HINT_BTN.style.display = "block";
-      HINT_TXT.innerText = `Hint: ${hint}`;
+      HINT_TXT.textContent = `Hint: ${hint}`;
       PUZZLES.splice(num, 1); //removes current puzzle from array
     }
   };
@@ -202,10 +202,10 @@ const KEYS = [
   //         .then((json) => json[0]);
   //     console.log(`PUZZLE TEXT: ${text.word}`);
   //     // console.log(`PUZZLE HINT: ${text.definition}`)
-  //     OUTCOME_LOSS.innerText = `Whoops! Correct answer: '${text.word.toUpperCase()}'`;
+  //     OUTCOME_LOSS.textContent = `Whoops! Correct answer: '${text.word.toUpperCase()}'`;
   //     buildPuzzle(text.word);
   //     HINT_BTN.style.display = "block";
-  //     HINT_TXT.innerText = `Hint: ${text.definition}`;
+  //     HINT_TXT.textContent = `Hint: ${text.definition}`;
   // };
   
   const resetKeyboard = function () {
@@ -299,7 +299,7 @@ const KEYS = [
     // console.log("game over")
     isGameOver = true;
     // KEYBOARD_DIV.style.visibility = "hidden";
-    OUTCOME_WIN.innerText = "Congratulations!";
+    OUTCOME_WIN.textContent = "Congratulations!";
     OUTCOME_WIN.style.display = "block";
     disableKeyboard();
     snowStop = setInterval(createSnowFlake, 20);
@@ -310,12 +310,12 @@ const KEYS = [
     // console.log(chosenKeyDiv)
     const ACTIVE_LETTERS_DIVS = document.querySelectorAll(".blanks-box");
     for (let blank of ACTIVE_LETTERS_DIVS) {
-      if (blank.innerText === chosenKey) {
+      if (blank.textContent === chosenKey) {
         blank.classList.remove("blanks-box-hidden");
         blank.classList.add("blanks-box-revealed");
       }
     }
-    const ACTIVE_LETTERS_ARR = [...ACTIVE_LETTERS_DIVS].map((n) => n.innerText);
+    const ACTIVE_LETTERS_ARR = [...ACTIVE_LETTERS_DIVS].map((n) => n.textContent);
     // console.log(ACTIVE_LETTERS_DIVS)
     // console.log(ACTIVE_LETTERS_ARR)
     // console.log(`TOTAL LETTERS TO SOLVE: ${ACTIVE_LETTERS_ARR.length}`)
@@ -394,7 +394,7 @@ const KEYS = [
     const SNOW_DIV = document.createElement("div");
     const FLAKE_ARR = ["❄", "❅", "❊", "❉"];
     const RAND_FLAKE = FLAKE_ARR[Math.floor(Math.random() * 4)];
-    SNOW_DIV.innerText = RAND_FLAKE;
+    SNOW_DIV.textContent = RAND_FLAKE;
     SNOW_DIV.classList.add("snow");
     SNOW_DIV.style.left = Math.random() * (window.innerWidth / 1.03) + "px";
     let rand = Math.random() * 8 + 2;
