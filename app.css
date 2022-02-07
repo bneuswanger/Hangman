@@ -16,9 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-
 }
-
 
 #snowman-container {
     display: flex;
@@ -29,6 +27,7 @@ body {
     margin-right: 15px;
     padding-bottom: 23px;
     border-radius: 1rem;
+    z-index: -11
 }
 
 #game-container {
@@ -36,7 +35,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid rgb(98, 98, 98); */
     padding: 10px;
 }
 
@@ -49,7 +47,6 @@ body {
 .keyLabel {
     letter-spacing: 0.05rem;
     user-select: none;
-    /* color: #030b4d; */
     margin: 0;
 }
 
@@ -92,7 +89,6 @@ h2 {
 
 .hit-inc-active {
     background: radial-gradient(ellipse at center, #9ff2f5 0%, #27ecf3 100%);
-
 }
 
 .hit-inc:first-of-type {
@@ -127,7 +123,6 @@ h2 {
 
 .miss-inc-active {
     background: radial-gradient(ellipse at center, #cf8787 0%, #d62121 100%);
-
 }
 
 .miss-inc:first-of-type {
@@ -141,7 +136,6 @@ h2 {
     border-top-left-radius: 2em;
     border-top-right-radius: 2em;
 }
-
 
 #keyboard-section {
     display: flex;
@@ -194,7 +188,6 @@ h2 {
     display: none;
 }
 
-
 #button-container {
     display: flex;
     justify-content: space-around;
@@ -215,31 +208,15 @@ button {
     user-select: none;
 }
 
-
-/* button {
-    border: 1px solid #B8B8E0;
-    margin: 8px 0px;
-    width: 125px;
-    padding: 2px 0px 4px 0px;
-    border-radius: 1.3rem;
-    box-shadow: 1px 1px 4px #CECECE;
-    background: radial-gradient(ellipse at center, #f4faff 5%, #3348a8 100%);
-    font-size: 10px;
-} */
-
-
 button:hover {
     cursor: pointer;
     background: radial-gradient(ellipse at center, #ffffff 30%, #3348a8 100%);
-
 }
 
 button:active {
     transform: translatex(2px) translatey(2px);
     box-shadow: 0px 0px 10px #CECECE;
-
 }
-
 
 #keyboard-container {
     display: grid;
@@ -259,10 +236,7 @@ button:active {
     margin-top: 1rem;
 }
 
-
-
 .key-div {
-
     display: grid;
     grid-template-columns: 60px;
     grid-template-rows: 60px;
@@ -311,11 +285,9 @@ button:active {
     opacity: 0.5;
 }
 
-
 .outside {
     font-family: 'Courier New', Courier, monospace
 }
-
 
 .snow {
     animation: fall linear forwards;
@@ -335,8 +307,6 @@ button:active {
 
 /* SNOWMAN */
 
-
-
 .hat {
     width: 2em;
     height: 2em;
@@ -346,12 +316,12 @@ button:active {
     border-radius: 50%;
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     visibility: hidden;
-    transform: translatey(22px)
+    transform: translatey(94px);
 }
 
 .head {
-    width: 5em;
-    height: 5em;
+    width: 71px;
+    height: 63px;
     background: radial-gradient(ellipse at center, #ffffff 0%, #c8fafb 100%);
     box-shadow: 0px 0px 7px #CECECE;
     border-radius: 45%;
@@ -360,15 +330,15 @@ button:active {
     align-items: center;
     justify-content: space-evenly;
     visibility: hidden;
-    transform: translatey(17px);
-    z-index: 3;
+    transform: translatey(88px);
+    z-index: 4;
 }
 
 /* Eyes */
 
 .eye-container {
     padding-top: 0.5em;
-    width: 40%;
+    width: 43%;
     display: flex;
     justify-content: space-between;
     visibility: hidden;
@@ -397,19 +367,18 @@ button:active {
     background-color: #ff8416;
     border-top: solid #f96a00 0.4em;
     border-bottom: solid #f0881e 0.5em;
-    clip-path: polygon(-13% -16%, 38% 103%, 113% 148%);
+    clip-path: polygon(-13% -16%, 45% 122%, 113% 148%);
+    transform: rotate(-22deg) translateY(-3px) translateX(-2px);
     visibility: hidden;
-
-
 }
 
 .mouth {
-    width: 2.5em;
-    height: 1em;
+    width: 33px;
+    height: 16px;
     border-bottom: dotted black 3px;
     border-radius: 50%;
     visibility: hidden;
-    transform: translatey(-8px)
+    transform: translatey(-8px);
 }
 
 /* Middle of body */
@@ -430,8 +399,8 @@ button:active {
     align-items: center;
     justify-content: space-evenly;
     visibility: hidden;
-    transform: translatey(14px);
-    z-index: 2;
+    transform: translatey(83px);
+    z-index: 3;
 }
 
 .buttons {
@@ -445,16 +414,18 @@ button:active {
 .arm1 {
     width: 4em;
     height: 0.5em;
+    border-radius: 1rem;
     background-color: #5c2f05;
-    transform: rotate(34deg) translateY(-24px);
+    transform: rotate(34deg) translateY(45px) translateX(45px);
     visibility: hidden;
 }
 
 .arm2 {
     width: 4em;
     height: 0.5em;
+    border-radius: 1rem;
     background-color: #5c2f05;
-    transform: rotate(-34deg) translateY(-24px);
+    transform: rotate(-34deg) translateY(45px) translateX(-45px);
     visibility: hidden;
 }
 
@@ -465,27 +436,26 @@ button:active {
     box-shadow: 0px 0px 15px #CECECE;
     border-radius: 43%;
     position: relative;
+    transform: translateY(77px);
     visibility: hidden;
-    z-index: 0;
-
+    z-index: 2;
 }
 
 .floor {
-    width: 13em;
+    width: 15em;
     height: 5em;
     background-color: #3e3e3f8f;
-    box-shadow: 0px 10px 10px #3e3e3f;
+    box-shadow: 0px 10px 10px #3E3E7A;
     border-radius: 57%;
-    transform: rotate3d(3, 1, 1, 288deg) translate(-196px, 263px);
+    transform: rotate3d(3, 1, 1, 288deg) translate(-59px, 74px);
     visibility: visible;
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
 .change-log {
     padding-top: 10rem;
 }
-
 
 @media (max-width: 1080px) {
 
@@ -494,7 +464,6 @@ button:active {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
     }
 
     #game-container {
@@ -502,7 +471,6 @@ button:active {
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        /* border: 2px solid rgb(98, 98, 98); remove */
         padding-left: 10px;
         padding-right: 10px;
         padding-top: 0px;
@@ -567,7 +535,6 @@ button:active {
     button:hover {
         cursor: pointer;
         background: radial-gradient(ellipse at center, #ffffff 30%, #3348a8 100%);
-
     }
 
     button:active {
@@ -583,7 +550,6 @@ button:active {
         text-align: center;
     }
 
-    /*----------Keyboard Area------------------------*/
     #keyboard-section {
         display: flex;
         flex-direction: column;
@@ -635,7 +601,6 @@ button:active {
         border-radius: 0px;
         border-top-right-radius: 1rem;
         border-bottom-right-radius: 1rem;
-
     }
 
     .miss-inc-container {
