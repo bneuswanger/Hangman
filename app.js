@@ -172,41 +172,45 @@ const KEYS = [
     if (PUZZLES.length === 0) {
       alert("You've exhausted the options, please refresh and play again!");
     } else {
-      let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
-      // console.log(`INDEX OF PUZZLE: ${num}`);
-      let text = PUZZLES[num].text;
-      // console.log(`PUZZLE TEXT: ${text}`);
-      let hint = PUZZLES[num].hint;
-      // console.log(`PUZZLE HINT: ${hint}`);
-      OUTCOME_LOSS.textContent = `Oh no! It was: ${text.toUpperCase()}`;
-      buildPuzzle(text);
-      HINT_BTN.style.display = "block";
-      HINT_TXT.textContent = `Hint: ${hint}`;
-      PUZZLES.splice(num, 1); //removes current puzzle from array
+      if (document.querySelector('#difficulty').value === 'easy'){        
+        let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
+        // console.log(`INDEX OF PUZZLE: ${num}`);
+        let text = PUZZLES[num].text;
+        // console.log(`PUZZLE TEXT: ${text}`);
+        let hint = PUZZLES[num].hint;
+        // console.log(`PUZZLE HINT: ${hint}`);
+        OUTCOME_LOSS.textContent = `Oh no! It was: ${text.toUpperCase()}`;
+        buildPuzzle(text);
+        HINT_BTN.style.display = "block";
+        HINT_TXT.textContent = `Hint: ${hint}`;
+        PUZZLES.splice(num, 1); //removes current puzzle from array
+      } else if (document.querySelector('#difficulty').value === 'hard') {
+        getNewPuzzleHard(snowStop, KEYBOARD_DIV, KEYS);
+      }
     }
   };
   
-  //USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
-  // const getNewPuzzle = async (snowStop, KEYBOARD_DIV, KEYS) => {
-  //     hideSnowman();
-  //     removeKeys(KEYBOARD_DIV);
-  //     createKeys(KEYS);
-  //     clearPuzzle();
-  //     resetKeyboard();
-  //     resetScore();
-  //     resetIncBars();
-  //     clearInterval(snowStop);
-  //     // await this fetch for api to respond
-  //     let text = await fetch("https://random-words-api.vercel.app/word")
-  //         .then((response) => response.json())
-  //         .then((json) => json[0]);
-  //     console.log(`PUZZLE TEXT: ${text.word}`);
-  //     // console.log(`PUZZLE HINT: ${text.definition}`)
-  //     OUTCOME_LOSS.textContent = `Whoops! Correct answer: '${text.word.toUpperCase()}'`;
-  //     buildPuzzle(text.word);
-  //     HINT_BTN.style.display = "block";
-  //     HINT_TXT.textContent = `Hint: ${text.definition}`;
-  // };
+  // USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
+  const getNewPuzzleHard = async (snowStop, KEYBOARD_DIV, KEYS) => {
+      hideSnowman();
+      removeKeys(KEYBOARD_DIV);
+      createKeys(KEYS);
+      clearPuzzle();
+      resetKeyboard();
+      resetScore();
+      resetIncBars();
+      clearInterval(snowStop);
+      // await this fetch for api to respond
+      let text = await fetch("https://random-words-api.vercel.app/word")
+          .then((response) => response.json())
+          .then((json) => json[0]);
+      console.log(`PUZZLE TEXT: ${text.word}`);
+      // console.log(`PUZZLE HINT: ${text.definition}`)
+      OUTCOME_LOSS.textContent = `Whoops! Correct answer: '${text.word.toUpperCase()}'`;
+      buildPuzzle(text.word);
+      HINT_BTN.style.display = "block";
+      HINT_TXT.textContent = `Hint: ${text.definition}`;
+  };
   
   const resetKeyboard = function () {
     const KEY_DIVS = document.querySelectorAll(".key-div");
