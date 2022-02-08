@@ -16,13 +16,14 @@ const HINT_TXT = document.getElementById("hint-txt");
 const OUTCOME_WIN = document.getElementById("outcome-win");
 const OUTCOME_LOSS = document.getElementById("outcome-loss");
 const HIT_INC_CONTAINER = document.getElementById("hit-inc-container");
+const DIFFICULTY = document.querySelector("#difficulty");
 
 // Event Listeners
 NEW_PUZ_BTN.addEventListener("click", () => {
   runSnowman();
 });
 
-// WORKING ON THIS *****************************************************************
+
 HINT_BTN.addEventListener("click", () => {
   HINT_TXT.classList.toggle("not-visible")
 });
@@ -38,7 +39,6 @@ const runSnowman = () => {
 };
 
 const runSetup = () => {
-  
   hideSnowman();
   removeKeys(KEYBOARD_DIV);
   createKeys(KEYS);
@@ -57,7 +57,7 @@ const getNewPuzzle = () => {
   if (!PUZZLES.length) {
     alert("You've exhausted the options, please refresh and play again!");
   } else {
-    if (document.querySelector("#difficulty").value === "easy") {
+    if (DIFFICULTY.value === "easy") {
       let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
       let text = PUZZLES[num].text;
       let hint = PUZZLES[num].hint;
