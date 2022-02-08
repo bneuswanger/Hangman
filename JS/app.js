@@ -32,7 +32,7 @@ let miss = 0;
 let snowStop;
 
 const runSnowman = () => {
-  DIFFICULTY.value === "easy" ? newPuzzleEasy() : newPuzzleHard() ;
+  DIFFICULTY.value === "easy" ? newPuzzleEasy() : newPuzzleHard();
   isGameOver = false;
 };
 
@@ -54,15 +54,15 @@ const runReset = () => {
 };
 // USE THIS VERSION of getNewPuzzle WHEN DRAWING FROM MY SIMPLE ARRAY
 const newPuzzleEasy = () => {
+  let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
+  let text = PUZZLES[num].text;
+  let hint = PUZZLES[num].hint;
+  OUTCOME_LOSS.textContent = `Oh no! It was: ${text.toUpperCase()}`;
   runReset();
-    let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
-    let text = PUZZLES[num].text;
-    let hint = PUZZLES[num].hint;
-    OUTCOME_LOSS.textContent = `Oh no! It was: ${text.toUpperCase()}`;
-    buildPuzzle(text);
-    HINT_BTN.style.display = "block";
-    HINT_TXT.textContent = `Hint: ${hint}`;
-    PUZZLES.splice(num, 1); //removes current puzzle from array
+  buildPuzzle(text);
+  HINT_BTN.style.display = "block";
+  HINT_TXT.textContent = `Hint: ${hint}`;
+  PUZZLES.splice(num, 1); //removes current puzzle from array
 };
 
 // USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
