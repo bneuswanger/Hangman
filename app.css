@@ -12,6 +12,10 @@ body {
     font-family: 'Azeret Mono', monospace;
 }
 
+/* Multi-Use Cases */
+.not-visible {
+    visibility: hidden;
+}
 .main-container {
     display: flex;
     justify-content: center;
@@ -40,7 +44,7 @@ body {
 
 #hint-txt {
     user-select: none;
-    color: #06060E;
+    color: rgb(226, 226, 243);
     margin: 0;
 }
 

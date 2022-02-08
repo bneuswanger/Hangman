@@ -24,17 +24,12 @@ NEW_PUZ_BTN.addEventListener("click", () => {
 
 // WORKING ON THIS *****************************************************************
 HINT_BTN.addEventListener("click", () => {
-  if (HINT_TXT.style.color === "rgb(226, 226, 243)") {
-    HINT_TXT.style.color = "#06060e";
-  } else {
-    HINT_TXT.style.color = "rgb(226, 226, 243)";
-  }
+  HINT_TXT.classList.toggle("not-visible")
 });
 
 let isGameOver;
 let miss = 0;
 let snowStop;
-
 
 
 const runSnowman = () => {
@@ -43,6 +38,7 @@ const runSnowman = () => {
 };
 
 const runSetup = () => {
+  
   hideSnowman();
   removeKeys(KEYBOARD_DIV);
   createKeys(KEYS);
@@ -58,16 +54,13 @@ const getNewPuzzle = () => {
   OUTCOME_WIN.style.display = "none";
   OUTCOME_LOSS.style.display = "none";
   runSetup();
-  if (PUZZLES.length === 0) {
+  if (!PUZZLES.length) {
     alert("You've exhausted the options, please refresh and play again!");
   } else {
     if (document.querySelector("#difficulty").value === "easy") {
       let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
-      // console.log(`INDEX OF PUZZLE: ${num}`);
       let text = PUZZLES[num].text;
-      // console.log(`PUZZLE TEXT: ${text}`);
       let hint = PUZZLES[num].hint;
-      // console.log(`PUZZLE HINT: ${hint}`);
       OUTCOME_LOSS.textContent = `Oh no! It was: ${text.toUpperCase()}`;
       buildPuzzle(text);
       HINT_BTN.style.display = "block";
@@ -87,14 +80,13 @@ const getNewPuzzleHard = async () => {
     .then((response) => response.json())
     .then((json) => json[0]);
   console.log(`PUZZLE TEXT: ${text.word}`);
-  // console.log(`PUZZLE HINT: ${text.definition}`)
   OUTCOME_LOSS.textContent = `Whoops! Correct answer: '${text.word.toUpperCase()}'`;
   buildPuzzle(text.word);
   HINT_BTN.style.display = "block";
   HINT_TXT.textContent = `Hint: ${text.definition}`;
 };
 
-const resetKeyboard = function () {
+const resetKeyboard =  () => {
   const KEY_DIVS = document.querySelectorAll(".key-div");
   for (let key of KEY_DIVS) {
     key.classList.remove("key-div-success");
@@ -213,3 +205,7 @@ function buildPuzzle(puzzle) {
     }
   }
 }
+
+
+// START THE GAME
+runSnowman();
