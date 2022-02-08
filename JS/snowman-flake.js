@@ -1,3 +1,10 @@
+// ** CTRL F **
+// Snowman
+// Snowflake
+
+
+
+// Snowman
 const snowManBuilder = () => {
     const BLANKS_REVEALED = document.getElementsByClassName(
       "blanks-box-revealed"
@@ -130,4 +137,29 @@ const snowManBuilder = () => {
       button.style.visibility = "hidden";
     }
   };
-  export { snowManBuilder, hideSnowman, hideSnowmanButtons, addSnowmanButtons};
+
+
+
+
+
+  // SNOWFLAKE
+
+  function createSnowFlake() {
+    const SNOW_DIV = document.createElement("div");
+    const FLAKE_ARR = ["❄", "❅", "❊", "❉"];
+    const RAND_FLAKE = FLAKE_ARR[Math.floor(Math.random() * 4)];
+    SNOW_DIV.textContent = RAND_FLAKE;
+    SNOW_DIV.classList.add("snow");
+    SNOW_DIV.style.left = Math.random() * (window.innerWidth / 1.03) + "px";
+    let rand = Math.random() * 8 + 2;
+    let timeout = rand * 990;
+    SNOW_DIV.style.animationDuration = rand + "s";
+    SNOW_DIV.style.opacity = Math.random() + 0.3;
+    SNOW_DIV.style.fontSize = Math.random() * 30 + "px";
+    document.body.appendChild(SNOW_DIV);
+    setTimeout(() => {
+      SNOW_DIV.remove();
+    }, timeout);
+  }
+  
+  export { snowManBuilder, hideSnowman, hideSnowmanButtons, addSnowmanButtons, createSnowFlake};
