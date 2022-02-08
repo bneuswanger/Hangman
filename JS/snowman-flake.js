@@ -2,8 +2,10 @@
 // Snowman
 // Snowflake
 
-
-
+let one = document.querySelectorAll('.floor, .body-bottom');
+let two = document.querySelectorAll('.floor, .body-bottom, .body-middle');
+let three = document.querySelectorAll('.floor, .body-bottom, .body-middle, .head');
+let four = document.querySelectorAll('.floor, .body-bottom, .body-middle, .head, .arm1');
 // Snowman
 const snowManBuilder = () => {
     const BLANKS_REVEALED = document.getElementsByClassName(
@@ -13,30 +15,28 @@ const snowManBuilder = () => {
     const BLANKS_TOTAL = document.getElementsByClassName("blanks-box").length;
     let x = Math.ceil((BLANKS_SOLVED / BLANKS_TOTAL) * 100); //x = percent solved
     console.log(`The percent solved is ${x}`);
-    if (x === 0) {
+    if (!x) {
       return;
     } else if (x > 0 && x <= 10) {
       //add bottom & floor
-      document.querySelector(".floor").style.visibility = "visible";
-      document.querySelector(".body-bottom").style.visibility = "visible";
+      for(let part of one){
+        part.style.visibility = "visible";
+      }
     } else if (x > 10 && x <= 20) {
       //add middle
-      document.querySelector(".floor").style.visibility = "visible";
-      document.querySelector(".body-bottom").style.visibility = "visible";
-      document.querySelector(".body-middle").style.visibility = "visible";
+      for(let part of two){
+        part.style.visibility = "visible";
+      }
     } else if (x > 20 && x <= 30) {
       //add head
-      document.querySelector(".floor").style.visibility = "visible";
-      document.querySelector(".body-bottom").style.visibility = "visible";
-      document.querySelector(".body-middle").style.visibility = "visible";
-      document.querySelector(".head").style.visibility = "visible";
+      for(let part of three){
+        part.style.visibility = "visible";
+      }
     } else if (x > 30 && x <= 40) {
       //add arm 1
-      document.querySelector(".floor").style.visibility = "visible";
-      document.querySelector(".body-bottom").style.visibility = "visible";
-      document.querySelector(".body-middle").style.visibility = "visible";
-      document.querySelector(".head").style.visibility = "visible";
-      document.querySelector(".arm1").style.visibility = "visible";
+      for(let part of four){
+        part.style.visibility = "visible";
+      }
     } else if (x > 40 && x <= 50) {
       //add arm 2
       document.querySelector(".floor").style.visibility = "visible";
@@ -122,7 +122,7 @@ const snowManBuilder = () => {
     hideSnowmanButtons();
   };
 
-    
+
   const addSnowmanButtons = () => {
     const BUTTONS = document.querySelectorAll(".buttons");
     const BUTTONS_ARR = [...BUTTONS];
@@ -137,9 +137,6 @@ const snowManBuilder = () => {
       button.style.visibility = "hidden";
     }
   };
-
-
-
 
 
   // SNOWFLAKE
