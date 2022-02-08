@@ -12,6 +12,8 @@ body {
     font-family: 'Azeret Mono', monospace;
 }
 
+
+
 .main-container {
     display: flex;
     justify-content: center;
@@ -36,12 +38,6 @@ body {
     justify-content: center;
     align-items: center;
     padding: 10px;
-}
-
-#hint-txt {
-    user-select: none;
-    color: #06060E;
-    margin: 0;
 }
 
 .keyLabel {
@@ -510,17 +506,15 @@ button:active {
     }
 
     #hint-txt {
+        color: rgb(226, 226, 243);
+        margin: 0;
         font-size: 8px;
         width: 350px;
         text-align: center;
+        visibility: hidden;
     }
 
-    #button-container {
-        padding: 0px;
-        width: 350px;
-        margin: 0px;
-    }
-
+    
     button {
         border: 1px solid #B8B8E0;
         margin: 8px 0px;
@@ -548,6 +542,11 @@ button:active {
         margin: 4px;
         width: 350px;
         text-align: center;
+    }
+    #button-container {
+        padding: 0px;
+        width: 350px;
+        margin: 0px;
     }
 
     #keyboard-section {
@@ -833,4 +832,9 @@ button:active {
         z-index: 0;
     }
 
+}
+
+/* Multi-Use Cases */
+.not-visible {
+    visibility: hidden;
 }
