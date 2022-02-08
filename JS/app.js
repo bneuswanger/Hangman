@@ -18,11 +18,12 @@ const OUTCOME_LOSS = document.getElementById("outcome-loss");
 const HIT_INC_CONTAINER = document.getElementById("hit-inc-container");
 
 // Event Listeners
-NEW_PUZ_BTN.addEventListener("click", function () {
+NEW_PUZ_BTN.addEventListener("click", () => {
   runSnowman();
 });
 
-HINT_BTN.addEventListener("click", function () {
+// WORKING ON THIS *****************************************************************
+HINT_BTN.addEventListener("click", () => {
   if (HINT_TXT.style.color === "rgb(226, 226, 243)") {
     HINT_TXT.style.color = "#06060e";
   } else {
@@ -34,9 +35,7 @@ let isGameOver;
 let miss = 0;
 let snowStop;
 
-const resetScore = () => {
-  miss = 0;
-};
+
 
 const runSnowman = () => {
   getNewPuzzle();
@@ -75,21 +74,14 @@ const getNewPuzzle = () => {
       HINT_TXT.textContent = `Hint: ${hint}`;
       PUZZLES.splice(num, 1); //removes current puzzle from array
     } else if (document.querySelector("#difficulty").value === "hard") {
-      getNewPuzzleHard(snowStop, KEYBOARD_DIV, KEYS);
+      getNewPuzzleHard();
     }
   }
 };
 
 // USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
-const getNewPuzzleHard = async (snowStop, KEYBOARD_DIV, KEYS) => {
-  hideSnowman();
-  removeKeys(KEYBOARD_DIV);
-  createKeys(KEYS);
-  clearPuzzle();
-  resetKeyboard();
-  resetScore();
-  resetIncBars();
-  clearInterval(snowStop);
+const getNewPuzzleHard = async () => {
+  runSetup();
   // await this fetch for api to respond
   let text = await fetch("https://random-words-api.vercel.app/word")
     .then((response) => response.json())
@@ -129,13 +121,15 @@ const resetIncBars = () => {
   }
 };
 
-getNewPuzzle(snowStop, KEYBOARD_DIV, KEYS);
+const resetScore = () => {
+  miss = 0;
+};
+
+
 
 export const checkGameStatus = () => {
   const BLANKS_REMAINING =
     document.getElementsByClassName("blanks-box-hidden").length;
-  // console.log(`Blanks remaining: ${BLANKS_REMAINING}`)
-  // console.log(`misses: ${miss}`)
   if (miss === 6) {
     gameOverLose();
   }
@@ -153,15 +147,12 @@ const disableKeyboard = () => {
 
 const gameOverLose = () => {
   isGameOver = true;
-  // KEYBOARD_DIV.style.visibility = "hidden";
   OUTCOME_LOSS.style.display = "block";
   disableKeyboard();
 };
 
 const gameOverWin = () => {
-  // console.log("game over")
   isGameOver = true;
-  // KEYBOARD_DIV.style.visibility = "hidden";
   OUTCOME_WIN.textContent = "Congratulations!";
   OUTCOME_WIN.style.display = "block";
   disableKeyboard();
@@ -169,8 +160,6 @@ const gameOverWin = () => {
 };
 
 export const testLetter = (chosenKey, chosenKeyDiv) => {
-  // console.log(`chosenKey is ${chosenKey}`)
-  // console.log(chosenKeyDiv)
   const ACTIVE_LETTERS_DIVS = document.querySelectorAll(".blanks-box");
   for (let blank of ACTIVE_LETTERS_DIVS) {
     if (blank.textContent === chosenKey) {
@@ -179,9 +168,6 @@ export const testLetter = (chosenKey, chosenKeyDiv) => {
     }
   }
   const ACTIVE_LETTERS_ARR = [...ACTIVE_LETTERS_DIVS].map((n) => n.textContent);
-  // console.log(ACTIVE_LETTERS_DIVS)
-  // console.log(ACTIVE_LETTERS_ARR)
-  // console.log(`TOTAL LETTERS TO SOLVE: ${ACTIVE_LETTERS_ARR.length}`)
   if (ACTIVE_LETTERS_ARR.includes(chosenKey)) {
     chosenKeyDiv.classList.remove("key-div-neutral");
     chosenKeyDiv.classList.add("key-div-success");
