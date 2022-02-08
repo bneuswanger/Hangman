@@ -58,25 +58,25 @@ const newPuzzleEasy = () => {
   let text = PUZZLES[num].text;
   let hint = PUZZLES[num].hint;
   OUTCOME_LOSS.textContent = `Oh no! It was: ${text.toUpperCase()}`;
-  runReset();
-  buildPuzzle(text);
   HINT_BTN.style.display = "block";
   HINT_TXT.textContent = `Hint: ${hint}`;
   PUZZLES.splice(num, 1); //removes current puzzle from array
+  runReset();
+  buildPuzzle(text);
 };
 
 // USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
 const newPuzzleHard = async () => {
-  runReset();
   // await this fetch for api to respond
   let text = await fetch("https://random-words-api.vercel.app/word")
-    .then((response) => response.json())
-    .then((json) => json[0]);
+  .then((response) => response.json())
+  .then((json) => json[0]);
   console.log(`PUZZLE TEXT: ${text.word}`);
   OUTCOME_LOSS.textContent = `Whoops! Correct answer: '${text.word.toUpperCase()}'`;
-  buildPuzzle(text.word);
   HINT_BTN.style.display = "block";
   HINT_TXT.textContent = `Hint: ${text.definition}`;
+  runReset();
+  buildPuzzle(text.word);
 };
 
 const resetKeyboard = () => {
