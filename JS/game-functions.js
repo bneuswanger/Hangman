@@ -1,0 +1,5 @@
+const gameEasy= () => {
+
+}
+
+export { gameEasy };

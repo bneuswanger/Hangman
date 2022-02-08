@@ -23,58 +23,56 @@ NEW_PUZ_BTN.addEventListener("click", () => {
   runSnowman();
 });
 
-
 HINT_BTN.addEventListener("click", () => {
-  HINT_TXT.classList.toggle("not-visible")
+  HINT_TXT.classList.toggle("not-visible");
 });
 
 let isGameOver;
 let miss = 0;
 let snowStop;
 
-
 const runSnowman = () => {
   getNewPuzzle();
   isGameOver = false;
 };
 
-const runSetup = () => {
-  hideSnowman();
-  removeKeys(KEYBOARD_DIV);
-  createKeys(KEYS);
-  clearPuzzle();
-  resetKeyboard();
-  resetScore();
-  resetIncBars();
-  clearInterval(snowStop);
-}
-// USE THIS VERSION of getNewPuzzle WHEN DRAWING FROM MY SIMPLE ARRAY
-const getNewPuzzle = () => {
-  KEYBOARD_DIV.style.visibility = "visible";
-  OUTCOME_WIN.style.display = "none";
-  OUTCOME_LOSS.style.display = "none";
-  runSetup();
+const runReset = () => {
   if (!PUZZLES.length) {
     alert("You've exhausted the options, please refresh and play again!");
   } else {
-    if (DIFFICULTY.value === "easy") {
-      let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
-      let text = PUZZLES[num].text;
-      let hint = PUZZLES[num].hint;
-      OUTCOME_LOSS.textContent = `Oh no! It was: ${text.toUpperCase()}`;
-      buildPuzzle(text);
-      HINT_BTN.style.display = "block";
-      HINT_TXT.textContent = `Hint: ${hint}`;
-      PUZZLES.splice(num, 1); //removes current puzzle from array
-    } else if (document.querySelector("#difficulty").value === "hard") {
-      getNewPuzzleHard();
-    }
+    OUTCOME_WIN.style.display = "none";
+    OUTCOME_LOSS.style.display = "none";
+    hideSnowman();
+    removeKeys(KEYBOARD_DIV);
+    createKeys(KEYS);
+    clearPuzzle();
+    resetKeyboard();
+    resetScore();
+    resetIncBars();
+    clearInterval(snowStop);
+  }
+};
+// USE THIS VERSION of getNewPuzzle WHEN DRAWING FROM MY SIMPLE ARRAY
+const getNewPuzzle = () => {
+  runReset();
+
+  if (DIFFICULTY.value === "easy") {
+    let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
+    let text = PUZZLES[num].text;
+    let hint = PUZZLES[num].hint;
+    OUTCOME_LOSS.textContent = `Oh no! It was: ${text.toUpperCase()}`;
+    buildPuzzle(text);
+    HINT_BTN.style.display = "block";
+    HINT_TXT.textContent = `Hint: ${hint}`;
+    PUZZLES.splice(num, 1); //removes current puzzle from array
+  } else if (DIFFICULTY.value === "hard") {
+    getNewPuzzleHard();
   }
 };
 
 // USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
 const getNewPuzzleHard = async () => {
-  runSetup();
+  runReset();
   // await this fetch for api to respond
   let text = await fetch("https://random-words-api.vercel.app/word")
     .then((response) => response.json())
@@ -86,7 +84,7 @@ const getNewPuzzleHard = async () => {
   HINT_TXT.textContent = `Hint: ${text.definition}`;
 };
 
-const resetKeyboard =  () => {
+const resetKeyboard = () => {
   const KEY_DIVS = document.querySelectorAll(".key-div");
   for (let key of KEY_DIVS) {
     key.classList.remove("key-div-success");
@@ -116,8 +114,6 @@ const resetIncBars = () => {
 const resetScore = () => {
   miss = 0;
 };
-
-
 
 export const checkGameStatus = () => {
   const BLANKS_REMAINING =
@@ -205,7 +201,6 @@ function buildPuzzle(puzzle) {
     }
   }
 }
-
 
 // START THE GAME
 runSnowman();
