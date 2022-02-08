@@ -2,10 +2,19 @@
 // Snowman
 // Snowflake
 
+const BUTTONS = document.querySelectorAll(".buttons");
+const BUTTONS_ARR = [...BUTTONS];
+
 let one = document.querySelectorAll('.floor, .body-bottom');
 let two = document.querySelectorAll('.floor, .body-bottom, .body-middle');
 let three = document.querySelectorAll('.floor, .body-bottom, .body-middle, .head');
 let four = document.querySelectorAll('.floor, .body-bottom, .body-middle, .head, .arm1');
+let five = document.querySelectorAll('.floor, .body-bottom, .body-middle, .head, .arm1, arm2');
+let six = document.querySelectorAll('.floor, .body-bottom, .body-middle, .head, .arm1, .arm2, .eye-container, .eye1, .eye2');
+let seven = document.querySelectorAll('.floor, .body-bottom, .body-middle, .head, .arm1, .arm2, .eye-container, .eye1, .eye2, .nose');
+let eight = document.querySelectorAll('.floor, .body-bottom, .body-middle, .head, .arm1, .arm2, .eye-container, .eye1, .eye2, .nose, .mouth');
+let nine = document.querySelectorAll('.floor, .body-bottom, .body-middle, .head, .arm1, .arm2, .eye-container, .eye1, .eye2, .nose, .mouth, .hat');
+
 // Snowman
 const snowManBuilder = () => {
     const BLANKS_REVEALED = document.getElementsByClassName(
@@ -39,105 +48,62 @@ const snowManBuilder = () => {
       }
     } else if (x > 40 && x <= 50) {
       //add arm 2
-      document.querySelector(".floor").style.visibility = "visible";
-      document.querySelector(".body-bottom").style.visibility = "visible";
-      document.querySelector(".body-middle").style.visibility = "visible";
-      document.querySelector(".head").style.visibility = "visible";
-      document.querySelector(".arm1").style.visibility = "visible";
-      document.querySelector(".arm2").style.visibility = "visible";
+      for(let part of five){
+        part.style.visibility = "visible";
+      }
     } else if (x > 50 && x <= 60) {
       //add buttons
-      document.querySelector(".body-bottom").style.visibility = "visible";
-      document.querySelector(".body-middle").style.visibility = "visible";
-      document.querySelector(".head").style.visibility = "visible";
-      document.querySelector(".arm1").style.visibility = "visible";
-      document.querySelector(".arm2").style.visibility = "visible";
+      for(let part of five){
+        part.style.visibility = "visible";
+      }
       addSnowmanButtons();
     } else if (x > 60 && x <= 70) {
       //add eyes
-      document.querySelector(".body-bottom").style.visibility = "visible";
-      document.querySelector(".body-middle").style.visibility = "visible";
-      document.querySelector(".head").style.visibility = "visible";
-      document.querySelector(".arm1").style.visibility = "visible";
-      document.querySelector(".arm2").style.visibility = "visible";
-      addSnowmanButtons();
-      document.querySelector(".eye-container").style.visibility = "visible";
-      document.querySelector(".eye1").style.visibility = "visible";
-      document.querySelector(".eye2").style.visibility = "visible";
+      for(let part of six){
+        part.style.visibility = "visible";
+      }
+      addSnowmanButtons(); 
     } else if (x > 70 && x <= 80) {
       //add nose
-      document.querySelector(".body-bottom").style.visibility = "visible";
-      document.querySelector(".body-middle").style.visibility = "visible";
-      document.querySelector(".head").style.visibility = "visible";
-      document.querySelector(".arm1").style.visibility = "visible";
-      document.querySelector(".arm2").style.visibility = "visible";
+      for(let part of seven){
+        part.style.visibility = "visible";
+      }
       addSnowmanButtons();
-      document.querySelector(".eye-container").style.visibility = "visible";
-      document.querySelector(".eye1").style.visibility = "visible";
-      document.querySelector(".eye2").style.visibility = "visible";
-      document.querySelector(".nose").style.visibility = "visible";
     } else if (x > 80 && x <= 90) {
       //add mouth
-      document.querySelector(".body-bottom").style.visibility = "visible";
-      document.querySelector(".body-middle").style.visibility = "visible";
-      document.querySelector(".head").style.visibility = "visible";
-      document.querySelector(".arm1").style.visibility = "visible";
-      document.querySelector(".arm2").style.visibility = "visible";
+      for(let part of eight){
+        part.style.visibility = "visible";
+      }
       addSnowmanButtons();
-      document.querySelector(".eye-container").style.visibility = "visible";
-      document.querySelector(".eye1").style.visibility = "visible";
-      document.querySelector(".eye2").style.visibility = "visible";
-      document.querySelector(".nose").style.visibility = "visible";
-      document.querySelector(".mouth").style.visibility = "visible";
     } else if (x > 90 && x <= 100) {
       //add hat
-      document.querySelector(".body-bottom").style.visibility = "visible";
-      document.querySelector(".body-middle").style.visibility = "visible";
-      document.querySelector(".head").style.visibility = "visible";
-      document.querySelector(".arm1").style.visibility = "visible";
-      document.querySelector(".arm2").style.visibility = "visible";
+      for(let part of nine){
+        part.style.visibility = "visible";
+      }
       addSnowmanButtons();
-      document.querySelector(".eye-container").style.visibility = "visible";
-      document.querySelector(".eye1").style.visibility = "visible";
-      document.querySelector(".eye2").style.visibility = "visible";
-      document.querySelector(".nose").style.visibility = "visible";
-      document.querySelector(".mouth").style.visibility = "visible";
-      document.querySelector(".hat").style.visibility = "visible";
     }
   };
 
+  
+  
   const hideSnowman = () => {
-    document.querySelector(".floor").style.visibility = "hidden";
-    document.querySelector(".body-bottom").style.visibility = "hidden";
-    document.querySelector(".body-middle").style.visibility = "hidden";
-    document.querySelector(".head").style.visibility = "hidden";
-    document.querySelector(".arm1").style.visibility = "hidden";
-    document.querySelector(".arm2").style.visibility = "hidden";
-    document.querySelector(".eye-container").style.visibility = "hidden";
-    document.querySelector(".eye1").style.visibility = "hidden";
-    document.querySelector(".eye2").style.visibility = "hidden";
-    document.querySelector(".nose").style.visibility = "hidden";
-    document.querySelector(".mouth").style.visibility = "hidden";
-    document.querySelector(".hat").style.visibility = "hidden";
+    for(let part of nine){
+      part.style.visibility = "hidden";
+    }
     hideSnowmanButtons();
   };
 
 
   const addSnowmanButtons = () => {
-    const BUTTONS = document.querySelectorAll(".buttons");
-    const BUTTONS_ARR = [...BUTTONS];
     for (let button of BUTTONS_ARR) {
       button.style.visibility = "visible";
     }
   };
   const hideSnowmanButtons = () => {
-    const BUTTONS = document.querySelectorAll(".buttons");
-    const BUTTONS_ARR = [...BUTTONS];
     for (let button of BUTTONS_ARR) {
       button.style.visibility = "hidden";
     }
   };
-
 
   // SNOWFLAKE
 
