@@ -16,7 +16,6 @@ const createKeys = () => {
     let keyLabel = document.createTextNode(key); //create a letter for the key label
     keyLabel.className = "keyLabel";
     KEY_PARA.appendChild(keyLabel);
-
     KEY_DIV.addEventListener("click", keyJobs, { once: true });
   }
 };

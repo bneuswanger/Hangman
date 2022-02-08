@@ -1,5 +1,0 @@
-const gameEasy= () => {
-
-}
-
-export { gameEasy };

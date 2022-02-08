@@ -32,7 +32,7 @@ let miss = 0;
 let snowStop;
 
 const runSnowman = () => {
-  getNewPuzzle();
+  DIFFICULTY.value === "easy" ? newPuzzleEasy() : newPuzzleHard() ;
   isGameOver = false;
 };
 
@@ -40,6 +40,7 @@ const runReset = () => {
   if (!PUZZLES.length) {
     alert("You've exhausted the options, please refresh and play again!");
   } else {
+    miss = 0;
     OUTCOME_WIN.style.display = "none";
     OUTCOME_LOSS.style.display = "none";
     hideSnowman();
@@ -47,15 +48,13 @@ const runReset = () => {
     createKeys(KEYS);
     clearPuzzle();
     resetKeyboard();
-    resetScore();
     resetIncBars();
     clearInterval(snowStop);
   }
 };
 // USE THIS VERSION of getNewPuzzle WHEN DRAWING FROM MY SIMPLE ARRAY
-const getNewPuzzle = () => {
+const newPuzzleEasy = () => {
   runReset();
-
   if (DIFFICULTY.value === "easy") {
     let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
     let text = PUZZLES[num].text;
@@ -65,13 +64,11 @@ const getNewPuzzle = () => {
     HINT_BTN.style.display = "block";
     HINT_TXT.textContent = `Hint: ${hint}`;
     PUZZLES.splice(num, 1); //removes current puzzle from array
-  } else if (DIFFICULTY.value === "hard") {
-    getNewPuzzleHard();
-  }
+  } 
 };
 
 // USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
-const getNewPuzzleHard = async () => {
+const newPuzzleHard = async () => {
   runReset();
   // await this fetch for api to respond
   let text = await fetch("https://random-words-api.vercel.app/word")
@@ -109,10 +106,6 @@ const resetIncBars = () => {
   for (let x of MISS_INC) {
     x.classList.remove("miss-inc-active");
   }
-};
-
-const resetScore = () => {
-  miss = 0;
 };
 
 export const checkGameStatus = () => {
