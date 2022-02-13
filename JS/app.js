@@ -17,6 +17,9 @@ const OUTCOME_WIN = document.getElementById("outcome-win");
 const OUTCOME_LOSS = document.getElementById("outcome-loss");
 const HIT_INC_CONTAINER = document.getElementById("hit-inc-container");
 const DIFFICULTY = document.querySelector("#difficulty");
+const PUZZLE_SCORE_DISPLAY = document.getElementById("puzzle-score")
+const GAME_SCORE_DISPLAY = document.getElementById("game-score")
+const PHRASE_COUNT = document.getElementById("phrase-count")
 
 // Event Listeners
 NEW_PUZ_BTN.addEventListener("click", () => {
@@ -27,6 +30,10 @@ HINT_BTN.addEventListener("click", () => {
   HINT_TXT.classList.toggle("not-visible");
 });
 
+//Scoring
+let puzzleCount = 0;
+let puzzleScore;
+let gameScore = 0;
 let isGameOver;
 let miss = 0;
 let snowStop;
@@ -54,10 +61,11 @@ const runReset = () => {
 };
 // USE THIS VERSION of getNewPuzzle WHEN DRAWING FROM MY SIMPLE ARRAY
 const newPuzzleEasy = () => {
+  resetPuzzleScore();
   let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
   let text = PUZZLES[num].text;
   let hint = PUZZLES[num].hint;
-  OUTCOME_LOSS.textContent = `Oh no! It was: ${text.toUpperCase()}`;
+  OUTCOME_LOSS.textContent = `Oh no! You've been penalized 100 points for failing to reveal: ${text.toUpperCase()}`;
   HINT_BTN.style.display = "block";
   HINT_TXT.textContent = `Hint: ${hint}`;
   PUZZLES.splice(num, 1); //removes current puzzle from array
@@ -68,11 +76,12 @@ const newPuzzleEasy = () => {
 // USE THIS VERSION OF getNewPuzzle WHEN DRAWING FROM WORDS API
 const newPuzzleHard = async () => {
   // await this fetch for api to respond
+  resetPuzzleScore();
   let text = await fetch("https://random-words-api.vercel.app/word")
-  .then((response) => response.json())
-  .then((json) => json[0]);
-  console.log(`PUZZLE TEXT: ${text.word}`);
-  OUTCOME_LOSS.textContent = `Whoops! Correct answer: '${text.word.toUpperCase()}'`;
+    .then((response) => response.json())
+    .then((json) => json[0]);
+  // console.log(`PUZZLE TEXT: ${text.word}`);
+  OUTCOME_LOSS.textContent = `Oh no! You've been penalized 100 points for failing to reveal:'${text.word.toUpperCase()}'`;
   HINT_BTN.style.display = "block";
   HINT_TXT.textContent = `Hint: ${text.definition}`;
   runReset();
@@ -88,6 +97,13 @@ const resetKeyboard = () => {
     key.classList.add("key-div-neutral");
   }
 };
+
+
+
+const resetPuzzleScore = () => {
+  puzzleScore = 0;
+  PUZZLE_SCORE_DISPLAY.textContent = `Current puzzle score: ${puzzleScore}`
+}
 
 const clearPuzzle = () => {
   //also clears hit stauts bar
@@ -110,9 +126,13 @@ export const checkGameStatus = () => {
   const BLANKS_REMAINING =
     document.getElementsByClassName("blanks-box-hidden").length;
   if (miss === 6) {
+    gameScore = gameScore - 100; //Loss Penalty
     gameOverLose();
   }
   if (BLANKS_REMAINING === 0) {
+    console.log(gameScore)
+    gameScore = gameScore + 50; //Win Bonus
+    console.log(gameScore)
     gameOverWin();
   }
 };
@@ -128,13 +148,19 @@ const gameOverLose = () => {
   isGameOver = true;
   OUTCOME_LOSS.style.display = "block";
   disableKeyboard();
+  calcGameScore();
+  puzzleCount++;
+  PHRASE_COUNT.textContent = `Puzzles completed: ${puzzleCount}`
 };
 
 const gameOverWin = () => {
   isGameOver = true;
-  OUTCOME_WIN.textContent = "Congratulations!";
+  OUTCOME_WIN.textContent = "Congratulations! +50 points!";
   OUTCOME_WIN.style.display = "block";
   disableKeyboard();
+  calcGameScore();
+  puzzleCount++;
+  PHRASE_COUNT.textContent = `Puzzles completed: ${puzzleCount}`
   snowStop = setInterval(createSnowFlake, 20);
 };
 
@@ -158,6 +184,7 @@ export const testLetter = (chosenKey, chosenKeyDiv) => {
     ALL_MISS_INCS[miss - 1].classList.add("miss-inc-active");
   }
   logHits();
+  calcPuzzleScore();
 };
 
 const logHits = () => {
@@ -173,6 +200,24 @@ const logHits = () => {
   }
   snowManBuilder();
 };
+
+const calcPuzzleScore = () => {
+  const BLANKS_SOLVED = document.querySelectorAll(".blanks-box-revealed").length; //number of blanks revealed
+  const BLANKS_TOTAL = document.getElementsByClassName("blanks-box").length; //total length of puzzle
+  let x = Math.ceil((BLANKS_SOLVED / BLANKS_TOTAL) * 100); //x = percent solved
+  if (DIFFICULTY.value === 'easy') {
+    puzzleScore = x - (miss * 10);
+  } else {
+    puzzleScore = (x * 2) - (miss * 8);
+  }
+
+  PUZZLE_SCORE_DISPLAY.textContent = `Current puzzle score: ${puzzleScore}`
+}
+
+const calcGameScore = () => {
+  gameScore += puzzleScore
+  GAME_SCORE_DISPLAY.textContent = `Cumulative game score: ${gameScore}`
+}
 
 function buildPuzzle(puzzle) {
   let wordsArray = puzzle.split(" ");
@@ -195,3 +240,5 @@ function buildPuzzle(puzzle) {
 
 // START THE GAME
 runSnowman();
+
+

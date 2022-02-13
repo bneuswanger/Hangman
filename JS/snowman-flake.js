@@ -31,13 +31,10 @@ let hat = document.querySelectorAll(
 
 // Snowman
 const snowManBuilder = () => {
-  const BLANKS_REVEALED = document.getElementsByClassName(
-    "blanks-box-revealed"
-  ); //this is an HTMLcollection of the revealed blanks
-  const BLANKS_SOLVED = [...BLANKS_REVEALED].length; //this is the length of an array containing the revealed blanks//
-  const BLANKS_TOTAL = document.getElementsByClassName("blanks-box").length;
+  const BLANKS_SOLVED = document.querySelectorAll(".blanks-box-revealed").length; //number of blanks revealed
+  const BLANKS_TOTAL = document.getElementsByClassName("blanks-box").length; //total length of puzzle
   let x = Math.ceil((BLANKS_SOLVED / BLANKS_TOTAL) * 100); //x = percent solved
-  console.log(`The percent solved is ${x}`);
+  // console.log(`The percent solved is ${x}`);
   if (!x) {
     return;
   } else if (x > 0 && x <= 10) {
