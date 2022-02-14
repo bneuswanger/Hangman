@@ -13,10 +13,10 @@ different APIs, difficulty levels, etc.
 
 Update 2/24/22
 1. Moved change-log to README.md file
-2. Adjusted some text related to scoring
+2. Adjusted some text & layout related to scoring
 3. Added event listener to difficulty select so new puzzle loads when selecting diff level
-4. Disabled 'get new puzzle' button once a letter is tested (prevents user from escaping a bad score); added style for disabled buttons
-
+4. Disabled 'get new puzzle' button and difficulty select menu once a letter is tested (prevents user from escaping a bad score); added style for disabled buttons
+5. Adjusted media query to start at 1200px instead of 1080px (probably temporary, just so scoring text looks decent)
 
 Update 2/13/22
 1. Implemented basic scoring system with difficulty modifiers 

@@ -40,14 +40,31 @@ HINT_BTN.addEventListener("click", () => {
 });
 
 DIFFICULTY.addEventListener("change", function () {
-  console.log('You selected', this.value)
   runSnowman();
 })
 
+//leave this as if/else so that selecting the "Choose Difficulty" option doesn't reset the puzzle. Also, leaves room for more levels.
 const runSnowman = () => {
-  DIFFICULTY.value === "easy" ? newPuzzleEasy() : newPuzzleHard();
-  // isGameOver = false;
+  if (DIFFICULTY.value === "easy") {
+    newPuzzleEasy()
+  } else if (DIFFICULTY.value === "hard") {
+    newPuzzleHard();
+  }
 };
+
+const disableSelect = () => {
+  const allOptions = DIFFICULTY.options
+  for (let opt of allOptions) {
+    opt.disabled = true;
+  }
+}
+
+const enableSelect = () => {
+  const allOptions = DIFFICULTY.options
+  for (let opt of allOptions) {
+    opt.disabled = false;
+  }
+}
 
 const runReset = () => {
   if (!PUZZLES.length) {
@@ -153,6 +170,7 @@ const disableKeyboard = () => {
 const gameOverLose = () => {
   isGameOver = true;
   NEW_PUZ_BTN.disabled = false;
+  enableSelect();
   OUTCOME_LOSS.style.display = "block";
   disableKeyboard();
   calcGameScore();
@@ -163,6 +181,7 @@ const gameOverLose = () => {
 const gameOverWin = () => {
   isGameOver = true;
   NEW_PUZ_BTN.disabled = false;
+  enableSelect();
   OUTCOME_WIN.textContent = "Congratulations! +50 Completion Bonus!";
   OUTCOME_WIN.style.display = "block";
   disableKeyboard();
@@ -175,6 +194,7 @@ const gameOverWin = () => {
 export const testLetter = (chosenKey, chosenKeyDiv) => {
   isGameOver = false;
   NEW_PUZ_BTN.disabled = true;
+  disableSelect();
   const ACTIVE_LETTERS_DIVS = document.querySelectorAll(".blanks-box");
   for (let blank of ACTIVE_LETTERS_DIVS) {
     if (blank.textContent === chosenKey) {
@@ -250,5 +270,7 @@ function buildPuzzle(puzzle) {
 
 // START THE GAME
 runSnowman();
+
+
 
 

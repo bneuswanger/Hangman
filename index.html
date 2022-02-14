@@ -67,19 +67,21 @@
                 </div>
             </section>
         </div>
-    </div>
-    <div class="scoreboard">
-        <!-- Difficulty Settings -->
-        <div class="difficulty">
-            <select name="difficulty" id="difficulty">
-                <option value="easy">Easy</option>
-                <option value="hard">Hard</option>
-            </select>
+        <div class="scoreboard">
+            <!-- Difficulty Settings -->
+            <div class="difficulty">
+                <select name="difficulty" id="difficulty">
+                    <option value="">-Choose Difficulty-</option>
+                    <option value="easy" selected>Easy</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <h2 id="puzzle-score"></h2>
+            <h2 id="game-score">Cumulative game score: 0</h2>
+            <h2 id="phrase-count">Puzzles completed: 0</h2>
         </div>
-        <h2 id="puzzle-score"></h2>
-        <h2 id="game-score">Cumulative game score: 0</h2>
-        <h2 id="phrase-count">Puzzles completed: 0</h2>
     </div>
+    
 
     <!-- <audio src="./music/background-music.mp3" autoplay loop controls>
         Your browser does not support the <code>audio</code> element.
