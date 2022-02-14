@@ -32,7 +32,7 @@ HINT_BTN.addEventListener("click", () => {
 });
 
 DIFFICULTY.addEventListener("change", function () {
-  // console.log('You selected', this.value)
+  console.log('You selected', this.value)
   runSnowman();
 })
 
