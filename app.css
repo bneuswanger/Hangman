@@ -12,8 +12,6 @@ body {
     font-family: 'Azeret Mono', monospace;
 }
 
-
-
 .main-container {
     display: flex;
     justify-content: center;
@@ -281,9 +279,12 @@ button:active {
     opacity: 0.5;
 }
 
-.outside {
-    font-family: 'Courier New', Courier, monospace
+.scoreboard {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
+
 
 .snow {
     animation: fall linear forwards;
@@ -447,10 +448,6 @@ button:active {
     visibility: visible;
     position: relative;
     z-index: 1;
-}
-
-.change-log {
-    padding-top: 10rem;
 }
 
 @media (max-width: 1080px) {

@@ -65,7 +65,7 @@ const newPuzzleEasy = () => {
   let num = Math.floor(Math.random() * PUZZLES.length); //generates random index position in the array of possible PUZZLES
   let text = PUZZLES[num].text;
   let hint = PUZZLES[num].hint;
-  OUTCOME_LOSS.textContent = `Oh no! You've been penalized 100 points for failing to reveal: ${text.toUpperCase()}`;
+  OUTCOME_LOSS.textContent = `Loss penalty: -50 points! It was: '${text.toUpperCase()}'`;
   HINT_BTN.style.display = "block";
   HINT_TXT.textContent = `Hint: ${hint}`;
   PUZZLES.splice(num, 1); //removes current puzzle from array
@@ -81,7 +81,7 @@ const newPuzzleHard = async () => {
     .then((response) => response.json())
     .then((json) => json[0]);
   // console.log(`PUZZLE TEXT: ${text.word}`);
-  OUTCOME_LOSS.textContent = `Oh no! You've been penalized 100 points for failing to reveal:'${text.word.toUpperCase()}'`;
+  OUTCOME_LOSS.textContent = `Loss penalty: -50 points! It was: '${text.word.toUpperCase()}'`;
   HINT_BTN.style.display = "block";
   HINT_TXT.textContent = `Hint: ${text.definition}`;
   runReset();
@@ -126,7 +126,7 @@ export const checkGameStatus = () => {
   const BLANKS_REMAINING =
     document.getElementsByClassName("blanks-box-hidden").length;
   if (miss === 6) {
-    gameScore = gameScore - 100; //Loss Penalty
+    gameScore = gameScore - 50; //Loss Penalty
     gameOverLose();
   }
   if (BLANKS_REMAINING === 0) {
@@ -155,7 +155,7 @@ const gameOverLose = () => {
 
 const gameOverWin = () => {
   isGameOver = true;
-  OUTCOME_WIN.textContent = "Congratulations! +50 points!";
+  OUTCOME_WIN.textContent = "Congratulations! +50 Completion Bonus!";
   OUTCOME_WIN.style.display = "block";
   disableKeyboard();
   calcGameScore();

@@ -14,7 +14,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@600&family=Gloria+Hallelujah&family=Mochiy+Pop+P+One&display=swap"
         rel="stylesheet">
-</head> 
+</head>
 
 <body>
     <div class="main-container">
@@ -46,7 +46,7 @@
             <!--Empty for now... can't decide on what to say; might clutter mobile view-->
             <div id="blanks-container"></div>
             <div id="hint-txt-div">
-                <p id="hint-txt"  class="not-visible">you found me!</p>
+                <p id="hint-txt" class="not-visible">you found me!</p>
             </div>
             <div id="button-container">
                 <button id="newPuzzle">Get New Puzzle</button>
@@ -68,80 +68,22 @@
             </section>
         </div>
     </div>
+    <div class="scoreboard">
+        <!-- Difficulty Settings -->
+        <div class="difficulty">
+            <select name="difficulty" id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+        <h2 id="puzzle-score"></h2>
+        <h2 id="game-score">Cumulative game score: 0</h2>
+        <h2 id="phrase-count">Puzzles completed: 0</h2>
+    </div>
 
-    <!-- Difficulty Settings -->
-    <select name="difficulty" id="difficulty">
-        <option value="easy">Easy</option>
-        <option value="hard">Hard</option>
-    </select>
     <!-- <audio src="./music/background-music.mp3" autoplay loop controls>
         Your browser does not support the <code>audio</code> element.
     </audio> -->
-    <h2 id="puzzle-score"></h2>
-    <h2 id="game-score">Cumulative game score: 0</h2>
-    <h2 id="phrase-count">Puzzles completed: 0</h2>
-
-    <div class="change-log">
-        <ul class="outside"><b>To Do List:</b>
-            <li>Media query for tablet screen size</li>
-            <li>Media queries for landscape at mobile/tablet sizes (move snowman to left)</li>
-            <li>Animate section entrances on pageload</li>
-            <li>Look for random word API with less obscure words</li>
-            <li>Discuss 90-99% case range with snowman parts</li>
-            <li>Add light snowfall during game which increases in proportion to puzzle completion?</li>
-            <li>Add dropdown so user can choose hard words API vs. local array; this can be expanded in the future with
-                different APIs, difficulty levels, etc.</li>
-        </ul>
-        <ul class="outside"><b>Update 2/6/22</b>
-            <li>Added new size (360-1080p wide)</li>
-        </ul>
-        <ul class="outside"><b>Update 2/3/22</b>
-            <li>Added some phrases to array</li>
-        </ul>
-        <ul class="outside"><b>Update 2/1/22</b>
-            <li>A few snowman tweaks</li>
-            <li>Snow falls behind game now</li>
-            <li>Fixed win-after-lose bug reported by @Lisgevan (thanks!)</li>
-            <li>Fixed hint-toggle display bug</li>
-        </ul>
-        <ul class="outside"><b>Update 1/31/22</b>
-            <li>Started snowman styling</li>
-            <li>Cleaned up CSS, changed color scheme</li>
-            <li>Added correct answer to loss screen, works for either array or API words</li>
-            <li>Switched keyboard removal to use 'visibility: hidden' instead of 'display: none'</li>
-            <li>added 'user select: none' to the snowflakes to prevent cursor display change/selectability</li>
-        </ul>
-        <ul class="outside"><b>Update 1/30/22</b>
-            <li>Built snowman(Thanks @NoobNoob!)</li>
-            <li>Added JS to sequentially add snowman parts in relation to puzzle completion</li>
-            <li>A little refactoring</li>
-            <li>updated semicolons use to be consistent</li>
-            <li>updated all const variable names to ALLCAPS</li>
-            <li>Keys can no longer fire more than once</li>
-        </ul>
-        <ul class="outside"><b>Update 1/29/22</b>
-            <li>Snow animation starts on win, removed with new puzzle</li>
-            <li>Snow animation created (@NoobNoob/@Keenai)</li>
-            <li>Set up random word API (@NoobNoob)</li>
-            <li>added hit-increment status bar functionality</li>
-            <li>hit status bar populates with correct # of letters</li>
-        </ul>
-        <ul class="outside"><b>Update 1/28/22</b>
-            <li>Defined loss (6 fails) & added point accumulator math</li>
-            <li>added win/loss notifications</li>
-            <li>created elements & styles for the hit/miss status bars</li>
-            <li>added miss-increment status bar functionality</li>
-        </ul>
-        <ul class="outside"><b>Update 1/25/22</b>
-            <li>Keyboard removed on win</li>
-            <li>Congrats Text added on win</li>
-            <li>Removed keyboard styling on win (wasn't working out)</li>
-            <li>Gets phrase on page refresh to prevent keyboard click from congratulating user</li>
-            <li>Hit/Miss tracker added in JS</li>
-        </ul>
-    </div>
-
-
 </body>
 
 </html>
