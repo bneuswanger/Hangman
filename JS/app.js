@@ -21,6 +21,14 @@ const PUZZLE_SCORE_DISPLAY = document.getElementById("puzzle-score")
 const GAME_SCORE_DISPLAY = document.getElementById("game-score")
 const PHRASE_COUNT = document.getElementById("phrase-count")
 
+//Scoring
+let puzzleCount = 0;
+let puzzleScore;
+let gameScore = 0;
+let isGameOver = true;
+let miss = 0;
+let snowStop;
+
 
 // Event Listeners
 NEW_PUZ_BTN.addEventListener("click", () => {
@@ -36,17 +44,9 @@ DIFFICULTY.addEventListener("change", function () {
   runSnowman();
 })
 
-//Scoring
-let puzzleCount = 0;
-let puzzleScore;
-let gameScore = 0;
-let isGameOver;
-let miss = 0;
-let snowStop;
-
 const runSnowman = () => {
   DIFFICULTY.value === "easy" ? newPuzzleEasy() : newPuzzleHard();
-  isGameOver = false;
+  // isGameOver = false;
 };
 
 const runReset = () => {
@@ -152,6 +152,7 @@ const disableKeyboard = () => {
 
 const gameOverLose = () => {
   isGameOver = true;
+  NEW_PUZ_BTN.disabled = false;
   OUTCOME_LOSS.style.display = "block";
   disableKeyboard();
   calcGameScore();
@@ -161,6 +162,7 @@ const gameOverLose = () => {
 
 const gameOverWin = () => {
   isGameOver = true;
+  NEW_PUZ_BTN.disabled = false;
   OUTCOME_WIN.textContent = "Congratulations! +50 Completion Bonus!";
   OUTCOME_WIN.style.display = "block";
   disableKeyboard();
@@ -171,6 +173,8 @@ const gameOverWin = () => {
 };
 
 export const testLetter = (chosenKey, chosenKeyDiv) => {
+  isGameOver = false;
+  NEW_PUZ_BTN.disabled = true;
   const ACTIVE_LETTERS_DIVS = document.querySelectorAll(".blanks-box");
   for (let blank of ACTIVE_LETTERS_DIVS) {
     if (blank.textContent === chosenKey) {
