@@ -21,6 +21,7 @@ const PUZZLE_SCORE_DISPLAY = document.getElementById("puzzle-score")
 const GAME_SCORE_DISPLAY = document.getElementById("game-score")
 const PHRASE_COUNT = document.getElementById("phrase-count")
 
+
 // Event Listeners
 NEW_PUZ_BTN.addEventListener("click", () => {
   runSnowman();
@@ -29,6 +30,11 @@ NEW_PUZ_BTN.addEventListener("click", () => {
 HINT_BTN.addEventListener("click", () => {
   HINT_TXT.classList.toggle("not-visible");
 });
+
+DIFFICULTY.addEventListener("change", function () {
+  // console.log('You selected', this.value)
+  runSnowman();
+})
 
 //Scoring
 let puzzleCount = 0;
